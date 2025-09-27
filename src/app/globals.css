@@ -1,0 +1,135 @@
+@import "tailwindcss";
+
+:root {
+  --pump-green: #00ff88;
+  --pump-blue: #00aaff;
+  --pump-purple: #8b5cf6;
+  
+  /* Original gray color scheme */
+  --color-gray-300: #d1d5dc;
+  --color-gray-400: #99a1af;
+  --color-gray-500: #6a7282;
+  --color-gray-600: #4a5565;
+  --color-gray-700: #364153;
+  --color-gray-800: #1e2939;
+  --color-gray-900: #101828;
+}
+
+@theme inline {
+  --color-pump-green: var(--pump-green);
+  --color-pump-blue: var(--pump-blue);
+  --color-pump-purple: var(--pump-purple);
+  --color-gray-300: var(--color-gray-300);
+  --color-gray-400: var(--color-gray-400);
+  --color-gray-500: var(--color-gray-500);
+  --color-gray-600: var(--color-gray-600);
+  --color-gray-700: var(--color-gray-700);
+  --color-gray-800: var(--color-gray-800);
+  --color-gray-900: var(--color-gray-900);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* Custom pump gradient text */
+.pump-gradient-text {
+  background: linear-gradient(135deg, var(--pump-green) 0%, var(--pump-blue) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Custom pump gradient background */
+.pump-gradient {
+  background: linear-gradient(135deg, var(--pump-green) 0%, var(--pump-blue) 100%);
+}
+
+/* Pump card styling */
+.pump-card {
+  background: color-mix(in oklab, var(--color-gray-800) 30%, transparent);
+  border: 1px solid color-mix(in oklab, var(--color-gray-700) 50%, transparent);
+  backdrop-filter: blur(10px);
+}
+
+/* Pump button styling */
+.pump-button {
+  background: linear-gradient(135deg, var(--pump-green) 0%, var(--pump-blue) 100%);
+  color: black;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.pump-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 255, 136, 0.3);
+}
+
+/* Animate pulse green */
+.animate-pulse-green {
+  animation: 2s infinite pulse-green;
+}
+
+@keyframes pulse-green {
+  0%, to {
+    box-shadow: 0 0 20px rgba(0, 255, 136, .4);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(0, 255, 136, .8);
+  }
+}
+
+/* Slider styling */
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.slider::-webkit-slider-track {
+  background: var(--color-gray-700);
+  height: 8px;
+  border-radius: 4px;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--pump-green);
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.slider::-moz-range-track {
+  background: var(--color-gray-700);
+  height: 8px;
+  border-radius: 4px;
+  border: none;
+}
+
+.slider::-moz-range-thumb {
+  background: var(--pump-green);
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+}
+
+/* Formula link styling */
+.formula-link {
+  color: var(--pump-green);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.formula-link:hover {
+  color: var(--pump-blue);
+}
+
+body {
+  color: #fff;
+  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+}
