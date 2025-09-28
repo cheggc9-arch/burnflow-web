@@ -1,0 +1,25 @@
+query {
+    Solana(dataset: realtime, network: solana) {
+      DEXTrades(
+        where: {
+          Transaction: { Result: { Success: true } }
+          Trade: {
+            Buy: {
+              Currency: { MintAddress: { is: "CvzxWd7aESqCYzEcgppByp58MAJ1dZnxeL9ZpWVhpump" } }
+              Account: { Token: { Owner: { in: [
+                "H84Wda2aSgKV1daCVV9ozWrSurjVnoSLY5GAymYArGPg",
+                "9RTva4wSk8E3EWYc8wtF9V94RUQGkemWtt3i8dUtsA4P",
+                "GgDGFZzrweSj3yRQUQnDpnmPFMP3zK54Pzogm4WF3GW1"
+              ] } } }
+            }
+          }
+        }
+        orderBy: { ascending: Block_Time }   # oldest first
+        limit: { count: 100000 }             # bump if needed
+      ) {
+        Trade { Buy { Account { Token { Owner } } } }
+        Block { Time }
+      }
+    }
+  }
+  

@@ -12,10 +12,20 @@ interface Holder {
   timeWeight: number;
   balanceWeight: number;
   totalWeight: number;
+  daysHeld: number;
+  category: string;
 }
 
 export default function HolderLeaderboard() {
-  const [holders, setHolders] = useState<Holder[]>([]);
+  const [holderData, setHolderData] = useState<{
+    topHolders: Holder[];
+    earlyAdopters: Holder[];
+    diamondHands: Holder[];
+  }>({
+    topHolders: [],
+    earlyAdopters: [],
+    diamondHands: []
+  });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'balance' | 'early' | 'duration'>('balance');
@@ -27,7 +37,11 @@ export default function HolderLeaderboard() {
         const result = await response.json();
         
         if (result.success) {
-          setHolders(result.data);
+          setHolderData({
+            topHolders: result.data.topHolders,
+            earlyAdopters: result.data.earlyAdopters,
+            diamondHands: result.data.diamondHands
+          });
         } else {
           setError(result.error || 'Failed to fetch holders');
         }
@@ -80,21 +94,16 @@ export default function HolderLeaderboard() {
     }
   };
 
-  const getSortedHolders = () => {
-    const sorted = [...holders];
-    
+  const getCurrentHolders = () => {
     switch (activeTab) {
       case 'balance':
-        return sorted.sort((a, b) => b.balance - a.balance);
+        return holderData.topHolders;
       case 'early':
-        return sorted.sort((a, b) => {
-          if (!a.firstHoldTime || !b.firstHoldTime) return 0;
-          return a.firstHoldTime.getTime() - b.firstHoldTime.getTime();
-        });
+        return holderData.earlyAdopters;
       case 'duration':
-        return sorted.sort((a, b) => b.totalWeight - a.totalWeight);
+        return holderData.diamondHands;
       default:
-        return sorted;
+        return holderData.topHolders;
     }
   };
 
@@ -134,7 +143,7 @@ export default function HolderLeaderboard() {
     );
   }
 
-  const sortedHolders = getSortedHolders().slice(0, 20);
+  const currentHolders = getCurrentHolders();
 
   return (
     <div className="pump-card rounded-xl p-6">
@@ -177,7 +186,7 @@ export default function HolderLeaderboard() {
         </div>
       </div>
       
-      {sortedHolders.length === 0 ? (
+      {currentHolders.length === 0 ? (
         <div className="text-center py-8 text-gray-400">No holders found</div>
       ) : (
         <div className="space-y-2">
@@ -187,7 +196,7 @@ export default function HolderLeaderboard() {
             <div>
               {activeTab === 'balance' && 'Balance'}
               {activeTab === 'early' && 'First Hold'}
-              {activeTab === 'duration' && 'Hold Duration'}
+              {activeTab === 'duration' && 'Days Held'}
             </div>
             <div>
               {activeTab === 'balance' && 'Hold Time'}
@@ -196,7 +205,7 @@ export default function HolderLeaderboard() {
             </div>
           </div>
           
-          {sortedHolders.map((holder, index) => (
+          {currentHolders.map((holder, index) => (
             <div 
               key={holder.address}
               className={`grid grid-cols-4 gap-4 py-3 px-2 rounded-lg transition-colors hover:bg-gray-800/30 ${
@@ -228,7 +237,7 @@ export default function HolderLeaderboard() {
               <div className="text-sm font-medium">
                 {activeTab === 'balance' && formatNumber(holder.balance)}
                 {activeTab === 'early' && holder.firstHoldTime && formatTimeAgo(holder.firstHoldTime)}
-                {activeTab === 'duration' && holder.firstHoldTime && formatTimeAgo(holder.firstHoldTime)}
+                {activeTab === 'duration' && `${holder.daysHeld} days`}
               </div>
               
               <div className="text-sm text-gray-400">

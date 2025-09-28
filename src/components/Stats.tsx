@@ -120,25 +120,24 @@ export default function Stats() {
 
       <div className="pump-card rounded-xl p-6">
         <div className="flex items-center space-x-4 p-4">
-          <Wallet className="w-10 h-10 text-[var(--pump-green)]" />
-          <div>
-            <div className="text-2xl font-bold text-[var(--pump-green)]">
-              {data?.treasuryBalance.toFixed(4) || '0.0000'} SOL
-            </div>
-            <div className="text-sm text-gray-400">Treasury Balance</div>
-          </div>
-        </div>
-      </div>
-
-
-      <div className="pump-card rounded-xl p-6">
-        <div className="flex items-center space-x-4 p-4">
           <Coins className="w-10 h-10 text-[var(--pump-green)]" />
           <div>
             <div className="text-2xl font-bold text-[var(--pump-green)]">
               {data?.totalDistributed.toFixed(4) || '0.0000'} SOL
             </div>
             <div className="text-sm text-gray-400">Total Distributed</div>
+          </div>
+        </div>
+      </div>
+
+      <div className="pump-card rounded-xl p-6">
+        <div className="flex items-center space-x-4 p-4">
+          <Wallet className="w-10 h-10 text-[var(--pump-green)]" />
+          <div>
+            <div className="text-2xl font-bold text-[var(--pump-green)]">
+              {data?.totalRounds || '0'}
+            </div>
+            <div className="text-sm text-gray-400">Distribution Rounds</div>
           </div>
         </div>
       </div>

@@ -1,0 +1,23 @@
+query {
+    Solana(dataset: realtime, network: solana, aggregates: yes) {
+      BalanceUpdates(
+        limit: { count: 10000 }
+        orderBy: { descendingByField: "BalanceUpdate_Holding_maximum" }
+        where: {
+          BalanceUpdate: {
+            Currency: { MintAddress: { is: "CvzxWd7aESqCYzEcgppByp58MAJ1dZnxeL9ZpWVhpump" } }
+          }
+          Transaction: { Result: { Success: true } }
+        }
+      ) {
+        BalanceUpdate {
+          Account { Token { Owner } }
+          Holding: PostBalance(
+            maximum: Block_Slot
+            selectWhere: { gt: "20000", lt: "100000000" }
+          )
+        }
+      }
+    }
+  }
+  

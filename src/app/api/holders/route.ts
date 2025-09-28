@@ -12,7 +12,12 @@ export async function GET(request: NextRequest) {
     
     return NextResponse.json({
       success: true,
-      data: cache.holders,
+      data: {
+        topHolders: cache.holders.topHolders,
+        earlyAdopters: cache.holders.earlyAdopters,
+        diamondHands: cache.holders.diamondHands,
+        allHolders: cache.holders.allHolders
+      },
       totalHolders: cache.totalHolders,
       lastUpdated: cache.lastUpdated,
       isUpdating: cache.isUpdating,
