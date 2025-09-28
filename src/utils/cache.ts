@@ -3,6 +3,90 @@ import { getMint, TOKEN_PROGRAM_ID } from '@solana/spl-token';
 import { getConnection, getCreatorWalletAddress, getTokenContractAddress } from './solana';
 import { loadCacheFromFile, saveCacheToFile } from './cache-persistence';
 
+// Global variable to store token launch time (set once at startup)
+let tokenLaunchTime: string | null = null;
+
+// Function to get token launch time (run once at startup)
+async function getTokenLaunchTime(tokenAddress: string): Promise<string> {
+  try {
+    console.log('🔄 Fetching: Token launch time from Bitquery API');
+    
+    const launchQuery = `
+      query {
+        Solana(dataset: realtime, network: solana) {
+          DEXTrades(
+            where: {
+              Transaction: { Result: { Success: true } }
+              Trade: {
+                Buy: { Currency: { MintAddress: { is: "${tokenAddress}" } } }
+              }
+            }
+            orderBy: { ascending: Block_Time }
+            limit: { count: 1 }
+          ) {
+            Block { Time }
+            Trade {
+              Buy {
+                Amount
+                Account { Token { Owner } }
+              }
+            }
+          }
+        }
+      }
+    `;
+
+    const response = await fetch('https://streaming.bitquery.io/eap', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${process.env.ACCESS_TOKEN}`,
+      },
+      body: JSON.stringify({ query: launchQuery })
+    });
+
+    if (!response.ok) {
+      throw new Error(`Launch time query error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    
+    if (data.errors) {
+      throw new Error(`Launch time GraphQL error: ${JSON.stringify(data.errors)}`);
+    }
+
+    const launchTime = data.data?.Solana?.DEXTrades?.[0]?.Block?.Time;
+    
+    if (!launchTime) {
+      throw new Error('No launch time found');
+    }
+
+    console.log(`✅ Token launch time: ${launchTime}`);
+    
+    // Save launch time to JSON file
+    try {
+      const fs = require('fs');
+      const path = require('path');
+      const filePath = path.join(process.cwd(), 'token-launch-time.json');
+      const launchData = {
+        launchTime: launchTime,
+        tokenAddress: tokenAddress,
+        fetchedAt: new Date().toISOString()
+      };
+      fs.writeFileSync(filePath, JSON.stringify(launchData, null, 2));
+      console.log(`📄 Launch time saved to token-launch-time.json`);
+    } catch (error) {
+      console.warn('Failed to save launch time to JSON file:', error);
+    }
+    
+    return launchTime;
+    
+  } catch (error) {
+    console.error('Error fetching launch time:', error);
+    throw error;
+  }
+}
+
 // Function to fetch holder data from Bitquery using two-step process
 async function fetchHolderDataFromAPI(tokenAddress: string) {
   try {
@@ -54,7 +138,7 @@ async function fetchHolderDataFromAPI(tokenAddress: string) {
     }
 
     // Create hashmap from Query A results
-    const holdersMap = new Map<string, { tokens: number; first_buy_time: string }>();
+    const holdersMap = new Map<string, { tokens: number; first_buy_time: string; weightage: number }>();
     const balanceUpdates = dataA.data?.Solana?.BalanceUpdates || [];
     
     // Initialize hashmap with high future time
@@ -65,7 +149,8 @@ async function fetchHolderDataFromAPI(tokenAddress: string) {
       const tokens = parseFloat(update.BalanceUpdate.Holding);
       holdersMap.set(owner, {
         tokens: tokens,
-        first_buy_time: futureTime
+        first_buy_time: futureTime,
+        weightage: 0 // Will be calculated after Query B
       });
     });
 
@@ -159,12 +244,31 @@ async function fetchHolderDataFromAPI(tokenAddress: string) {
 
     console.log(`🔍 Filtered out ${holdersMap.size - validHolders.length} holders with invalid buy times`);
 
+    // Calculate weightage for each holder BEFORE saving to JSON
+    console.log(`🔍 Token launch time: ${tokenLaunchTime}`);
+    if (tokenLaunchTime) {
+      let calculatedCount = 0;
+      let futureTimeCount = 0;
+      holdersMap.forEach((data, address) => {
+        if (data.first_buy_time !== futureTime) {
+          data.weightage = calculateWeightage(data.tokens, data.first_buy_time, tokenLaunchTime!);
+          if (data.weightage > 0) calculatedCount++;
+        } else {
+          futureTimeCount++;
+        }
+      });
+      console.log(`✅ Calculated weightage for ${calculatedCount} holders (${futureTimeCount} had future timestamps)`);
+    } else {
+      console.warn('⚠️ No token launch time available - weightage will be 0');
+    }
+
     // Save only valid holders to JSON file for debugging/monitoring
-    const hashmapData: Record<string, { tokens: number; first_buy_time: string }> = {};
+    const hashmapData: Record<string, { tokens: number; first_buy_time: string; weightage: number }> = {};
     validHolders.forEach(([address, data]) => {
       hashmapData[address] = {
         tokens: data.tokens,
-        first_buy_time: data.first_buy_time
+        first_buy_time: data.first_buy_time,
+        weightage: data.weightage
       };
     });
 
@@ -191,16 +295,58 @@ async function fetchHolderDataFromAPI(tokenAddress: string) {
         balance: data.tokens,
         firstHoldTime: firstHoldTime.toISOString(),
         lastUpdated: new Date().toISOString(),
-        daysHeld: Math.floor(daysHeld)
+        daysHeld: Math.floor(daysHeld),
+        weightage: data.weightage
       };
     });
 
-    console.log(`✅ Retrieved ${processedHolders.length} holders with accurate first buy times`);
+
+    console.log(`✅ Retrieved ${processedHolders.length} holders with accurate first buy times and weightage`);
     return processedHolders;
     
   } catch (error) {
     console.error('Bitquery API error:', error);
     return [];
+  }
+}
+
+// Function to calculate weightage based on new formula
+function calculateWeightage(tokens: number, firstBuyTime: string, launchTime: string): number {
+  try {
+    const launch = new Date(launchTime);
+    const firstBuy = new Date(firstBuyTime);
+    const now = new Date();
+    
+    // Only include holders with balance ≥ 20,000 tokens
+    if (tokens < 20000) {
+      return 0;
+    }
+    
+    // 1. Balance Weight (commitment)
+    const balanceWeight = 1 + Math.log10(tokens / 20000);
+    
+    // 2. Earlyness Bonus (timing)
+    const daysSinceLaunch = (firstBuy.getTime() - launch.getTime()) / (1000 * 60 * 60 * 24);
+    const earlyBonus = 1 + 2 * Math.exp(-daysSinceLaunch / 2);
+    
+    // 3. Tenure Bonus (loyalty)
+    const daysHeld = (now.getTime() - firstBuy.getTime()) / (1000 * 60 * 60 * 24);
+    const tenureBonus = 1 + 0.6 * Math.log2(daysHeld + 1);
+    
+    // 4. Total Weight
+    const timeWeight = earlyBonus * tenureBonus;
+    const totalWeight = balanceWeight * timeWeight;
+    
+    // Debug logging for first few calculations
+    if (Math.random() < 0.05) { // Log 5% of calculations to see what's happening
+      console.log(`🔍 Weightage calc: tokens=${tokens}, daysSinceLaunch=${daysSinceLaunch.toFixed(2)}, daysHeld=${daysHeld.toFixed(2)}, balanceWeight=${balanceWeight.toFixed(2)}, earlyBonus=${earlyBonus.toFixed(2)}, tenureBonus=${tenureBonus.toFixed(2)}, totalWeight=${totalWeight.toFixed(2)}`);
+    }
+    
+    return totalWeight;
+    
+  } catch (error) {
+    console.error('Error calculating weightage:', error);
+    return 0;
   }
 }
 
@@ -375,23 +521,15 @@ export async function updateHolderCache(): Promise<void> {
         const holdDuration = now.getTime() - firstHoldTime.getTime();
         const daysHeld = holdDuration / (1000 * 60 * 60 * 24);
         
-        // Calculate weights based on real holding duration
-        let timeWeight = 1;
-        if (daysHeld >= 7) timeWeight = 2;
-        else if (daysHeld >= 3) timeWeight = 1.5;
-        else if (daysHeld >= 1) timeWeight = 1.2;
-        
-        const balanceWeight = Math.log10(holder.balance / 20000 + 1);
-        const totalWeight = balanceWeight * timeWeight;
+        // Use the weightage calculated by the new formula from fetchHolderDataFromAPI
+        const weightage = holder.weightage || 0;
         
         return {
           address: holder.address,
           balance: holder.balance,
           firstHoldTime: holder.firstHoldTime,
           lastUpdated: holder.lastUpdated,
-          timeWeight,
-          balanceWeight,
-          totalWeight,
+          weightage: weightage,
           daysHeld: Math.floor(daysHeld)
         };
       });
@@ -416,7 +554,7 @@ export async function updateHolderCache(): Promise<void> {
       .map((holder, index) => ({ ...holder, rank: index + 1, category: 'early' }));
 
     const diamondHands = [...holders]
-      .sort((a, b) => b.totalWeight - a.totalWeight)
+      .sort((a, b) => (b.weightage || 0) - (a.weightage || 0))
       .slice(0, 15)
       .map((holder, index) => ({ ...holder, rank: index + 1, category: 'duration' }));
 
@@ -463,7 +601,17 @@ export function isHolderCacheStale(): boolean {
 }
 
 // Initialize background job
-export function startBackgroundJob(): void {
+export async function startBackgroundJob(): Promise<void> {
+  // Get token launch time once at startup
+  try {
+    const tokenMint = getTokenContractAddress();
+    tokenLaunchTime = await getTokenLaunchTime(tokenMint.toBase58());
+    console.log(`🎯 Token launch time set: ${tokenLaunchTime}`);
+  } catch (error) {
+    console.error('Failed to get token launch time:', error);
+    // Continue without launch time - weightage will be 0
+  }
+  
   // Initial cache update immediately
   updateCache().catch((error) => {
     console.error('Initial cache update failed:', error);

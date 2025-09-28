@@ -1,0 +1,21 @@
+{
+    "Solana": {
+      "DEXTrades": [
+        {
+          "Block": {
+            "Time": "2025-09-27T23:15:56Z"
+          },
+          "Trade": {
+            "Buy": {
+              "Account": {
+                "Token": {
+                  "Owner": "o7RY6P2vQMuGSu1TrLM81weuzgDjaCRTXYRaXJwWcvc"
+                }
+              },
+              "Amount": "18134590.876173"
+            }
+          }
+        }
+      ]
+    }
+  }

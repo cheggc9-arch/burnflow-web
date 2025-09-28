@@ -1,0 +1,23 @@
+query {
+    Solana(dataset: realtime, network: solana) {
+      DEXTrades(
+        where: {
+          Transaction: { Result: { Success: true } }
+          Trade: {
+            Buy: { Currency: { MintAddress: { is: "CvzxWd7aESqCYzEcgppByp58MAJ1dZnxeL9ZpWVhpump" } } }
+          }
+        }
+        orderBy: { ascending: Block_Time }
+        limit: { count: 1 }
+      ) {
+        Block { Time }                        # <-- launch time (first buy timestamp)
+        Trade {
+          Buy {
+            Amount
+            Account { Token { Owner } }       # <-- dev wallet address (first buyer)
+          }
+        }
+      }
+    }
+  }
+  

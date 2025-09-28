@@ -1,362 +1,547 @@
 {
-  "H84Wda2aSgKV1daCVV9ozWrSurjVnoSLY5GAymYArGPg": {
-    "tokens": 38061267.34539,
-    "first_buy_time": "2025-09-27T23:22:51Z"
-  },
-  "CzBs2bTYVo9hMeu3jmNby1wRYGbE7EbzKQuk5hAS6WWK": {
-    "tokens": 29637415.53579,
-    "first_buy_time": "2025-09-28T04:09:59Z"
-  },
   "M9zithUetHT3DmEvPj5e8R9zGSmWtmmjZPceU8efwoJ": {
     "tokens": 28900590.968761,
-    "first_buy_time": "2025-09-27T23:23:06Z"
+    "first_buy_time": "2025-09-27T23:23:06Z",
+    "weightage": 16.165708434270304
+  },
+  "F1VYzwbBbMSeD5NjR2TErcfHuRBtbJehUZSUavvSWFY": {
+    "tokens": 28379856.173184,
+    "first_buy_time": "2025-09-28T07:02:23Z",
+    "weightage": 12.061659710778976
+  },
+  "VJSDW6S74YXR4rRR9P4xwhMvLZJQMhrUb8XMFirUsy1": {
+    "tokens": 27011109.827041,
+    "first_buy_time": "2025-09-28T09:02:42Z",
+    "weightage": 10.940654325961598
+  },
+  "D6rPm8yP7AFYqVNTxtTvywXGDh2FniUwkw8kJA9hufWM": {
+    "tokens": 25192352.269961,
+    "first_buy_time": "2025-09-28T05:38:33Z",
+    "weightage": 12.640442644982112
   },
   "Cfq4rLkhgBtaB5BiEEezdy4KgNB7zcsyJ78zjTfyVxsN": {
     "tokens": 24119321.998245,
-    "first_buy_time": "2025-09-27T23:22:48Z"
-  },
-  "D6rPm8yP7AFYqVNTxtTvywXGDh2FniUwkw8kJA9hufWM": {
-    "tokens": 23071827.734109,
-    "first_buy_time": "2025-09-28T05:38:33Z"
+    "first_buy_time": "2025-09-27T23:22:48Z",
+    "weightage": 15.863151370156753
   },
   "DBxXDjRdu3JXPN4EfkX4ybymztrEEPAWN743FLDt5HJc": {
     "tokens": 22073224.573848,
-    "first_buy_time": "2025-09-28T05:49:38Z"
+    "first_buy_time": "2025-09-28T05:49:38Z",
+    "weightage": 12.368477767409452
+  },
+  "7J8cfDvbbUMmNAKuqUW3kvijJui3C4t62Le6dTj8M4fN": {
+    "tokens": 21488605.635928,
+    "first_buy_time": "2025-09-28T06:55:49Z",
+    "weightage": 11.766920943572776
   },
   "12PPVhB8jC9pq5bfcbf9VZcptmXuvsAFyeH8VK7L93zq": {
     "tokens": 20507199.166355,
-    "first_buy_time": "2025-09-28T00:09:13Z"
+    "first_buy_time": "2025-09-28T00:09:13Z",
+    "weightage": 15.18540204429291
+  },
+  "H84Wda2aSgKV1daCVV9ozWrSurjVnoSLY5GAymYArGPg": {
+    "tokens": 19827292.547132,
+    "first_buy_time": "2025-09-27T23:22:51Z",
+    "weightage": 15.531947237717358
   },
   "MobS6L5HhVJtxpeafDgREsweWFh53xFoUeP9pgbaDSf": {
     "tokens": 19155447.437668,
-    "first_buy_time": "2025-09-28T00:09:13Z"
+    "first_buy_time": "2025-09-28T00:09:13Z",
+    "weightage": 15.073281601448583
+  },
+  "Dt73Jbqt35xYScr2bMyvrv56bjJva2S8PGq98gAPmWTU": {
+    "tokens": 18243844.975522,
+    "first_buy_time": "2025-09-27T23:41:06Z",
+    "weightage": 15.234400715500533
   },
   "5suj5CA91EKzD9x3BBhyay5eDmNwMnquntAJADNLaews": {
     "tokens": 17422356.712015,
-    "first_buy_time": "2025-09-28T00:41:28Z"
+    "first_buy_time": "2025-09-28T00:41:28Z",
+    "weightage": 14.642925208782074
   },
   "L5tMyayK3t9MVxTZbDjKzTA9JWFAz2ffCZUXYjUKPgt": {
     "tokens": 16670450.014774,
-    "first_buy_time": "2025-09-27T23:21:38Z"
+    "first_buy_time": "2025-09-27T23:21:38Z",
+    "weightage": 15.249599594424405
   },
   "Eqm4pdRd3kLSfie5mNHrVQgdaz3zLGVXmCT1qWsaaaJB": {
     "tokens": 15602312.523797,
-    "first_buy_time": "2025-09-28T03:16:14Z"
+    "first_buy_time": "2025-09-28T03:16:14Z",
+    "weightage": 13.175070634967032
+  },
+  "962uV6AXavmwFwvUrghkRKPBHctocy7mUuNH2iuhwYd2": {
+    "tokens": 15304289.837505,
+    "first_buy_time": "2025-09-27T23:45:46Z",
+    "weightage": 14.901531976776898
   },
   "9FgcSU39k2kkZuMFKFmfALfVxzsu8LSwwFnxv8qDjEMA": {
     "tokens": 15105523.621263,
-    "first_buy_time": "2025-09-28T05:32:27Z"
+    "first_buy_time": "2025-09-28T05:32:27Z",
+    "weightage": 12.00579455041516
   },
   "7ntXiSYtUeTDnMxhWhUSsdtiSNmnGaZijySLNcgtTT9X": {
     "tokens": 15077863.84668,
-    "first_buy_time": "2025-09-28T04:52:53Z"
+    "first_buy_time": "2025-09-28T04:52:53Z",
+    "weightage": 12.328654259813716
   },
-  "962uV6AXavmwFwvUrghkRKPBHctocy7mUuNH2iuhwYd2": {
-    "tokens": 14822587.624647,
-    "first_buy_time": "2025-09-27T23:45:46Z"
+  "5ks7eKa4rD6YhpjqUmtNykTJ2Jp6t7CJ6VrWevBfP7tT": {
+    "tokens": 14176382.568976,
+    "first_buy_time": "2025-09-28T09:07:17Z",
+    "weightage": 10.161293555984498
   },
   "Cz99uWRvpCgsYTQDmK9YxiGcXoqsES1mFYnLMH3RM4Hf": {
     "tokens": 13681686.28504,
-    "first_buy_time": "2025-09-28T05:01:48Z"
+    "first_buy_time": "2025-09-28T05:01:48Z",
+    "weightage": 12.121939050452399
   },
   "AQT5VUbAJuY6gccSNCTRTV3HkbQaV2uac1YSAauHGmJc": {
     "tokens": 13405638.804125,
-    "first_buy_time": "2025-09-28T00:15:12Z"
+    "first_buy_time": "2025-09-28T00:15:12Z",
+    "weightage": 14.436909886523155
+  },
+  "B95BuZugo1kRtsd5wXGRjxXmqVsp6xKaT7M4YYHjaajH": {
+    "tokens": 11928243.952439,
+    "first_buy_time": "2025-09-28T05:25:59Z",
+    "weightage": 11.740058396787415
   },
   "FzSKyDvgWJ4k9Uyn8JJpGi3gPHW4f7W4ME7CtotPrckF": {
     "tokens": 11378288.990349,
-    "first_buy_time": "2025-09-28T01:37:47Z"
+    "first_buy_time": "2025-09-28T01:37:47Z",
+    "weightage": 13.500628259381418
   },
   "Y1ibdmEHKu1TUS2SnLVLhYX775G5yYUkgf3mhYCNCQJ": {
     "tokens": 9994409.407228,
-    "first_buy_time": "2025-09-27T23:23:05Z"
-  },
-  "9TWLQcHCyGM35BTyV28EUzmunb78Q6UaDs2HrsTYUVGp": {
-    "tokens": 9931314.810933,
-    "first_buy_time": "2025-09-28T04:10:27Z"
+    "first_buy_time": "2025-09-27T23:23:05Z",
+    "weightage": 14.373767860425112
   },
   "6PKHZvH1F3XZrm7nL44YJJ8TvCLcPPKHXK9hTbiWJaTj": {
     "tokens": 9632926.126938,
-    "first_buy_time": "2025-09-28T05:47:31Z"
-  },
-  "MXXbHkHfSo6VNYzH8xty68xMEuATESheqaTR8adHDCx": {
-    "tokens": 8337980.160268,
-    "first_buy_time": "2025-09-27T23:22:33Z"
+    "first_buy_time": "2025-09-28T05:47:31Z",
+    "weightage": 11.283307122574481
   },
   "GeKf8Su7xtrUpGYrfeJBwTwXCEk4BZ6GLnCE3RBtViD3": {
     "tokens": 8111514.213326,
-    "first_buy_time": "2025-09-27T23:24:24Z"
+    "first_buy_time": "2025-09-27T23:24:24Z",
+    "weightage": 14.01113483172625
+  },
+  "CYH16p31N2ME7VhnPgCcEdmxDVdb3gmGCcyiYo1h1Gen": {
+    "tokens": 7412973.202916,
+    "first_buy_time": "2025-09-28T09:06:36Z",
+    "weightage": 9.423463124448944
   },
   "C7zvmonEbgvVpMqhZLbsR6qEf5wLNEXxBegnLWqq4uSg": {
     "tokens": 6842731.401839,
-    "first_buy_time": "2025-09-28T01:07:16Z"
+    "first_buy_time": "2025-09-28T01:07:16Z",
+    "weightage": 12.938194817600175
+  },
+  "9mSdyYGD6X3e9ht6cWDPDJ8V6d7Q4iXqhoUbnMQhyNTW": {
+    "tokens": 6265623.002166,
+    "first_buy_time": "2025-09-28T09:03:54Z",
+    "weightage": 9.250843869434547
   },
   "6W3LB7h3CEcCsyBGeDKAMQqnrUvF6Emnzym49CUzpG3r": {
     "tokens": 5570072.291078,
-    "first_buy_time": "2025-09-28T00:15:14Z"
-  },
-  "FsBLudRkt6i4K4rJg4YvoiVGg9Bquw93BfDeAyYqDv31": {
-    "tokens": 5478118.7179,
-    "first_buy_time": "2025-09-28T05:52:05Z"
+    "first_buy_time": "2025-09-28T00:15:14Z",
+    "weightage": 12.997494859297062
   },
   "7HgWw9xHfnLs4Gkv5KYA2PxZUV9Dj6PnhzPwGJbNFDUQ": {
     "tokens": 4526396.47807,
-    "first_buy_time": "2025-09-27T23:23:21Z"
+    "first_buy_time": "2025-09-27T23:23:21Z",
+    "weightage": 13.034972194329324
   },
   "5GEew4AFz6x3B3nFURHmaPBXtxXr9tT6VCiW5dHEajA7": {
     "tokens": 4526203.468434,
-    "first_buy_time": "2025-09-28T00:44:13Z"
+    "first_buy_time": "2025-09-28T00:44:13Z",
+    "weightage": 12.447555496056143
   },
   "2n2vCrVZtiyt8fj6VPVzh3PSJpWUSebUmads2uEgZHAt": {
     "tokens": 4507112.471699,
-    "first_buy_time": "2025-09-27T23:33:08Z"
+    "first_buy_time": "2025-09-27T23:33:08Z",
+    "weightage": 12.956451163042509
   },
   "Dsiasii6sSSkcXg3Q6cMDSoEu8H5jvMuDqGtqKM3SmR2": {
     "tokens": 4495110.355856,
-    "first_buy_time": "2025-09-27T23:29:36Z"
+    "first_buy_time": "2025-09-27T23:29:36Z",
+    "weightage": 12.977713796391228
+  },
+  "9Cdn1BcyTikA42ojZvYp39bFEKoqTQrYPiKnfMbQEjcz": {
+    "tokens": 4346555.896976,
+    "first_buy_time": "2025-09-27T23:36:46Z",
+    "weightage": 12.869237373396597
+  },
+  "6qWx2URmTVVYiC38AgNJSr1RidAp7VQMRkB2EvMNNMWZ": {
+    "tokens": 4092986.877649,
+    "first_buy_time": "2025-09-28T08:33:41Z",
+    "weightage": 8.97532424366554
   },
   "EmGoYvXcX1ZVzwu4MHLv3t5hu9nAQJc4ctdEiG9T2F7V": {
     "tokens": 3988126.074337,
-    "first_buy_time": "2025-09-28T05:01:37Z"
+    "first_buy_time": "2025-09-28T05:01:37Z",
+    "weightage": 10.43103274487893
+  },
+  "X8WW7xhS8BH7Av4yZLHJKtmaFayWAhAnew7sAoCAYr7": {
+    "tokens": 3461949.42496,
+    "first_buy_time": "2025-09-28T09:03:47Z",
+    "weightage": 8.569883261100825
   },
   "7PMnAUDTagzhrQs3rcA7f8z9WcgTSV9WQMsZ1bAWLFcp": {
     "tokens": 3044242.853602,
-    "first_buy_time": "2025-09-27T23:30:24Z"
+    "first_buy_time": "2025-09-27T23:30:24Z",
+    "weightage": 12.316806410363956
   },
   "93vu1eCcwXyBYNNiECVoKcUJwoiPMq8ha7us7Ddb1T9h": {
     "tokens": 2839886.089493,
-    "first_buy_time": "2025-09-28T01:04:39Z"
+    "first_buy_time": "2025-09-28T01:04:39Z",
+    "weightage": 11.557748588456912
+  },
+  "DADEPju7iexZeuosiDnJYVoZ1xoPGpXUkFAJELpPr7y1": {
+    "tokens": 2512741.007397,
+    "first_buy_time": "2025-09-28T07:15:23Z",
+    "weightage": 8.917496206875308
   },
   "korVAgftQhfEiVhNEFbRiSdpZFP4NDfp4w73RaFUZTd": {
     "tokens": 2159500.871937,
-    "first_buy_time": "2025-09-27T23:26:46Z"
+    "first_buy_time": "2025-09-27T23:26:46Z",
+    "weightage": 11.763615288996725
   },
   "gfk8p5hD6oYPw7SLWuJ9k5LVoGEVBw7Uj878wShh14E": {
     "tokens": 2156213.402214,
-    "first_buy_time": "2025-09-28T05:41:31Z"
+    "first_buy_time": "2025-09-28T05:41:31Z",
+    "weightage": 9.330182560008858
   },
   "Ae8pNropumaiV6Bq39f1QdBFhRuiFg6SeRrjcYv7wHTD": {
     "tokens": 2121201.221893,
-    "first_buy_time": "2025-09-28T05:49:39Z"
+    "first_buy_time": "2025-09-28T05:49:39Z",
+    "weightage": 9.25613624417708
   },
   "7F9NUKtEK96NH7CgTieFGZm6bkFThJYe4Fug4srzs9AY": {
     "tokens": 2104808.471993,
-    "first_buy_time": "2025-09-28T05:49:39Z"
+    "first_buy_time": "2025-09-28T05:49:39Z",
+    "weightage": 9.245828516304208
+  },
+  "DrBz1SVriJCBkobKi2EL31pEMRtddcXnx2skhVbgriHT": {
+    "tokens": 2017996.149664,
+    "first_buy_time": "2025-09-28T09:04:24Z",
+    "weightage": 7.94559643765567
   },
   "9EMid2bjMS9pedxRCasM9pNSMWXVfqAzyBkYbeDDw35f": {
     "tokens": 2014125.698463,
-    "first_buy_time": "2025-09-28T05:57:52Z"
-  },
-  "Go2WkCgWJNhGZQ6QWzYRDddddausTbfbPYL3qLwQEhrx": {
-    "tokens": 1822808.530675,
-    "first_buy_time": "2025-09-27T23:57:36Z"
+    "first_buy_time": "2025-09-28T05:57:52Z",
+    "weightage": 9.13499955263666
   },
   "6PvN6m9zXLvzLopzMesFv3M9992v8v2HvwndRU7yL4RC": {
     "tokens": 1614701.573997,
-    "first_buy_time": "2025-09-28T04:49:59Z"
+    "first_buy_time": "2025-09-28T04:49:59Z",
+    "weightage": 9.261448420791663
   },
   "2QRghUXjj2Jz8QCAvS1fmd6pi6aDDUAGDAaM11S96QN2": {
     "tokens": 1569817.633734,
-    "first_buy_time": "2025-09-28T06:12:48Z"
+    "first_buy_time": "2025-09-28T06:12:48Z",
+    "weightage": 8.714089128514255
+  },
+  "Go2WkCgWJNhGZQ6QWzYRDddddausTbfbPYL3qLwQEhrx": {
+    "tokens": 1528003.75725,
+    "first_buy_time": "2025-09-27T23:57:36Z",
+    "weightage": 10.988066207802751
+  },
+  "GXps4haVxWdmrqxoiXwBf633vdLKFT9znkg2ReiusNtV": {
+    "tokens": 1393924.548246,
+    "first_buy_time": "2025-09-28T08:59:43Z",
+    "weightage": 7.549071398376198
   },
   "HEzdmL7aZNb5yHsiNhfefbXsAbez1F1gJBsdXqAATCpP": {
     "tokens": 1377736.182074,
-    "first_buy_time": "2025-09-28T05:50:29Z"
+    "first_buy_time": "2025-09-28T05:50:29Z",
+    "weightage": 8.677756574633493
+  },
+  "DaMuA2KJtDKhzdq2cTTAdoJiJEamAhVfbbaPVTguA2vk": {
+    "tokens": 1345467.370327,
+    "first_buy_time": "2025-09-28T09:07:46Z",
+    "weightage": 7.459554043166973
   },
   "B9fSBYZXjKQZR5FBA7gG29DHFkYBRUJboUJtBkkzTYkT": {
     "tokens": 1264157.558503,
-    "first_buy_time": "2025-09-28T04:45:09Z"
+    "first_buy_time": "2025-09-28T04:45:09Z",
+    "weightage": 8.951539790382483
+  },
+  "HJv6Dvn2gCjnTQtWm6ZuN8Rp3eVJR2vxerXMK92VRrQB": {
+    "tokens": 1233404.771532,
+    "first_buy_time": "2025-09-27T23:40:23Z",
+    "weightage": 10.737725221371178
+  },
+  "9BK8yn69bbVxALW64vfXjJhGjSAik2VW6vrXRCcGe9qA": {
+    "tokens": 1223672.537932,
+    "first_buy_time": "2025-09-28T07:38:18Z",
+    "weightage": 7.88262754620172
+  },
+  "VCUojCPAKTiWEAhVn6bnyLkaHbtcxVp6ErVpdGKKDJF": {
+    "tokens": 1194713.020259,
+    "first_buy_time": "2025-09-28T06:49:46Z",
+    "weightage": 8.139413969256767
   },
   "BQyG4ttz43oYcPLtHf6zk82giUZGCCpe6YkQknfLot4W": {
     "tokens": 1170941.291405,
-    "first_buy_time": "2025-09-28T06:00:23Z"
+    "first_buy_time": "2025-09-28T06:00:23Z",
+    "weightage": 8.403707997697932
   },
   "E2bvdttYoUs8NEVMVJCa1xwZVft8JxmG9gFn9kaTGriY": {
     "tokens": 1143648.939662,
-    "first_buy_time": "2025-09-28T00:05:19Z"
+    "first_buy_time": "2025-09-28T00:05:19Z",
+    "weightage": 10.462421280885343
   },
   "68vJU7gXHsKuVveP4AegP8TsuXtp5qSeQBs428tvRQ4U": {
     "tokens": 1142306.519449,
-    "first_buy_time": "2025-09-28T04:23:47Z"
-  },
-  "8zebnNHY2T4xxJwWKDiK7GrEiNAiiaExxFEeBdrTGpTe": {
-    "tokens": 982461.234301,
-    "first_buy_time": "2025-09-27T23:47:47Z"
+    "first_buy_time": "2025-09-28T04:23:47Z",
+    "weightage": 8.935852371029137
   },
   "ERHFGmHR7mGZT3iD3v11dNhpFzNVsT9LCK4u4NH8vgu9": {
     "tokens": 966690.287549,
-    "first_buy_time": "2025-09-27T23:47:08Z"
-  },
-  "HJv6Dvn2gCjnTQtWm6ZuN8Rp3eVJR2vxerXMK92VRrQB": {
-    "tokens": 902237.590943,
-    "first_buy_time": "2025-09-27T23:40:23Z"
+    "first_buy_time": "2025-09-27T23:47:08Z",
+    "weightage": 10.291161385976311
   },
   "Chz4MTEniyvzVm94bmyG6PP2M75Q5gQta6x2h9sXgs1U": {
     "tokens": 847153.407711,
-    "first_buy_time": "2025-09-28T03:34:53Z"
+    "first_buy_time": "2025-09-28T03:34:53Z",
+    "weightage": 8.787984473188928
   },
   "Csg3fe7CRD65XNknyQN22gpc1gQeukGgckARf3LoSviu": {
     "tokens": 828680.890225,
-    "first_buy_time": "2025-09-28T00:23:07Z"
-  },
-  "6qUb9wuraRM7nUYoz55Z4e1zfDarmRyV46gY3E4B3T6K": {
-    "tokens": 827201.175642,
-    "first_buy_time": "2025-09-28T00:37:31Z"
+    "first_buy_time": "2025-09-28T00:23:07Z",
+    "weightage": 9.830810094935973
   },
   "Gb9jjpid2frJ2BbXgMMQH6gDFbrGJUh7QGmATFvz4nzt": {
     "tokens": 786988.486764,
-    "first_buy_time": "2025-09-27T23:24:40Z"
+    "first_buy_time": "2025-09-27T23:24:40Z",
+    "weightage": 10.075353669139007
   },
   "DziwjU7RR9mNmkhUgLu6zx8qH2YdzPLoiEfGnxgn3xaN": {
     "tokens": 754846.394572,
-    "first_buy_time": "2025-09-28T06:17:16Z"
+    "first_buy_time": "2025-09-28T06:17:16Z",
+    "weightage": 7.732454188222764
   },
-  "Cfp5vgobxD6o6W44UmBPZrmpqZKNnpzzDD7eE3Aumppk": {
-    "tokens": 667440.117001,
-    "first_buy_time": "2025-09-28T05:57:59Z"
+  "6U4ZVnq89vgu3MtqQzwXF2DcgLq74FdJbuZ9zVevetDq": {
+    "tokens": 687110.61183,
+    "first_buy_time": "2025-09-28T09:09:26Z",
+    "weightage": 6.680643516550868
+  },
+  "67pChhXKkzypCArPjgtHyjrWyNnc9DQzYAy6jryNhCAS": {
+    "tokens": 674226.507269,
+    "first_buy_time": "2025-09-28T08:28:50Z",
+    "weightage": 6.878332424743336
+  },
+  "2EBafZtDpkCaBvjJjwg83RjrihWtxJdt4M4vYRTqRB4Z": {
+    "tokens": 670537.509559,
+    "first_buy_time": "2025-09-28T06:57:50Z",
+    "weightage": 7.360756356603762
   },
   "C1wGRBTjjLSeNVqMe6HtYrk8EGgikznYkXmRuaQwdcPV": {
     "tokens": 658959.900051,
-    "first_buy_time": "2025-09-27T23:59:09Z"
+    "first_buy_time": "2025-09-27T23:59:09Z",
+    "weightage": 9.587510398679669
   },
   "4QCzo17YVXq3pjJwsquc7S1HQ33c33QJp4AZS5Wy53Aq": {
     "tokens": 636549.191137,
-    "first_buy_time": "2025-09-27T23:52:36Z"
+    "first_buy_time": "2025-09-27T23:52:36Z",
+    "weightage": 9.565812219315475
   },
   "GKoHragBJZvCAMz8JqWyBjkFLBNpYaTejtvTTr6LYpVn": {
     "tokens": 560664.230848,
-    "first_buy_time": "2025-09-27T23:58:20Z"
+    "first_buy_time": "2025-09-27T23:58:20Z",
+    "weightage": 9.324696476749752
   },
   "ETQPZK5hGciBYuMmgJnmqompuAtps2i5X5CP9QHj2CFq": {
     "tokens": 539202.718006,
-    "first_buy_time": "2025-09-27T23:43:36Z"
+    "first_buy_time": "2025-09-27T23:43:36Z",
+    "weightage": 9.33776725231378
+  },
+  "A7zd7FtbeGj4imWhgkTgkgn1pp4fVsBmSJcw1Cya3k3p": {
+    "tokens": 533399.887066,
+    "first_buy_time": "2025-09-28T05:54:20Z",
+    "weightage": 7.397895061697737
   },
   "GPQXq2t4K3rbVQZigEQQ3JDeWKebdrzZkvHH4DTBaAxQ": {
     "tokens": 525909.952924,
-    "first_buy_time": "2025-09-27T23:31:23Z"
+    "first_buy_time": "2025-09-27T23:31:23Z",
+    "weightage": 9.360322514959659
   },
   "4fqq4Ydu1GJT9xGpReNt9mENgHjoGjjvsCEooQERdu47": {
     "tokens": 452381.296591,
-    "first_buy_time": "2025-09-28T04:55:26Z"
+    "first_buy_time": "2025-09-28T04:55:26Z",
+    "weightage": 7.473770934432658
   },
-  "6bDSde2CarhxQtAepYJF5VgNYbw56BvB7bDbpdsdEArk": {
-    "tokens": 433497.83583,
-    "first_buy_time": "2025-09-28T00:28:23Z"
+  "7YUaKQX1jyd1rMPZkpWfKm92GAKhKtAqPc6GSk69bATu": {
+    "tokens": 432802.39376,
+    "first_buy_time": "2025-09-28T09:03:06Z",
+    "weightage": 6.183497186393196
   },
-  "A7zd7FtbeGj4imWhgkTgkgn1pp4fVsBmSJcw1Cya3k3p": {
-    "tokens": 430032.222981,
-    "first_buy_time": "2025-09-28T05:54:20Z"
+  "9taL2GjgBpoZ9F7QxxZrAbvYF2bRjkiXRyZ7HVis6MHs": {
+    "tokens": 423921.334269,
+    "first_buy_time": "2025-09-28T07:11:26Z",
+    "weightage": 6.713155052479704
   },
   "F2KpnLZn4AQa5JBnX9mXx4Ge2mDAewVHJVUK9R2ZHVNy": {
     "tokens": 416557.484023,
-    "first_buy_time": "2025-09-28T04:57:06Z"
+    "first_buy_time": "2025-09-28T04:57:06Z",
+    "weightage": 7.351840618805578
+  },
+  "7bsgKmKu5byMhJDQ5xMfyRabGwwwgZnEyYJ6Dn8MuhZP": {
+    "tokens": 407112.584686,
+    "first_buy_time": "2025-09-28T07:39:24Z",
+    "weightage": 6.525235516813914
+  },
+  "AChpzF5EMu8GcUpKNUeBqzmdtjNwwPaVSvUYddauSuSs": {
+    "tokens": 406734.583191,
+    "first_buy_time": "2025-09-28T09:03:23Z",
+    "weightage": 6.110661490326574
   },
   "8Z4UM936s5Li6CadovrQnEuNkyuxMSUzanz9rfTqFG7d": {
     "tokens": 385403.247309,
-    "first_buy_time": "2025-09-28T00:10:20Z"
-  },
-  "3xMz5wqWbkH5MeahL6wz6UrGzQAY8rDWhFnuy2gHmunZ": {
-    "tokens": 377845.323642,
-    "first_buy_time": "2025-09-27T23:33:04Z"
+    "first_buy_time": "2025-09-28T00:10:20Z",
+    "weightage": 8.645183893758452
   },
   "JE8XShHGn5nXaGnxMZGUGrHeBL1Hge5KpJDi4k33K26x": {
     "tokens": 375083.588929,
-    "first_buy_time": "2025-09-28T05:03:18Z"
+    "first_buy_time": "2025-09-28T05:03:18Z",
+    "weightage": 7.177532333799183
+  },
+  "FNwAeVwWWxMuqF5gAjWFDprarP969FdVaNktXbD1MPcd": {
+    "tokens": 360300.750413,
+    "first_buy_time": "2025-09-28T08:16:55Z",
+    "weightage": 6.195133440539367
   },
   "HRJRvgBLev9CzN1AUVoaDBiVgj9rwZ7YjnwpkPS4oQBe": {
     "tokens": 346852.939676,
-    "first_buy_time": "2025-09-27T23:51:26Z"
+    "first_buy_time": "2025-09-27T23:51:26Z",
+    "weightage": 8.563654320696294
   },
-  "GGrcscAqEq4qJ1apGnQMv3XkFL7Dp68C6Cm8wx4ytjuf": {
-    "tokens": 342604.18478,
-    "first_buy_time": "2025-09-28T05:52:13Z"
+  "9icS4JbUuFVnWtEkUWuLsgVjM3CgP2qc1BXua4WehHAj": {
+    "tokens": 340912.348031,
+    "first_buy_time": "2025-09-28T09:09:11Z",
+    "weightage": 5.879991492422103
   },
   "19robdSSea3mZXPW5X55rZqbJabSGWQjLoVC3wex8Uz": {
     "tokens": 340227.70298,
-    "first_buy_time": "2025-09-28T06:19:31Z"
+    "first_buy_time": "2025-09-28T06:19:31Z",
+    "weightage": 6.6832787516446235
+  },
+  "7QECxQobnNWxWQpHpB5UbceDcnjEALd45NUk8aaYj3og": {
+    "tokens": 339629.861306,
+    "first_buy_time": "2025-09-28T07:08:14Z",
+    "weightage": 6.450464589924929
   },
   "FWpxdhzXABBVmf8by1W7h2fdDy2CVjPbVR8NnwhtRCGv": {
     "tokens": 284498.452181,
-    "first_buy_time": "2025-09-28T00:43:19Z"
+    "first_buy_time": "2025-09-28T00:43:19Z",
+    "weightage": 7.993020882183603
   },
   "8JaHxpQkVRdtojyqQHYV6N5NDw4T8npCwkKsaFC5Phoz": {
     "tokens": 264828.338468,
-    "first_buy_time": "2025-09-27T23:44:29Z"
+    "first_buy_time": "2025-09-27T23:44:29Z",
+    "weightage": 8.147473511901888
   },
   "FZk4CB7kZZDiFGjP56Te5rX55jRsCeeUS67ACKVhUnLo": {
     "tokens": 242221.978443,
-    "first_buy_time": "2025-09-28T05:06:10Z"
+    "first_buy_time": "2025-09-28T05:06:10Z",
+    "weightage": 6.565193680010983
+  },
+  "DDJJfAi55dqLjwAmCYKPJJFKBzKYWwGvPdUDksdm5Frc": {
+    "tokens": 234620.032892,
+    "first_buy_time": "2025-09-28T09:02:30Z",
+    "weightage": 5.482016688126445
   },
   "9sBtLtMHWT1Srg1Q2wQMifuY6jrt14fPv7CTpyB6aHQE": {
     "tokens": 232554.580773,
-    "first_buy_time": "2025-09-27T23:58:26Z"
-  },
-  "PP1XrGM62qSnWEpvJvneE1mP5PpvCQebB1ZWvyTHrW5": {
-    "tokens": 231670.1229,
-    "first_buy_time": "2025-09-28T06:17:01Z"
+    "first_buy_time": "2025-09-27T23:58:26Z",
+    "weightage": 7.868297363236488
   },
   "CctqicgWX6rhRuZDpwSBDfHdLyVfjxgPhjtC4jJuttZy": {
     "tokens": 226837.905066,
-    "first_buy_time": "2025-09-28T06:29:28Z"
+    "first_buy_time": "2025-09-28T06:29:28Z",
+    "weightage": 6.112461046047145
   },
-  "GD9VYcDDKWrFJ9SaDSAHxgvsU5SuxKk4yGF24p3opnP1": {
-    "tokens": 208256.040466,
-    "first_buy_time": "2025-09-28T03:49:52Z"
+  "FHdrNGdMstb4afGhSt1pQTesSA2BWrweFvSEYhV1KEHc": {
+    "tokens": 221188.230311,
+    "first_buy_time": "2025-09-28T09:05:23Z",
+    "weightage": 5.401578259229017
   },
   "riwqaRh6ZXwhwTJGfRnx5HEoxSmfGqeKiBotK2pvj3z": {
     "tokens": 159895.410085,
-    "first_buy_time": "2025-09-27T23:51:23Z"
+    "first_buy_time": "2025-09-27T23:51:23Z",
+    "weightage": 7.2776216922448755
+  },
+  "2wjzspyoqGfyG4FrsADerptdvBvjJ9QaxzgC85npXNrW": {
+    "tokens": 154586.225515,
+    "first_buy_time": "2025-09-28T05:25:08Z",
+    "weightage": 5.874574921417696
   },
   "5Z5ShmjqCgQHuHYSGJfq5TuZLVcyyb251xC8oAAaDf5L": {
     "tokens": 144469.442676,
-    "first_buy_time": "2025-09-28T00:15:22Z"
-  },
-  "6ZNXcZi2ofp3JiAF5jNeKwh3kjZzgvjb9nbEwnSmz99K": {
-    "tokens": 114979.798236,
-    "first_buy_time": "2025-09-28T00:14:34Z"
+    "first_buy_time": "2025-09-28T00:15:22Z",
+    "weightage": 7.0125927544077316
   },
   "BJ8QjkTinNHozLfdMvWec9BNjwPZnvqUxY8Ko1DaExZ3": {
     "tokens": 109537.372506,
-    "first_buy_time": "2025-09-27T23:55:15Z"
+    "first_buy_time": "2025-09-27T23:55:15Z",
+    "weightage": 6.634756801020999
   },
   "CpUh1vfLunActdwJaVThj6qWn8cfmwXTLjUJJktoforR": {
     "tokens": 94607.782264,
-    "first_buy_time": "2025-09-27T23:45:15Z"
+    "first_buy_time": "2025-09-27T23:45:15Z",
+    "weightage": 6.428222072279902
   },
   "Grxc3SKUxXUa6CimNSqE6o5iCifZMhu2iiD1AiXP4zi2": {
     "tokens": 89923.269269,
-    "first_buy_time": "2025-09-27T23:23:25Z"
+    "first_buy_time": "2025-09-27T23:23:25Z",
+    "weightage": 6.42197556576876
+  },
+  "G1NEdsBEh722KWef6sTqWYCL56buFLjfvNHF6EvLStZL": {
+    "tokens": 83355.904493,
+    "first_buy_time": "2025-09-28T07:16:38Z",
+    "weightage": 4.656866835254931
+  },
+  "9wMTjBom4KW8jgg6XMkmF2mj5QVDfoAsSbVWio7znvzS": {
+    "tokens": 70146.809978,
+    "first_buy_time": "2025-09-28T08:25:50Z",
+    "weightage": 4.213928180378479
   },
   "2cxi1mU7PXGvPhR8P2vateQYkfzCtYHBzmwgNypyERkH": {
     "tokens": 49419.08604,
-    "first_buy_time": "2025-09-27T23:41:35Z"
+    "first_buy_time": "2025-09-27T23:41:35Z",
+    "weightage": 5.356871101031241
   },
   "EVdn5ahjEwmygPD7otA2zWy9yf12mpbMtRNuV2P5RYHm": {
     "tokens": 43417.342548,
-    "first_buy_time": "2025-09-28T05:12:30Z"
+    "first_buy_time": "2025-09-28T05:12:30Z",
+    "weightage": 4.194473988052685
   },
-  "B7eRAwdDCFLhnqBHVEH85FrAo7FZeYVT7owQ1hfuEZWD": {
-    "tokens": 37483.951262,
-    "first_buy_time": "2025-09-28T06:47:54Z"
+  "BobDo1k2Jb9qZUH8mn6wpx6fc8Uu6HGeu1bL5orjGYgz": {
+    "tokens": 42325.644007,
+    "first_buy_time": "2025-09-28T08:15:10Z",
+    "weightage": 3.6456508738678606
   },
   "QtCUdig6WsUUhedBJ7thzRarRwdpopHzAXWU45PR8jK": {
     "tokens": 32610.647158,
-    "first_buy_time": "2025-09-27T23:42:20Z"
+    "first_buy_time": "2025-09-27T23:42:20Z",
+    "weightage": 4.66057009539592
   },
   "3UGvzFUUZNxZZ1R8xWvp6wY5rBSv3nR4nNFpBq74ZqeA": {
     "tokens": 32261.068566,
-    "first_buy_time": "2025-09-27T23:27:15Z"
+    "first_buy_time": "2025-09-27T23:27:15Z",
+    "weightage": 4.682146784098119
   },
   "CB3a6oCFXApMZ3c4Yny5ntNRyGVicRsWY4LH2834t21": {
     "tokens": 32003.840374,
-    "first_buy_time": "2025-09-27T23:24:55Z"
+    "first_buy_time": "2025-09-27T23:24:55Z",
+    "weightage": 4.674777915836623
   },
   "EHh9XNwpifajuGhY5wsFgPyL6d9JqHL66p1t7myNQU47": {
     "tokens": 27952.932044,
-    "first_buy_time": "2025-09-28T00:12:42Z"
+    "first_buy_time": "2025-09-28T00:12:42Z",
+    "weightage": 4.327908066022176
   },
   "5V1uM9T9dXRxhT81mgCRUCoDUHrcnAxrgNEJMFYQeWvQ": {
     "tokens": 26775.007287,
-    "first_buy_time": "2025-09-27T23:23:32Z"
+    "first_buy_time": "2025-09-27T23:23:32Z",
+    "weightage": 4.377408288243686
   }
 }

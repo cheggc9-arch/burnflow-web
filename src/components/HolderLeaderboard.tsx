@@ -1,17 +1,18 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Trophy, Clock, Diamond } from "lucide-react";
+import { Trophy, Clock, Star } from "lucide-react";
 
 interface Holder {
   address: string;
   balance: number;
-  firstHoldTime?: string;
-  lastUpdated?: string;
+  firstHoldTime: string;
+  lastUpdated: string;
   rank: number;
   timeWeight: number;
   balanceWeight: number;
   totalWeight: number;
+  weightage: number;
   daysHeld: number;
   category: string;
 }
@@ -20,15 +21,15 @@ export default function HolderLeaderboard() {
   const [holderData, setHolderData] = useState<{
     topHolders: Holder[];
     earlyAdopters: Holder[];
-    diamondHands: Holder[];
+    highestWeight: Holder[];
   }>({
     topHolders: [],
     earlyAdopters: [],
-    diamondHands: []
+    highestWeight: []
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<'balance' | 'early' | 'duration'>('balance');
+  const [activeTab, setActiveTab] = useState<'weight' | 'early' | 'balance'>('weight');
 
   useEffect(() => {
     const fetchHolders = async () => {
@@ -37,10 +38,44 @@ export default function HolderLeaderboard() {
         const result = await response.json();
         
         if (result.success) {
+          // Process the hashmap data to create the three sections
+          const allHolders = result.data.allHolders || [];
+          
+          // 1. Top Holders - Sorted by balance (highest first)
+          const topHolders = [...allHolders]
+            .sort((a, b) => b.balance - a.balance)
+            .slice(0, 20)
+            .map((holder, index) => ({
+              ...holder,
+              rank: index + 1,
+              category: 'Top Holder'
+            }));
+
+          // 2. Early Adopters - Sorted by first hold time (earliest first)
+          const earlyAdopters = [...allHolders]
+            .filter(holder => holder.firstHoldTime)
+            .sort((a, b) => new Date(a.firstHoldTime).getTime() - new Date(b.firstHoldTime).getTime())
+            .slice(0, 20)
+            .map((holder, index) => ({
+              ...holder,
+              rank: index + 1,
+              category: 'Early Adopter'
+            }));
+
+          // 3. Highest Weight - Sorted by weightage (highest first)
+          const highestWeight = [...allHolders]
+            .sort((a, b) => (b.weightage || 0) - (a.weightage || 0))
+            .slice(0, 20)
+            .map((holder, index) => ({
+              ...holder,
+              rank: index + 1,
+              category: 'Highest Weight'
+            }));
+
           setHolderData({
-            topHolders: result.data.topHolders,
-            earlyAdopters: result.data.earlyAdopters,
-            diamondHands: result.data.diamondHands
+            topHolders,
+            earlyAdopters,
+            highestWeight
           });
         } else {
           setError(result.error || 'Failed to fetch holders');
@@ -96,14 +131,14 @@ export default function HolderLeaderboard() {
 
   const getCurrentHolders = () => {
     switch (activeTab) {
-      case 'balance':
-        return holderData.topHolders;
+      case 'weight':
+        return holderData.highestWeight;
       case 'early':
         return holderData.earlyAdopters;
-      case 'duration':
-        return holderData.diamondHands;
-      default:
+      case 'balance':
         return holderData.topHolders;
+      default:
+        return holderData.highestWeight;
     }
   };
 
@@ -111,19 +146,24 @@ export default function HolderLeaderboard() {
     return (
       <div className="pump-card rounded-xl p-6">
         <div className="mb-6">
-          <h3 className="text-xl font-bold pump-gradient-text">Holder Leaderboard</h3>
+          <div className="flex justify-between items-center mb-4">
+            <h3 className="text-xl font-bold pump-gradient-text">Holder Leaderboard</h3>
+            <div className="text-xs text-gray-400 bg-gray-800/50 px-3 py-1 rounded-full">
+              Updated every 5min
+            </div>
+          </div>
           <div className="flex space-x-1 bg-gray-800/50 rounded-lg p-1">
             <button className="flex items-center space-x-2 px-4 py-2 rounded-md text-sm font-medium transition-all bg-gray-700 text-white">
-              <Trophy className="w-4 h-4 text-yellow-400" />
-              <span>Top Holders</span>
+              <Star className="w-4 h-4 text-purple-400" />
+              <span>Highest Weight</span>
             </button>
             <button className="flex items-center space-x-2 px-4 py-2 rounded-md text-sm font-medium transition-all text-gray-400 hover:text-white hover:bg-gray-700/50">
               <Clock className="w-4 h-4" />
               <span>Early Adopters</span>
             </button>
             <button className="flex items-center space-x-2 px-4 py-2 rounded-md text-sm font-medium transition-all text-gray-400 hover:text-white hover:bg-gray-700/50">
-              <Diamond className="w-4 h-4" />
-              <span>Diamond Hands</span>
+              <Trophy className="w-4 h-4 text-yellow-400" />
+              <span>Top Holders</span>
             </button>
           </div>
         </div>
@@ -136,7 +176,12 @@ export default function HolderLeaderboard() {
     return (
       <div className="pump-card rounded-xl p-6">
         <div className="mb-6">
-          <h3 className="text-xl font-bold pump-gradient-text">Holder Leaderboard</h3>
+          <div className="flex justify-between items-center mb-4">
+            <h3 className="text-xl font-bold pump-gradient-text">Holder Leaderboard</h3>
+            <div className="text-xs text-gray-400 bg-gray-800/50 px-3 py-1 rounded-full">
+              Updated every 5min
+            </div>
+          </div>
         </div>
         <div className="text-center py-8 text-red-400">Error: {error}</div>
       </div>
@@ -148,18 +193,23 @@ export default function HolderLeaderboard() {
   return (
     <div className="pump-card rounded-xl p-6">
       <div className="mb-6">
-        <h3 className="text-xl font-bold pump-gradient-text">Holder Leaderboard</h3>
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="text-xl font-bold pump-gradient-text">Holder Leaderboard</h3>
+          <div className="text-xs text-gray-400 bg-gray-800/50 px-3 py-1 rounded-full">
+            Updated every 5min
+          </div>
+        </div>
         <div className="flex space-x-1 bg-gray-800/50 rounded-lg p-1">
           <button 
-            onClick={() => setActiveTab('balance')}
+            onClick={() => setActiveTab('weight')}
             className={`flex items-center space-x-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${
-              activeTab === 'balance' 
+              activeTab === 'weight' 
                 ? 'bg-gray-700 text-white' 
                 : 'text-gray-400 hover:text-white hover:bg-gray-700/50'
             }`}
           >
-            <Trophy className="w-4 h-4 text-yellow-400" />
-            <span>Top Holders</span>
+            <Star className="w-4 h-4 text-purple-400" />
+            <span>Highest Weight</span>
           </button>
           <button 
             onClick={() => setActiveTab('early')}
@@ -173,15 +223,15 @@ export default function HolderLeaderboard() {
             <span>Early Adopters</span>
           </button>
           <button 
-            onClick={() => setActiveTab('duration')}
+            onClick={() => setActiveTab('balance')}
             className={`flex items-center space-x-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${
-              activeTab === 'duration' 
+              activeTab === 'balance' 
                 ? 'bg-gray-700 text-white' 
                 : 'text-gray-400 hover:text-white hover:bg-gray-700/50'
             }`}
           >
-            <Diamond className="w-4 h-4" />
-            <span>Diamond Hands</span>
+            <Trophy className="w-4 h-4 text-yellow-400" />
+            <span>Top Holders</span>
           </button>
         </div>
       </div>
@@ -194,14 +244,14 @@ export default function HolderLeaderboard() {
             <div>Rank</div>
             <div>Address</div>
             <div>
-              {activeTab === 'balance' && 'Balance'}
+              {activeTab === 'weight' && 'Total Weight'}
               {activeTab === 'early' && 'First Hold'}
-              {activeTab === 'duration' && 'Days Held'}
+              {activeTab === 'balance' && 'Balance'}
             </div>
             <div>
-              {activeTab === 'balance' && 'Hold Time'}
+              {activeTab === 'weight' && 'Balance'}
               {activeTab === 'early' && 'Balance'}
-              {activeTab === 'duration' && 'Balance'}
+              {activeTab === 'balance' && 'Hold Time'}
             </div>
           </div>
           
@@ -235,15 +285,15 @@ export default function HolderLeaderboard() {
               </div>
               
               <div className="text-sm font-medium">
-                {activeTab === 'balance' && formatNumber(holder.balance)}
+                {activeTab === 'weight' && (holder.weightage || 0).toFixed(2)}
                 {activeTab === 'early' && holder.firstHoldTime && formatTimeAgo(holder.firstHoldTime)}
-                {activeTab === 'duration' && `${holder.daysHeld} days`}
+                {activeTab === 'balance' && formatNumber(holder.balance)}
               </div>
               
               <div className="text-sm text-gray-400">
-                {activeTab === 'balance' && holder.firstHoldTime && formatTimeAgo(holder.firstHoldTime)}
+                {activeTab === 'weight' && formatNumber(holder.balance)}
                 {activeTab === 'early' && formatNumber(holder.balance)}
-                {activeTab === 'duration' && formatNumber(holder.balance)}
+                {activeTab === 'balance' && holder.firstHoldTime && formatTimeAgo(holder.firstHoldTime)}
               </div>
             </div>
           ))}
