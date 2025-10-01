@@ -1,6 +1,6 @@
 export default function HowItWorks() {
   return (
-    <div id="how-it-works" className="pump-card rounded-xl p-6">
+    <div id="how-it-works" className="pump-card rounded-xl p-6 scroll-mt-32">
       <div className="mb-6">
         <h3 className="text-xl font-bold pump-gradient-text">How It Works</h3>
         <p className="text-gray-400 text-sm mt-2">An automated algorithm that distributes 100% of creator fees from Pump.fun to token holders based on their holding duration and volume</p>

@@ -1,6 +1,44 @@
 'use client';
 
+import { useRouter, usePathname } from 'next/navigation';
+import { useEffect } from 'react';
+
 export default function Header() {
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const handleSectionClick = (sectionId: string) => {
+    if (pathname === '/') {
+      // If already on home page, just scroll
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // If on another page, navigate to home first, then scroll
+      router.push('/');
+      // Wait for navigation to complete, then scroll
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 500);
+    }
+  };
+
+  // Handle hash scrolling when page loads
+  useEffect(() => {
+    if (pathname === '/' && window.location.hash) {
+      const hash = window.location.hash.substring(1);
+      setTimeout(() => {
+        const element = document.getElementById(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  }, [pathname]);
   return (
     <header className="border-b-2 border-green-400 bg-black/80 backdrop-blur-sm sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4">
@@ -18,16 +56,12 @@ export default function Header() {
             </div>
           </a>
           <div className="flex items-center space-x-6">
-            <a
-              href="#how-it-works"
+            <button
               className="bg-green-400 text-black px-4 py-2 rounded font-mono text-sm font-semibold hover:bg-yellow-400 transition-colors tracking-wider"
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' });
-              }}
+              onClick={() => handleSectionClick('how-it-works')}
             >
               HOW IT WORKS
-            </a>
+            </button>
             <a
               href="/formula"
               className="bg-cyan-400 text-black px-4 py-2 rounded font-mono text-sm font-bold hover:bg-cyan-300 transition-all duration-300 tracking-wider border-2 border-cyan-300 shadow-lg hover:shadow-cyan-400/50"
@@ -35,21 +69,17 @@ export default function Header() {
               FORMULA
             </a>
             <a
-              href="#leaderboard"
-              className="bg-green-400 text-black px-4 py-2 rounded font-mono text-sm font-semibold hover:bg-yellow-400 transition-colors tracking-wider"
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById('leaderboard')?.scrollIntoView({ behavior: 'smooth' });
-              }}
-            >
-              LEADERBOARD
-            </a>
-            <a
               href="/roadmap"
               className="bg-green-400 text-black px-4 py-2 rounded font-mono text-sm font-semibold hover:bg-yellow-400 transition-colors tracking-wider"
             >
               ROADMAP
             </a>
+            <button
+              className="bg-green-400 text-black px-4 py-2 rounded font-mono text-sm font-semibold hover:bg-yellow-400 transition-colors tracking-wider"
+              onClick={() => handleSectionClick('leaderboard')}
+            >
+              LEADERBOARD
+            </button>
             <a
               href="https://x.com/hold2earnsol"
               target="_blank"

@@ -191,7 +191,7 @@ export default function HolderLeaderboard() {
   const currentHolders = getCurrentHolders();
 
   return (
-    <div id="leaderboard" className="pump-card rounded-xl p-6">
+    <div id="leaderboard" className="pump-card rounded-xl p-6 scroll-mt-32">
       <div className="mb-6">
         <div className="flex justify-between items-center mb-4">
           <h3 className="text-xl font-bold pump-gradient-text">Holder Leaderboard</h3>
