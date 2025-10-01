@@ -223,7 +223,7 @@ body {
     opacity: 0.32;
   }
   100% {
-    transform: translateY(200vh);
+    transform: translateY(300vh);
     opacity: 0.16;
   }
 }
