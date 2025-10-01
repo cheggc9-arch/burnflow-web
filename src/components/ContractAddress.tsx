@@ -4,11 +4,16 @@ import { useState } from "react";
 
 export default function ContractAddress() {
   const [copied, setCopied] = useState(false);
-  const address = "CPhwmZW52cukV6GF6RRFBkAo1NjjmjGktMBiiHfGpump";
+  const address = process.env.NEXT_PUBLIC_TOKEN_CONTRACT_ADDRESS || 'Address not configured';
 
   const copyToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText(address);
+      const contractAddress = process.env.NEXT_PUBLIC_TOKEN_CONTRACT_ADDRESS;
+      if (!contractAddress) {
+        console.error("NEXT_PUBLIC_TOKEN_CONTRACT_ADDRESS not found in environment variables");
+        return;
+      }
+      await navigator.clipboard.writeText(contractAddress);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
@@ -24,7 +29,7 @@ export default function ContractAddress() {
         </span>
         <button
           onClick={copyToClipboard}
-          className="flex items-center space-x-2 text-left hover:text-green-300 transition-colors"
+          className="flex items-center space-x-2 text-left hover:text-green-300 transition-colors cursor-pointer"
         >
           <span className="font-mono text-sm text-green-400">{address}</span>
           {copied ? (

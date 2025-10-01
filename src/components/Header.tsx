@@ -1,3 +1,5 @@
+'use client';
+
 export default function Header() {
   return (
     <header className="border-b-2 border-green-400 bg-black/80 backdrop-blur-sm sticky top-0 z-50">
@@ -17,16 +19,26 @@ export default function Header() {
           </div>
           <div className="flex items-center space-x-6">
             <a
-              href="/formula"
-              className="text-green-400 hover:text-cyan-400 transition-colors font-mono text-sm tracking-wider"
+              href="#how-it-works"
+              className="bg-green-400 text-black px-4 py-2 rounded font-mono text-sm font-semibold hover:bg-yellow-400 transition-colors tracking-wider"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' });
+              }}
             >
-              [ FORMULA ]
+              HOW IT WORKS
+            </a>
+            <a
+              href="/formula"
+              className="bg-green-400 text-black px-4 py-2 rounded font-mono text-sm font-semibold hover:bg-yellow-400 transition-colors tracking-wider"
+            >
+              FORMULA
             </a>
             <a
               href="https://x.com/hold2earnsol"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center space-x-2 text-green-400 hover:text-cyan-400 transition-colors font-mono text-sm tracking-wider"
+              className="flex items-center space-x-2 text-green-400 hover:text-yellow-400 transition-colors font-mono text-sm tracking-wider"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

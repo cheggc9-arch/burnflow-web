@@ -153,15 +153,15 @@ export default function HolderLeaderboard() {
             </div>
           </div>
           <div className="flex space-x-1 bg-gray-800/50 rounded-lg p-1">
-            <button className="flex items-center space-x-2 px-4 py-2 rounded-md text-sm font-medium transition-all bg-gray-700 text-white">
+            <button className="flex items-center space-x-2 px-4 py-2 rounded-md text-sm font-medium transition-all bg-gray-700 text-white cursor-pointer">
               <Star className="w-4 h-4 text-purple-400" />
               <span>Highest Weight</span>
             </button>
-            <button className="flex items-center space-x-2 px-4 py-2 rounded-md text-sm font-medium transition-all text-gray-400 hover:text-white hover:bg-gray-700/50">
+            <button className="flex items-center space-x-2 px-4 py-2 rounded-md text-sm font-medium transition-all text-gray-400 hover:text-white hover:bg-gray-700/50 cursor-pointer">
               <Clock className="w-4 h-4" />
               <span>Early Adopters</span>
             </button>
-            <button className="flex items-center space-x-2 px-4 py-2 rounded-md text-sm font-medium transition-all text-gray-400 hover:text-white hover:bg-gray-700/50">
+            <button className="flex items-center space-x-2 px-4 py-2 rounded-md text-sm font-medium transition-all text-gray-400 hover:text-white hover:bg-gray-700/50 cursor-pointer">
               <Trophy className="w-4 h-4 text-yellow-400" />
               <span>Top Holders</span>
             </button>
@@ -202,7 +202,7 @@ export default function HolderLeaderboard() {
         <div className="flex space-x-1 bg-gray-800/50 rounded-lg p-1">
           <button 
             onClick={() => setActiveTab('weight')}
-            className={`flex items-center space-x-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${
+            className={`flex items-center space-x-2 px-4 py-2 rounded-md text-sm font-medium transition-all cursor-pointer ${
               activeTab === 'weight' 
                 ? 'bg-gray-700 text-white' 
                 : 'text-gray-400 hover:text-white hover:bg-gray-700/50'
@@ -213,7 +213,7 @@ export default function HolderLeaderboard() {
           </button>
           <button 
             onClick={() => setActiveTab('early')}
-            className={`flex items-center space-x-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${
+            className={`flex items-center space-x-2 px-4 py-2 rounded-md text-sm font-medium transition-all cursor-pointer ${
               activeTab === 'early' 
                 ? 'bg-gray-700 text-white' 
                 : 'text-gray-400 hover:text-white hover:bg-gray-700/50'
@@ -224,7 +224,7 @@ export default function HolderLeaderboard() {
           </button>
           <button 
             onClick={() => setActiveTab('balance')}
-            className={`flex items-center space-x-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${
+            className={`flex items-center space-x-2 px-4 py-2 rounded-md text-sm font-medium transition-all cursor-pointer ${
               activeTab === 'balance' 
                 ? 'bg-gray-700 text-white' 
                 : 'text-gray-400 hover:text-white hover:bg-gray-700/50'

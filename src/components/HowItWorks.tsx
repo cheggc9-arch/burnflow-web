@@ -1,6 +1,6 @@
 export default function HowItWorks() {
   return (
-    <div className="pump-card rounded-xl p-6">
+    <div id="how-it-works" className="pump-card rounded-xl p-6">
       <div className="mb-6">
         <h3 className="text-xl font-bold pump-gradient-text">How It Works</h3>
         <p className="text-gray-400 text-sm mt-2">A sophisticated reward system that rewards early adopters, loyal holders, and fair distribution</p>
@@ -40,6 +40,30 @@ export default function HowItWorks() {
               <div className="text-xs text-gray-300">Every 20 minutes</div>
             </div>
           </div>
+        </div>
+        
+        <div className="mt-8 pt-6 border-t border-gray-600">
+          <a
+            href="/formula"
+            className="inline-flex items-center space-x-2 text-green-300 hover:text-yellow-400 transition-colors font-mono text-base font-bold tracking-wider group"
+          >
+            <span>Learn more about the formula</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="group-hover:translate-x-1 transition-transform duration-200"
+            >
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+            </svg>
+          </a>
         </div>
         
       </div>
