@@ -356,6 +356,7 @@ interface CacheData {
   activeHolders: number;
   lastUpdated: number;
   isUpdating: boolean;
+  lastDistributionTime: number;
 }
 
 // Holder cache interface
@@ -376,13 +377,21 @@ let cache: CacheData = {
   treasuryBalance: 0,
   activeHolders: 0,
   lastUpdated: 0,
-  isUpdating: false
+  isUpdating: false,
+  lastDistributionTime: 0
 };
 
 // Try to load cache from file first
 const fileCache = loadCacheFromFile();
 if (fileCache) {
-  cache = fileCache;
+  // Ensure all required properties exist
+  cache = {
+    treasuryBalance: fileCache.treasuryBalance || 0,
+    activeHolders: fileCache.activeHolders || 0,
+    lastUpdated: fileCache.lastUpdated || 0,
+    isUpdating: fileCache.isUpdating || false,
+    lastDistributionTime: fileCache.lastDistributionTime || 0
+  };
 }
 
 // Ensure cache is not reset on module reloads
@@ -600,8 +609,32 @@ export function isHolderCacheStale(): boolean {
   return cacheAge > 5 * 60 * 1000; // 5 minutes
 }
 
+// Function to update last distribution time (call this when you run your distribution script)
+export function updateLastDistributionTime(): void {
+  cache.lastDistributionTime = Date.now();
+  cache.lastUpdated = Date.now();
+  
+  // Save to file for persistence
+  saveCacheToFile(cache);
+  
+  console.log(`🎯 Distribution completed at: ${new Date(cache.lastDistributionTime).toISOString()}`);
+}
+
+// Function to initialize distribution time if not set
+function initializeDistributionTime(): void {
+  if (cache.lastDistributionTime === 0) {
+    // Set initial distribution time to current time
+    cache.lastDistributionTime = Date.now();
+    saveCacheToFile(cache);
+    console.log(`🎯 Initial distribution time set: ${new Date(cache.lastDistributionTime).toISOString()}`);
+  }
+}
+
 // Initialize background job
 export async function startBackgroundJob(): Promise<void> {
+  // Initialize distribution time if not set
+  initializeDistributionTime();
+  
   // Get token launch time once at startup
   try {
     const tokenMint = getTokenContractAddress();

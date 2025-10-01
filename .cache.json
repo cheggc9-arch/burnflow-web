@@ -1,8 +1,7 @@
 {
-  "treasuryBalance": 0.728060085,
-  "activeHolders": 135,
-  "totalTokensHeld": 0,
-  "lastUpdated": 1759052942461,
+  "treasuryBalance": 0.921839826,
+  "activeHolders": 437,
+  "lastUpdated": 1759278879025,
   "isUpdating": false,
-  "marketCap": 999.972400657809
+  "lastDistributionTime": 1759278817260
 }
