@@ -90,7 +90,7 @@ export default function Hero() {
           </h1>
         </div>
           <p className="text-xl md:text-2xl font-semibold text-gray-300 max-w-4xl mx-auto leading-relaxed">
-            Holders recieve 100% of  creator fees from Pump.fun!<br/>
+            Holders recieve 100% of creator rewards from Pump.fun!<br/>
             <span className="text-green-400">More volume, more fees distributed!</span><br/>
             <span className="text-yellow-400">[AUTOMATED OPEN SOURCE ALGORITHM]</span>
           </p>

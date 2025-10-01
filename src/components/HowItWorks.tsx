@@ -3,7 +3,7 @@ export default function HowItWorks() {
     <div id="how-it-works" className="pump-card rounded-xl p-6">
       <div className="mb-6">
         <h3 className="text-xl font-bold pump-gradient-text">How It Works</h3>
-        <p className="text-gray-400 text-sm mt-2">A sophisticated reward system that rewards early adopters, loyal holders, and fair distribution</p>
+        <p className="text-gray-400 text-sm mt-2">An automated algorithm that distributes 100% of creator fees from Pump.fun to token holders based on their holding duration and volume</p>
       </div>
       <div className="">
         <div className="grid md:grid-cols-3 gap-6">
@@ -13,8 +13,8 @@ export default function HowItWorks() {
             </div>
             <h3 className="font-semibold text-lg text-[var(--pump-green)]">1. Buy & Hold</h3>
             <p className="text-gray-400 text-sm">Purchase tokens and hold them in your wallet.<br/>The earlier you buy, the more you earn!</p>
-            <div className="bg-green-900/20 rounded-lg p-3 border border-green-500/20">
-              <div className="text-xs text-green-400 font-medium">Early Advantage</div>
+            <div className="bg-purple-900/20 rounded-lg p-3 border border-purple-500/20">
+              <div className="text-xs text-purple-400 font-medium">Early Advantage</div>
               <div className="text-xs text-gray-300">Exponential rewards for early buyers</div>
             </div>
           </div>
@@ -23,7 +23,7 @@ export default function HowItWorks() {
               <span className="text-2xl">⚡</span>
             </div>
             <h3 className="font-semibold text-lg text-[var(--pump-blue)]">2. Earn Weightage</h3>
-            <p className="text-gray-400 text-sm">Your weightage is calculated using three factors:<br/>balance, earlyness, and loyalty bonuses.</p>
+            <p className="text-gray-400 text-sm">Weightage is calculated using three factors:<br/>Token balance • Earlyness • Loyalty</p>
             <div className="bg-blue-900/20 rounded-lg p-3 border border-blue-500/20">
               <div className="text-xs text-blue-400 font-medium">Weightage Formula</div>
               <div className="text-xs text-gray-300">Balance × Earlyness × Loyalty</div>
@@ -34,7 +34,7 @@ export default function HowItWorks() {
               <span className="text-2xl">🎯</span>
             </div>
             <h3 className="font-semibold text-lg text-yellow-400">3. Get Rewards</h3>
-            <p className="text-gray-400 text-sm">Receive your proportional share of creator fees based on your weightage.<br/>Updated every 5 minutes!</p>
+            <p className="text-gray-400 text-sm">Receive your portion of creator rewards based on your weightage.</p>
             <div className="bg-yellow-900/20 rounded-lg p-3 border border-yellow-500/20">
               <div className="text-xs text-yellow-400 font-medium">Auto Distribution</div>
               <div className="text-xs text-gray-300">Every 20 minutes</div>
