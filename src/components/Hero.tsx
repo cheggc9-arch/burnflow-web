@@ -82,30 +82,42 @@ export default function Hero() {
       
       <div className="relative z-10">
         <div className="mb-6">
-          <div className="text-sm text-green-400 font-mono mb-2 tracking-widest">
-            [ SYSTEM INITIALIZED ]
+          <div className="text-sm text-blue-400 font-mono mb-2 tracking-widest">
+            [TEST]
           </div>
-          <h1 className="text-6xl md:text-8xl font-bold pump-gradient-text mb-4 tracking-wider">
-            MATRIX
+          <h1 className="text-6xl md:text-8xl font-bold text-green-400 mb-4 tracking-wider" style={{textShadow: '0 0 15px rgba(34, 197, 94, 0.6)'}}>
+            CREATOR FEES GO TO YOU
           </h1>
-          <h2 className="text-3xl md:text-5xl font-bold text-cyan-400 mb-6 tracking-wide">
-            REWARDS
-          </h2>
         </div>
-        <p className="text-xl md:text-2xl text-green-300 max-w-4xl mx-auto leading-relaxed font-mono">
-          <span className="text-cyan-400">[ ENTER THE MATRIX ]</span><br/>
-          Advanced algorithms distribute creator fees to token holders.<br/>
-          <span className="text-lime-400">[ AUTOMATED REWARD SYSTEM ACTIVE ]</span>
-        </p>
+          <p className="text-xl md:text-2xl font-semibold text-gray-300 max-w-4xl mx-auto leading-relaxed">
+            Holders recieve 100% of  creator fees from Pump.fun!<br/>
+            <span className="text-green-400">More volume, more fees distributed!</span><br/>
+            <span className="text-yellow-400">[AUTOMATED OPEN SOURCE ALGORITHM]</span>
+          </p>
       </div>
       
-      <div className="flex justify-center mt-12 relative z-10">
-        <div className="pump-card rounded-lg p-6 max-w-lg w-full">
-          <div className="text-center">
-            <div className="text-green-400 font-mono text-sm mb-3 tracking-wider">
-              [ TOKEN CONTRACT ]
-            </div>
+      <div className="flex justify-center mt-12 relative z-10 gap-6">
+        <div className="pump-card rounded-lg p-4 max-w-lg w-full">
+          <div className="flex items-center justify-center h-full min-h-[80px]">
             <ContractAddress />
+          </div>
+        </div>
+        <div className="pump-card rounded-lg p-4 max-w-lg w-full">
+          <div className="text-center">
+            <div className="text-sm font-semibold text-gray-300 mb-2 tracking-wide">
+              [ OPEN SOURCE CODE ]
+            </div>
+            <a 
+              href="https://github.com/your-username/hold2earn-algorithm" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-yellow-400 hover:text-yellow-300 font-mono text-sm break-all transition-colors duration-200"
+            >
+              github.com/hold2earn-algorithm
+            </a>
+            <div className="text-gray-400 font-mono text-xs mt-1">
+              View the distribution algorithm
+            </div>
           </div>
         </div>
       </div>

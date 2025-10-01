@@ -42,23 +42,23 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-shadow: 0 0 10px var(--matrix-green);
+  text-shadow: none;
   animation: matrix-glow 2s ease-in-out infinite alternate;
 }
 
 /* Matrix gradient background */
 .pump-gradient {
   background: linear-gradient(135deg, var(--matrix-green) 0%, var(--matrix-cyan) 50%, var(--matrix-lime) 100%);
-  box-shadow: 0 0 20px var(--matrix-green);
+  box-shadow: none;
 }
 
 /* Matrix glow animation */
 @keyframes matrix-glow {
   from {
-    text-shadow: 0 0 10px var(--matrix-green), 0 0 20px var(--matrix-green), 0 0 30px var(--matrix-green);
+    text-shadow: none;
   }
   to {
-    text-shadow: 0 0 20px var(--matrix-green), 0 0 30px var(--matrix-green), 0 0 40px var(--matrix-green);
+    text-shadow: none;
   }
 }
 
@@ -100,12 +100,12 @@
   letter-spacing: 2px;
   transition: all 0.3s ease;
   border: 2px solid var(--matrix-green);
-  box-shadow: 0 0 15px var(--matrix-green);
+  box-shadow: none;
 }
 
 .pump-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 0 30px var(--matrix-green), 0 0 50px var(--matrix-cyan);
+  box-shadow: none;
   background: linear-gradient(135deg, var(--matrix-cyan) 0%, var(--matrix-lime) 100%);
 }
 
@@ -116,10 +116,10 @@
 
 @keyframes matrix-pulse {
   0%, to {
-    box-shadow: 0 0 20px var(--matrix-green), 0 0 40px var(--matrix-green);
+    box-shadow: none;
   }
   50% {
-    box-shadow: 0 0 40px var(--matrix-green), 0 0 80px var(--matrix-green), 0 0 120px var(--matrix-green);
+    box-shadow: none;
   }
 }
 
@@ -146,7 +146,7 @@
   width: 20px;
   border-radius: 50%;
   cursor: pointer;
-  box-shadow: 0 0 10px var(--matrix-green);
+  box-shadow: none;
 }
 
 .slider::-moz-range-track {
@@ -163,7 +163,7 @@
   border-radius: 50%;
   cursor: pointer;
   border: none;
-  box-shadow: 0 0 10px var(--matrix-green);
+  box-shadow: none;
 }
 
 /* Matrix link styling */
@@ -171,14 +171,14 @@
   color: var(--matrix-green);
   text-decoration: none;
   transition: all 0.3s ease;
-  text-shadow: 0 0 5px var(--matrix-green);
+  text-shadow: none;
   font-family: 'Courier New', monospace;
   font-weight: bold;
 }
 
 .formula-link:hover {
   color: var(--matrix-cyan);
-  text-shadow: 0 0 10px var(--matrix-cyan);
+  text-shadow: none;
 }
 
 /* Matrix background with digital rain effect */
@@ -194,6 +194,22 @@ body {
   position: relative;
 }
 
+/* Increase all text sizes by one level */
+.text-xxs { @apply text-xs; }
+.text-xs { @apply text-sm; }
+.text-sm { @apply text-base; }
+.text-base { @apply text-lg; }
+.text-lg { @apply text-xl; }
+.text-xl { @apply text-2xl; }
+.text-2xl { @apply text-3xl; }
+.text-3xl { @apply text-4xl; }
+.text-4xl { @apply text-5xl; }
+.text-5xl { @apply text-6xl; }
+.text-6xl { @apply text-7xl; }
+.text-7xl { @apply text-8xl; }
+.text-8xl { @apply text-9xl; }
+.text-9xl { @apply text-9xl; } /* Keep largest size as is */
+
 /* Removed conflicting background animation */
 
 @keyframes digital-rain {
@@ -205,26 +221,26 @@ body {
 @keyframes matrix-fall {
   0% {
     transform: translateY(0);
-    opacity: 0.8;
-  }
-  5% {
-    opacity: 0.72;
-  }
-  20% {
-    opacity: 0.64;
-  }
-  50% {
-    opacity: 0.56;
-  }
-  80% {
     opacity: 0.48;
   }
+  5% {
+    opacity: 0.432;
+  }
+  20% {
+    opacity: 0.384;
+  }
+  50% {
+    opacity: 0.336;
+  }
+  80% {
+    opacity: 0.288;
+  }
   95% {
-    opacity: 0.32;
+    opacity: 0.192;
   }
   100% {
     transform: translateY(300vh);
-    opacity: 0.16;
+    opacity: 0.096;
   }
 }
 
@@ -237,5 +253,5 @@ body {
   user-select: none;
   font-size: 14px;
   font-weight: bold;
-  text-shadow: 0 0 5px currentColor;
+  text-shadow: none;
 }
