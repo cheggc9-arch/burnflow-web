@@ -49,7 +49,7 @@ export default function TreasuryBalance() {
             <div className="text-5xl md:text-6xl font-bold pump-gradient-text">...</div>
             <div className="space-y-1">
               <p className="text-gray-400 text-sm">
-                Available in creator wallet • Next distribution every 20 minutes
+                Available in creator wallet • Distribution every 20 minutes
               </p>
               <p className="text-[var(--pump-green)] text-xs font-medium">Loading...</p>
             </div>
@@ -85,7 +85,7 @@ export default function TreasuryBalance() {
           </div>
           <div className="space-y-1">
             <p className="text-gray-400 text-sm">
-              Available in creator wallet • Next distribution every 20 minutes
+              Available in creator wallet • Distribution every 20 minutes
             </p>
             <p className="text-[var(--pump-green)] text-xs font-medium">
               ~{data?.distributionAmount.toFixed(4) || '0.0000'} SOL will be distributed (95% of treasury)
