@@ -8,8 +8,8 @@ export default function HowItWorks() {
       <div className="">
         <div className="grid md:grid-cols-3 gap-6">
           <div className="text-center space-y-4">
-            <div className="w-16 h-16 mx-auto bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center shadow-lg">
-              <span className="text-2xl">💰</span>
+            <div className="w-16 h-16 mx-auto flex items-center justify-center">
+              <span className="text-4xl" style={{filter: 'hue-rotate(20deg) saturate(2) brightness(1.2)'}}>💎</span>
             </div>
             <h3 className="font-semibold text-lg text-[var(--pump-green)]">1. Buy & Hold</h3>
             <p className="text-gray-400 text-sm">Purchase tokens and hold them in your wallet.<br/>The earlier you buy, the more you earn!</p>
@@ -19,8 +19,8 @@ export default function HowItWorks() {
             </div>
           </div>
           <div className="text-center space-y-4">
-            <div className="w-16 h-16 mx-auto bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg">
-              <span className="text-2xl">⚡</span>
+            <div className="w-16 h-16 mx-auto flex items-center justify-center">
+              <span className="text-4xl" style={{filter: 'hue-rotate(120deg) saturate(2) brightness(1.2)'}}>⚖️</span>
             </div>
             <h3 className="font-semibold text-lg text-[var(--pump-blue)]">2. Earn Weightage</h3>
             <p className="text-gray-400 text-sm">Weightage is calculated using three factors:<br/>Token balance • Earlyness • Loyalty</p>
@@ -30,10 +30,10 @@ export default function HowItWorks() {
             </div>
           </div>
           <div className="text-center space-y-4">
-            <div className="w-16 h-16 mx-auto bg-gradient-to-br from-yellow-500 to-orange-600 rounded-full flex items-center justify-center shadow-lg">
-              <span className="text-2xl">🎯</span>
+            <div className="w-16 h-16 mx-auto flex items-center justify-center">
+              <span className="text-4xl" style={{filter: 'hue-rotate(120deg) saturate(2) brightness(1.2)'}}>🎁</span>
             </div>
-            <h3 className="font-semibold text-lg text-yellow-400">3. Get Rewards</h3>
+            <h3 className="font-semibold text-lg text-[var(--pump-blue)]">3. Get Rewards</h3>
             <p className="text-gray-400 text-sm">Receive your portion of creator rewards based on your weightage.</p>
             <div className="bg-yellow-900/20 rounded-lg p-3 border border-yellow-500/20">
               <div className="text-xs text-yellow-400 font-medium">Auto Distribution</div>

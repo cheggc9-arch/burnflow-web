@@ -86,7 +86,7 @@ export default function Hero() {
             [TEST]
           </div>
           <h1 className="text-6xl md:text-8xl font-bold text-green-400 mb-4 tracking-wider" style={{textShadow: '0 0 15px rgba(34, 197, 94, 0.6)'}}>
-            CREATOR FEES GO TO YOU
+            CREATOR REWARDS GO TO YOU
           </h1>
         </div>
           <p className="text-xl md:text-2xl font-semibold text-gray-300 max-w-4xl mx-auto leading-relaxed">

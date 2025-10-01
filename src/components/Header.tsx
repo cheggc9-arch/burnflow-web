@@ -5,18 +5,18 @@ export default function Header() {
     <header className="border-b-2 border-green-400 bg-black/80 backdrop-blur-sm sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
-          <div className="flex items-center space-x-4">
+          <a href="/" className="flex items-center space-x-4 hover:opacity-80 transition-opacity">
             <div className="relative">
               <div className="w-12 h-12 rounded border-2 border-green-400 bg-black flex items-center justify-center">
-                <div className="text-green-400 font-mono text-xl font-bold">M</div>
+                <div className="text-green-400 font-mono text-xl font-bold">R</div>
               </div>
               <div className="absolute -top-1 -right-1 w-3 h-3 bg-cyan-400 rounded-full animate-pulse"></div>
             </div>
             <div>
-              <h1 className="text-2xl font-bold pump-gradient-text font-mono tracking-wider">MATRIX</h1>
-              <p className="text-xs text-green-400 font-mono tracking-widest">[ REWARDS ]</p>
+              <h1 className="text-2xl font-bold pump-gradient-text font-mono tracking-wider">REWARDFLOW</h1>
+              <p className="text-xs text-green-400 font-mono tracking-widest">[ REWARD ]</p>
             </div>
-          </div>
+          </a>
           <div className="flex items-center space-x-6">
             <a
               href="#how-it-works"
@@ -30,9 +30,25 @@ export default function Header() {
             </a>
             <a
               href="/formula"
-              className="bg-green-400 text-black px-4 py-2 rounded font-mono text-sm font-semibold hover:bg-yellow-400 transition-colors tracking-wider"
+              className="bg-cyan-400 text-black px-4 py-2 rounded font-mono text-sm font-bold hover:bg-cyan-300 transition-all duration-300 tracking-wider border-2 border-cyan-300 shadow-lg hover:shadow-cyan-400/50"
             >
               FORMULA
+            </a>
+            <a
+              href="#leaderboard"
+              className="bg-green-400 text-black px-4 py-2 rounded font-mono text-sm font-semibold hover:bg-yellow-400 transition-colors tracking-wider"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('leaderboard')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              LEADERBOARD
+            </a>
+            <a
+              href="/roadmap"
+              className="bg-green-400 text-black px-4 py-2 rounded font-mono text-sm font-semibold hover:bg-yellow-400 transition-colors tracking-wider"
+            >
+              ROADMAP
             </a>
             <a
               href="https://x.com/hold2earnsol"

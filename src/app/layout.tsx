@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "MATRIX REWARDS",
-  description: "Enter the Matrix of automated token distribution. Advanced algorithms reward holders with creator fees from the digital realm.",
+  title: "REWARDFLOW",
+  description: "Advanced algorithms distribute creator fees to token holders. Automated, transparent, and fair reward distribution on Solana.",
 };
 
 export default function RootLayout({
