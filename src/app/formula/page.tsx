@@ -39,7 +39,7 @@ export default function FormulaPage() {
               {/* Introduction */}
               <div className="text-center mb-12">
                 <p className="text-lg text-gray-300 leading-relaxed max-w-4xl mx-auto">
-                  This token is built on Pump.fun, but it uses a custom reward distribution script. 
+                  This token is built on Pump.fun, but it uses a open source custom reward distribution script. 
                   All creator rewards collected in the treasury are distributed fairly using a formula 
                   that rewards not only on token balance, but also on how early you've joined and how long you've held.
                 </p>
@@ -102,7 +102,7 @@ export default function FormulaPage() {
                       <div className="w-8 h-8 bg-purple-400 text-black rounded-full flex items-center justify-center font-bold text-sm mr-3">3</div>
                       <h4 className="text-xl font-bold text-purple-400">TENURE BONUS</h4>
                     </div>
-                    <p className="text-gray-300 mb-4">The longer you hold, the more your weight grows, but with diminishing returns:</p>
+                    <p className="text-gray-300 mb-4">The longer you hold, the more your weight grows:</p>
                     <div className="bg-black/50 p-4 rounded border border-purple-500/30 mb-4 overflow-x-auto">
                       <code className="text-purple-400 text-sm whitespace-nowrap">tenure_bonus = 1 + 0.6 × log2(days_held + 1)</code>
                     </div>
@@ -141,22 +141,22 @@ export default function FormulaPage() {
                 <div className="grid md:grid-cols-3 gap-6">
                   <div className="bg-pink-900/20 border border-pink-500/30 p-4 rounded">
                     <h4 className="text-pink-400 font-bold mb-2">Wallet A</h4>
-                    <p className="text-gray-300 text-sm">20k tokens, bought day 1, held for 1 day</p>
+                    <p className="text-pink-400 font-bold text-sm">20k tokens, bought day 1, held for 1 day</p>
                     <p className="text-pink-400 font-bold">Total weight ≈ 4.8</p>
                   </div>
                   <div className="bg-cyan-900/20 border border-cyan-500/30 p-4 rounded">
                     <h4 className="text-cyan-400 font-bold mb-2">Wallet B</h4>
-                    <p className="text-gray-300 text-sm">200k tokens, bought day 2, held for 1 day</p>
+                    <p className="text-cyan-400 font-bold text-sm">200k tokens, bought day 2, held for 1 day</p>
                     <p className="text-cyan-400 font-bold">Total weight ≈ 7.6</p>
                   </div>
                   <div className="bg-purple-900/20 border border-purple-500/30 p-4 rounded">
                     <h4 className="text-purple-400 font-bold mb-2">Wallet C</h4>
-                    <p className="text-gray-300 text-sm">20k tokens, bought day 7, held for 1 day</p>
+                    <p className="text-purple-400 font-bold text-sm">20k tokens, bought day 7, held for 1 day</p>
                     <p className="text-purple-400 font-bold">Total weight ≈ 1.7</p>
                   </div>
                 </div>
                 <p className="text-yellow-400 text-lg mt-6">
-                  👉 Timing and loyalty change the outcome. It's not just about raw token balance.
+                  👉 Timing and loyalty changes the outcome. It's not just about raw token balance!.
                 </p>
               </div>
 
@@ -181,8 +181,9 @@ export default function FormulaPage() {
                   <div className="pump-card p-6">
                     <h4 className="text-xl font-bold text-yellow-400 mb-4">🔥 MASSIVE EARLY ADOPTER REWARDS</h4>
                     <p className="text-gray-300">
-                      First-hour holders get 3x multiplier! Hour-based tracking means every minute counts 
-                      in the crucial early phases, rewarding true believers and early supporters.
+                      Hour-based tracking means every minute counts 
+                      in the crucial early phases, rewarding true believers and early supporters. 
+                      The system recognizes dedication and commitment.
                     </p>
                   </div>
                   
@@ -198,7 +199,7 @@ export default function FormulaPage() {
                     <h4 className="text-xl font-bold text-purple-400 mb-4">🛡️ BALANCED WHALE PROTECTION</h4>
                     <p className="text-gray-300">
                       Logarithmic token balance scaling prevents whale dominance while still rewarding larger 
-                      commitments. Early timing beats big bags in the initial phases!
+                      commitments. Early timing beats big bags so everyone feels valued.
                     </p>
                   </div>
                   

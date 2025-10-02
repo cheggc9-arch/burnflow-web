@@ -1,0 +1,111 @@
+<svg width="1200" height="675" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#000000;stop-opacity:1" />
+      <stop offset="30%" style="stop-color:#0a0a0a;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#0f0f0f;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Grid pattern -->
+    <pattern id="grid" width="25" height="25" patternUnits="userSpaceOnUse">
+      <path d="M 25 0 L 0 0 0 25" fill="none" stroke="#00fb1a" stroke-width="0.15" opacity="0.08"/>
+    </pattern>
+    
+    <!-- Glow effect -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="675" fill="url(#bgGradient)"/>
+  <rect width="1200" height="675" fill="url(#grid)"/>
+  
+  <!-- Central logo -->
+  <g transform="translate(500, 100)">
+    <rect x="0" y="0" width="200" height="200" fill="#000000" stroke="#00fb1a" stroke-width="6" rx="20" filter="url(#glow)"/>
+    <text x="100" y="110" font-family="monospace, 'Courier New', Courier" font-size="120" font-weight="bold" fill="#00fb1a" text-anchor="middle" dominant-baseline="middle">R</text>
+  </g>
+  
+  <!-- Main title -->
+  <text x="600" y="380" font-family="monospace, 'Courier New', Courier" font-size="56" font-weight="bold" fill="#00fb1a" text-anchor="middle">EARLY ADOPTERS WIN</text>
+  
+  <!-- Subtitle -->
+  <text x="600" y="420" font-family="monospace, 'Courier New', Courier" font-size="24" fill="#fbbf24" text-anchor="middle" opacity="0.9">[The Earlier You Join, The More You Earn]</text>
+  
+  <!-- Left side stats -->
+  <g transform="translate(80, 450)">
+    <rect x="0" y="0" width="300" height="150" fill="#00fb1a" opacity="0.05" stroke="#00fb1a" stroke-width="2" rx="12"/>
+    
+    <text x="150" y="30" font-family="monospace, 'Courier New', Courier" font-size="18" font-weight="bold" fill="#00fb1a" text-anchor="middle">EARLY ADVANTAGE</text>
+    
+    <text x="150" y="65" font-family="monospace, 'Courier New', Courier" font-size="36" font-weight="bold" fill="#fbbf24" text-anchor="middle">TIMING</text>
+    <text x="150" y="90" font-family="monospace, 'Courier New', Courier" font-size="16" fill="#ffffff" text-anchor="middle">Beats Size</text>
+    
+    <text x="150" y="120" font-family="monospace, 'Courier New', Courier" font-size="14" fill="#ffffff" text-anchor="middle" opacity="0.8">Early adopters get</text>
+    <text x="150" y="135" font-family="monospace, 'Courier New', Courier" font-size="14" fill="#ffffff" text-anchor="middle" opacity="0.8">massive rewards</text>
+  </g>
+  
+  <!-- Center stats -->
+  <g transform="translate(450, 450)">
+    <rect x="0" y="0" width="300" height="150" fill="#fbbf24" opacity="0.05" stroke="#fbbf24" stroke-width="2" rx="12"/>
+    
+    <text x="150" y="30" font-family="monospace, 'Courier New', Courier" font-size="18" font-weight="bold" fill="#fbbf24" text-anchor="middle">LOYALTY REWARDS</text>
+    
+    <text x="150" y="65" font-family="monospace, 'Courier New', Courier" font-size="36" font-weight="bold" fill="#00fb1a" text-anchor="middle">HODL</text>
+    <text x="150" y="90" font-family="monospace, 'Courier New', Courier" font-size="16" fill="#ffffff" text-anchor="middle">= More Weight</text>
+    
+    <text x="150" y="120" font-family="monospace, 'Courier New', Courier" font-size="14" fill="#ffffff" text-anchor="middle" opacity="0.8">Long-term holders get</text>
+    <text x="150" y="135" font-family="monospace, 'Courier New', Courier" font-size="14" fill="#ffffff" text-anchor="middle" opacity="0.8">exponential advantages</text>
+  </g>
+  
+  <!-- Right side stats -->
+  <g transform="translate(820, 450)">
+    <rect x="0" y="0" width="300" height="150" fill="#8b5cf6" opacity="0.05" stroke="#8b5cf6" stroke-width="2" rx="12"/>
+    
+    <text x="150" y="30" font-family="monospace, 'Courier New', Courier" font-size="18" font-weight="bold" fill="#8b5cf6" text-anchor="middle">OPEN SOURCE</text>
+    
+    <text x="150" y="65" font-family="monospace, 'Courier New', Courier" font-size="32" font-weight="bold" fill="#00fb1a" text-anchor="middle">100%</text>
+    <text x="150" y="90" font-family="monospace, 'Courier New', Courier" font-size="16" fill="#ffffff" text-anchor="middle">Transparent</text>
+    
+    <text x="150" y="120" font-family="monospace, 'Courier New', Courier" font-size="14" fill="#ffffff" text-anchor="middle" opacity="0.8">Verify the code</text>
+    <text x="150" y="135" font-family="monospace, 'Courier New', Courier" font-size="14" fill="#ffffff" text-anchor="middle" opacity="0.8">Trust the process</text>
+  </g>
+  
+  <!-- Top accent bars -->
+  <rect x="0" y="0" width="1200" height="6" fill="#00fb1a" opacity="0.6"/>
+  <rect x="0" y="669" width="1200" height="6" fill="#00fb1a" opacity="0.6"/>
+  
+  <!-- Corner decorations -->
+  <g opacity="0.4">
+    <!-- Top corners -->
+    <circle cx="50" cy="50" r="3" fill="#00fb1a">
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="1150" cy="50" r="3" fill="#fbbf24">
+      <animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+    
+    <!-- Bottom corners -->
+    <circle cx="50" cy="625" r="2" fill="#8b5cf6">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="1150" cy="625" r="3" fill="#00fb1a">
+      <animate attributeName="opacity" values="1;0.2;1" dur="3.5s" repeatCount="indefinite"/>
+    </circle>
+    
+    <!-- Side decorations -->
+    <circle cx="30" cy="337" r="2" fill="#fbbf24">
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="1170" cy="337" r="2" fill="#8b5cf6">
+      <animate attributeName="opacity" values="1;0.4;1" dur="2.8s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+</svg>

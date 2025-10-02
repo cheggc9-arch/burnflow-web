@@ -147,7 +147,7 @@ export default function HolderLeaderboard() {
       <div className="pump-card rounded-xl p-6">
         <div className="mb-6">
           <div className="flex justify-between items-center mb-4">
-            <h3 className="text-xl font-bold pump-gradient-text">Holder Leaderboard</h3>
+            <h3 className="text-xl font-bold pump-gradient-text">Holders Leaderboard</h3>
             <div className="text-xs text-gray-400 bg-gray-800/50 px-3 py-1 rounded-full">
               Updated every 5min
             </div>
@@ -177,7 +177,7 @@ export default function HolderLeaderboard() {
       <div className="pump-card rounded-xl p-6">
         <div className="mb-6">
           <div className="flex justify-between items-center mb-4">
-            <h3 className="text-xl font-bold pump-gradient-text">Holder Leaderboard</h3>
+            <h3 className="text-xl font-bold pump-gradient-text">Holders Leaderboard</h3>
             <div className="text-xs text-gray-400 bg-gray-800/50 px-3 py-1 rounded-full">
               Updated every 5min
             </div>
@@ -194,7 +194,7 @@ export default function HolderLeaderboard() {
     <div id="leaderboard" className="pump-card rounded-xl p-6 scroll-mt-32">
       <div className="mb-6">
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-xl font-bold pump-gradient-text">Holder Leaderboard</h3>
+          <h3 className="text-xl font-bold pump-gradient-text">Holders Leaderboard</h3>
           <div className="text-xs text-gray-400 bg-gray-800/50 px-3 py-1 rounded-full">
             Updated every 5min
           </div>

@@ -1,0 +1,104 @@
+<svg width="1200" height="675" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#000000;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#0f0f0f;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Grid pattern -->
+    <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#00fb1a" stroke-width="0.2" opacity="0.1"/>
+    </pattern>
+    
+    <!-- Glow effect -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="675" fill="url(#bgGradient)"/>
+  <rect width="1200" height="675" fill="url(#grid)"/>
+  
+  <!-- Header with logo and title -->
+  <g transform="translate(50, 80)">
+    <!-- Small logo -->
+    <rect x="0" y="0" width="60" height="60" fill="#000000" stroke="#00fb1a" stroke-width="3" rx="8"/>
+    <text x="30" y="30" font-family="monospace, 'Courier New', Courier" font-size="36" font-weight="bold" fill="#00fb1a" text-anchor="middle" dominant-baseline="middle">R</text>
+    
+    <!-- Title next to logo -->
+    <text x="80" y="35" font-family="monospace, 'Courier New', Courier" font-size="32" font-weight="bold" fill="#00fb1a">REWARDFLOW</text>
+    <text x="80" y="55" font-family="monospace, 'Courier New', Courier" font-size="14" fill="#fbbf24" opacity="0.8">[Open Source Automated Reward Distribution]</text>
+  </g>
+  
+  <!-- Main content area -->
+  <g transform="translate(60, 180)">
+    <!-- Main headline -->
+    <text x="0" y="30" font-family="monospace, 'Courier New', Courier" font-size="28" font-weight="bold" fill="#00fb1a">💰 EARN REWARDS FOR HOLDING</text>
+    
+    <!-- Description -->
+    <text x="0" y="70" font-family="monospace, 'Courier New', Courier" font-size="18" fill="#ffffff" opacity="0.9">- Launched on Pump.fun with a custom reward distribution script</text>
+    <text x="0" y="95" font-family="monospace, 'Courier New', Courier" font-size="18" fill="#ffffff" opacity="0.9">- 100% creator fees go to treasury → distributed to holders</text>
+    
+    <!-- Features section -->
+    <text x="0" y="140" font-family="monospace, 'Courier New', Courier" font-size="20" font-weight="bold" fill="#fbbf24">HOW IT WORKS:</text>
+    
+    <text x="0" y="170" font-family="monospace, 'Courier New', Courier" font-size="16" fill="#ffffff">⚡ Real-time treasury monitoring</text>
+    <text x="0" y="195" font-family="monospace, 'Courier New', Courier" font-size="16" fill="#ffffff">🎯 Weighted rewards: Balance × Earlyness × Loyalty</text>
+    <text x="0" y="220" font-family="monospace, 'Courier New', Courier" font-size="16" fill="#ffffff">🚀 Early adopters get massive advantages</text>
+    <text x="0" y="245" font-family="monospace, 'Courier New', Courier" font-size="16" fill="#ffffff">🔓 100% transparent & open source</text>
+    
+    <!-- Benefits section -->
+    <text x="0" y="290" font-family="monospace, 'Courier New', Courier" font-size="20" font-weight="bold" fill="#8b5cf6">WHY HOLD?</text>
+    
+    <text x="0" y="320" font-family="monospace, 'Courier New', Courier" font-size="16" fill="#ffffff">• The longer you hold, the more weight you gain</text>
+    <text x="0" y="345" font-family="monospace, 'Courier New', Courier" font-size="16" fill="#ffffff">• Early timing beats big bags in initial phases</text>
+    <text x="0" y="370" font-family="monospace, 'Courier New', Courier" font-size="16" fill="#ffffff">• Passive income from treasury distributions</text>
+    
+    <!-- Call to action -->
+    <rect x="0" y="410" width="400" height="50" fill="#00fb1a" opacity="0.1" stroke="#00fb1a" stroke-width="2" rx="8"/>
+    <text x="200" y="440" font-family="monospace, 'Courier New', Courier" font-size="18" font-weight="bold" fill="#00fb1a" text-anchor="middle">JOIN THE REVOLUTION</text>
+  </g>
+  
+  <!-- Side decorative elements -->
+  <g transform="translate(650, 190)">
+    <!-- Stats box -->
+    <rect x="0" y="0" width="480" height="300" fill="#000000" opacity="0.3" stroke="#00fb1a" stroke-width="1" rx="12"/>
+    
+    <text x="240" y="30" font-family="monospace, 'Courier New', Courier" font-size="20" font-weight="bold" fill="#00fb1a" text-anchor="middle">REWARD FORMULA</text>
+    
+    <!-- Formula visualization -->
+    <rect x="20" y="50" width="440" height="80" fill="#00fb1a" opacity="0.05" stroke="#00fb1a" stroke-width="1" rx="8"/>
+    <text x="240" y="80" font-family="monospace, 'Courier New', Courier" font-size="24" font-weight="bold" fill="#00fb1a" text-anchor="middle">Token Balance</text>
+    <text x="240" y="105" font-family="monospace, 'Courier New', Courier" font-size="20" fill="#fbbf24" text-anchor="middle">× Earlyness × Loyalty</text>
+    
+    <!-- Example -->
+    <text x="20" y="160" font-family="monospace, 'Courier New', Courier" font-size="16" font-weight="bold" fill="#8b5cf6">EXAMPLE:</text>
+    <text x="20" y="185" font-family="monospace, 'Courier New', Courier" font-size="14" fill="#ffffff">Early holder (Day 1): 20k tokens</text>
+    <text x="20" y="205" font-family="monospace, 'Courier New', Courier" font-size="14" fill="#ffffff">Late holder (Day 7): 200k tokens</text>
+    <text x="20" y="235" font-family="monospace, 'Courier New', Courier" font-size="14" font-weight="bold" fill="#00fb1a">Early holder gets MORE rewards!</text>
+    <text x="20" y="255" font-family="monospace, 'Courier New', Courier" font-size="12" fill="#fbbf24">Timing > Raw token amount</text>
+  </g>
+  
+  <!-- Bottom accent -->
+  <rect x="0" y="650" width="1200" height="8" fill="#00fb1a" opacity="0.6"/>
+  
+  <!-- Floating particles -->
+  <g opacity="0.3">
+    <circle cx="100" cy="600" r="2" fill="#00fb1a">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="1100" cy="100" r="3" fill="#fbbf24">
+      <animate attributeName="opacity" values="1;0.2;1" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="200" cy="200" r="1.5" fill="#8b5cf6">
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="5s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+</svg>

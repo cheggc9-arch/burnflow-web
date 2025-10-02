@@ -26,7 +26,7 @@ export default function HowItWorks() {
             <p className="text-gray-400 text-sm">Weightage is calculated using three factors:<br/>Token balance • Earlyness • Loyalty</p>
             <div className="bg-blue-900/20 rounded-lg p-3 border border-blue-500/20">
               <div className="text-xs text-blue-400 font-medium">Weightage Formula</div>
-              <div className="text-xs text-gray-300">Balance × Earlyness × Loyalty</div>
+              <div className="text-xs text-gray-300">Token Balance × Earlyness × Loyalty</div>
             </div>
           </div>
           <div className="text-center space-y-4">

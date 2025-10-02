@@ -1,0 +1,129 @@
+<svg width="1200" height="675" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#000000;stop-opacity:1" />
+      <stop offset="25%" style="stop-color:#0a0a0a;stop-opacity:1" />
+      <stop offset="75%" style="stop-color:#0a0a0a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Grid pattern -->
+    <pattern id="grid" width="35" height="35" patternUnits="userSpaceOnUse">
+      <path d="M 35 0 L 0 0 0 35" fill="none" stroke="#00fb1a" stroke-width="0.2" opacity="0.12"/>
+    </pattern>
+    
+    <!-- Glow effect -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="675" fill="url(#bgGradient)"/>
+  <rect width="1200" height="675" fill="url(#grid)"/>
+  
+  <!-- Header section -->
+  <g transform="translate(60, 60)">
+    <!-- Logo and title -->
+    <rect x="0" y="0" width="80" height="80" fill="#000000" stroke="#00fb1a" stroke-width="4" rx="12"/>
+    <text x="40" y="50" font-family="monospace, 'Courier New', Courier" font-size="48" font-weight="bold" fill="#00fb1a" text-anchor="middle" dominant-baseline="middle">R</text>
+    
+    <text x="100" y="40" font-family="monospace, 'Courier New', Courier" font-size="42" font-weight="bold" fill="#00fb1a">REWARDFLOW</text>
+    <text x="100" y="65" font-family="monospace, 'Courier New', Courier" font-size="16" fill="#fbbf24" opacity="0.9">[Passive Income from Treasury Distributions]</text>
+  </g>
+  
+  <!-- Main content area -->
+  <g transform="translate(80, 180)">
+    <!-- Big headline -->
+    <text x="0" y="40" font-family="monospace, 'Courier New', Courier" font-size="48" font-weight="bold" fill="#fbbf24">💎 TREASURY GROWS</text>
+    <text x="0" y="90" font-family="monospace, 'Courier New', Courier" font-size="48" font-weight="bold" fill="#00fb1a">HOLDERS EARN</text>
+    
+    <!-- Flow diagram -->
+    <g transform="translate(0, 140)">
+      <!-- Step 1 -->
+      <rect x="0" y="0" width="200" height="80" fill="#8b5cf6" opacity="0.1" stroke="#8b5cf6" stroke-width="2" rx="10"/>
+      <text x="100" y="25" font-family="monospace, 'Courier New', Courier" font-size="14" font-weight="bold" fill="#8b5cf6" text-anchor="middle">PUMP.FUN FEES</text>
+      <text x="100" y="45" font-family="monospace, 'Courier New', Courier" font-size="12" fill="#ffffff" text-anchor="middle">Creator fees from</text>
+      <text x="100" y="60" font-family="monospace, 'Courier New', Courier" font-size="12" fill="#ffffff" text-anchor="middle">trading activity</text>
+      
+      <!-- Arrow 1 -->
+      <text x="230" y="45" font-family="monospace, 'Courier New', Courier" font-size="24" fill="#00fb1a">→</text>
+      
+      <!-- Step 2 -->
+      <rect x="260" y="0" width="200" height="80" fill="#00fb1a" opacity="0.1" stroke="#00fb1a" stroke-width="2" rx="10"/>
+      <text x="360" y="25" font-family="monospace, 'Courier New', Courier" font-size="14" font-weight="bold" fill="#00fb1a" text-anchor="middle">TREASURY</text>
+      <text x="360" y="45" font-family="monospace, 'Courier New', Courier" font-size="12" fill="#ffffff" text-anchor="middle">100% fees collected</text>
+      <text x="360" y="60" font-family="monospace, 'Courier New', Courier" font-size="12" fill="#ffffff" text-anchor="middle">& monitored</text>
+      
+      <!-- Arrow 2 -->
+      <text x="490" y="45" font-family="monospace, 'Courier New', Courier" font-size="24" fill="#00fb1a">→</text>
+      
+      <!-- Step 3 -->
+      <rect x="520" y="0" width="200" height="80" fill="#fbbf24" opacity="0.1" stroke="#fbbf24" stroke-width="2" rx="10"/>
+      <text x="620" y="25" font-family="monospace, 'Courier New', Courier" font-size="14" font-weight="bold" fill="#fbbf24" text-anchor="middle">DISTRIBUTION</text>
+      <text x="620" y="45" font-family="monospace, 'Courier New', Courier" font-size="12" fill="#ffffff" text-anchor="middle">Weighted rewards</text>
+      <text x="620" y="60" font-family="monospace, 'Courier New', Courier" font-size="12" fill="#ffffff" text-anchor="middle">to all holders</text>
+    </g>
+    
+    <!-- Benefits section -->
+    <g transform="translate(0, 260)">
+      <text x="0" y="30" font-family="monospace, 'Courier New', Courier" font-size="24" font-weight="bold" fill="#00fb1a">WHY THIS WORKS:</text>
+      
+      <text x="0" y="65" font-family="monospace, 'Courier New', Courier" font-size="18" fill="#ffffff">✅ More trading = More treasury growth</text>
+      <text x="0" y="95" font-family="monospace, 'Courier New', Courier" font-size="18" fill="#ffffff">✅ Automated distribution = No manual errors</text>
+      <text x="0" y="125" font-family="monospace, 'Courier New', Courier" font-size="18" fill="#ffffff">✅ Weighted formula = Fair for everyone</text>
+      <text x="0" y="155" font-family="monospace, 'Courier New', Courier" font-size="18" fill="#ffffff">✅ Open source = Fully transparent</text>
+    </g>
+  </g>
+  
+  <!-- Right side panel -->
+  <g transform="translate(850, 200)">
+    <rect x="0" y="0" width="280" height="350" fill="#000000" opacity="0.4" stroke="#00fb1a" stroke-width="2" rx="15"/>
+    
+    <text x="140" y="35" font-family="monospace, 'Courier New', Courier" font-size="20" font-weight="bold" fill="#00fb1a" text-anchor="middle">LIVE STATS</text>
+    
+    <!-- Mock stats -->
+    <g transform="translate(20, 60)">
+      <text x="0" y="25" font-family="monospace, 'Courier New', Courier" font-size="14" fill="#fbbf24">Treasury Balance:</text>
+      <text x="0" y="45" font-family="monospace, 'Courier New', Courier" font-size="24" font-weight="bold" fill="#00fb1a">$XX,XXX SOL</text>
+      
+      <text x="0" y="80" font-family="monospace, 'Courier New', Courier" font-size="14" fill="#fbbf24">Total Holders:</text>
+      <text x="0" y="100" font-family="monospace, 'Courier New', Courier" font-size="24" font-weight="bold" fill="#00fb1a">XXX+</text>
+      
+      <text x="0" y="135" font-family="monospace, 'Courier New', Courier" font-size="14" fill="#fbbf24">Last Distribution:</text>
+      <text x="0" y="155" font-family="monospace, 'Courier New', Courier" font-size="18" font-weight="bold" fill="#00fb1a">XX hours ago</text>
+      
+      <text x="0" y="190" font-family="monospace, 'Courier New', Courier" font-size="14" fill="#fbbf24">Next Distribution:</text>
+      <text x="0" y="210" font-family="monospace, 'Courier New', Courier" font-size="18" font-weight="bold" fill="#00fb1a">When threshold hit</text>
+    </g>
+    
+    <!-- Call to action -->
+    <rect x="20" y="280" width="240" height="50" fill="#00fb1a" opacity="0.1" stroke="#00fb1a" stroke-width="2" rx="8"/>
+    <text x="140" y="310" font-family="monospace, 'Courier New', Courier" font-size="16" font-weight="bold" fill="#00fb1a" text-anchor="middle">START EARNING TODAY</text>
+  </g>
+  
+  <!-- Decorative elements -->
+  <g opacity="0.3">
+    <!-- Floating money symbols -->
+    <text x="200" y="150" font-family="monospace, 'Courier New', Courier" font-size="20" fill="#fbbf24" opacity="0.4">$</text>
+    <text x="750" y="180" font-family="monospace, 'Courier New', Courier" font-size="16" fill="#00fb1a" opacity="0.3">$</text>
+    <text x="150" y="580" font-family="monospace, 'Courier New', Courier" font-size="18" fill="#8b5cf6" opacity="0.4">$</text>
+    
+    <!-- Animated particles -->
+    <circle cx="100" cy="600" r="2" fill="#00fb1a">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="1100" cy="100" r="3" fill="#fbbf24">
+      <animate attributeName="opacity" values="1;0.2;1" dur="3s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  
+  <!-- Border accents -->
+  <rect x="0" y="0" width="1200" height="4" fill="#00fb1a" opacity="0.6"/>
+  <rect x="0" y="671" width="1200" height="4" fill="#00fb1a" opacity="0.6"/>
+</svg>
