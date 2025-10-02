@@ -139,24 +139,24 @@ export default function FormulaPage() {
               <div className="pump-card p-8">
                 <h3 className="text-2xl font-bold text-yellow-400 mb-6">EXAMPLE</h3>
                 <div className="grid md:grid-cols-3 gap-6">
-                  <div className="bg-pink-900/20 border border-pink-500/30 p-4 rounded">
-                    <h4 className="text-pink-400 font-bold mb-2">Wallet A</h4>
-                    <p className="text-pink-400 font-bold text-sm">20k tokens, bought day 1, held for 1 day</p>
-                    <p className="text-pink-400 font-bold">Total weight ≈ 4.8</p>
+                  <div className="bg-blue-900/20 border border-blue-500/30 p-4 rounded">
+                    <h4 className="text-blue-400 font-bold mb-2">Wallet A</h4>
+                    <p className="text-blue-400 font-bold text-sm">100k tokens, bought day 1, held 14 days</p>
+                    <p className="text-blue-400 font-bold text-lg mt-2">Total weight: 12.8</p>
                   </div>
-                  <div className="bg-cyan-900/20 border border-cyan-500/30 p-4 rounded">
-                    <h4 className="text-cyan-400 font-bold mb-2">Wallet B</h4>
-                    <p className="text-cyan-400 font-bold text-sm">200k tokens, bought day 2, held for 1 day</p>
-                    <p className="text-cyan-400 font-bold">Total weight ≈ 7.6</p>
+                  <div className="bg-red-900/20 border border-red-500/30 p-4 rounded">
+                    <h4 className="text-red-400 font-bold mb-2">Wallet B</h4>
+                    <p className="text-red-400 font-bold text-sm">800k tokens, bought day 7, held 5 days</p>
+                    <p className="text-red-400 font-bold text-lg mt-2">Total weight: 6.8</p>
                   </div>
-                  <div className="bg-purple-900/20 border border-purple-500/30 p-4 rounded">
-                    <h4 className="text-purple-400 font-bold mb-2">Wallet C</h4>
-                    <p className="text-purple-400 font-bold text-sm">20k tokens, bought day 7, held for 1 day</p>
-                    <p className="text-purple-400 font-bold">Total weight ≈ 1.7</p>
+                  <div className="bg-yellow-900/20 border border-yellow-500/30 p-4 rounded">
+                    <h4 className="text-yellow-400 font-bold mb-2">Wallet C</h4>
+                    <p className="text-yellow-400 font-bold text-sm">300k tokens, bought day 3, held 8 days</p>
+                    <p className="text-yellow-400 font-bold text-lg mt-2">Total weight: 9.1</p>
                   </div>
                 </div>
                 <p className="text-yellow-400 text-lg mt-6">
-                  👉 Timing and loyalty changes the outcome. It's not just about raw token balance!.
+                  👉 Timing and loyalty changes the outcome. It's not just about raw token balance!
                 </p>
               </div>
 

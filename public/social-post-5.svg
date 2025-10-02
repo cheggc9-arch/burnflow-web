@@ -54,20 +54,20 @@
     <g transform="translate(0, 0)">
       <rect x="0" y="0" width="350" height="120" fill="#8b5cf6" opacity="0.1" stroke="#8b5cf6" stroke-width="2" rx="12"/>
       <text x="175" y="25" font-family="monospace, 'Courier New', Courier" font-size="18" font-weight="bold" fill="#8b5cf6" text-anchor="middle">TOKEN BALANCE</text>
-      <text x="175" y="50" font-family="monospace, 'Courier New', Courier" font-size="24" font-weight="bold" fill="#00fb1a" text-anchor="middle">log₂(tokens + 1)</text>
-      <text x="175" y="75" font-family="monospace, 'Courier New', Courier" font-size="12" fill="#ffffff" text-anchor="middle">Prevents whale dominance</text>
-      <text x="175" y="90" font-family="monospace, 'Courier New', Courier" font-size="12" fill="#ffffff" text-anchor="middle">Logarithmic scaling</text>
-      <text x="175" y="105" font-family="monospace, 'Courier New', Courier" font-size="12" fill="#fbbf24" text-anchor="middle">10k tokens ≈ 13.3 weight</text>
+      <text x="175" y="50" font-family="monospace, 'Courier New', Courier" font-size="20" font-weight="bold" fill="#00fb1a" text-anchor="middle">1 + log₁₀(tokens / 20k)</text>
+      <text x="175" y="70" font-family="monospace, 'Courier New', Courier" font-size="12" fill="#ffffff" text-anchor="middle">Prevents whale dominance</text>
+      <text x="175" y="85" font-family="monospace, 'Courier New', Courier" font-size="12" fill="#ffffff" text-anchor="middle">Min 20k tokens required</text>
+      <text x="175" y="100" font-family="monospace, 'Courier New', Courier" font-size="12" fill="#fbbf24" text-anchor="middle">200k tokens ≈ 2.0 weight</text>
     </g>
     
     <!-- Earlyness -->
     <g transform="translate(375, 0)">
       <rect x="0" y="0" width="350" height="120" fill="#00fb1a" opacity="0.1" stroke="#00fb1a" stroke-width="2" rx="12"/>
       <text x="175" y="25" font-family="monospace, 'Courier New', Courier" font-size="18" font-weight="bold" fill="#00fb1a" text-anchor="middle">EARLYNESS</text>
-      <text x="175" y="50" font-family="monospace, 'Courier New', Courier" font-size="24" font-weight="bold" fill="#fbbf24" text-anchor="middle">3 - log₂(day + 1)</text>
-      <text x="175" y="75" font-family="monospace, 'Courier New', Courier" font-size="12" fill="#ffffff" text-anchor="middle">Earlier = Higher multiplier</text>
-      <text x="175" y="90" font-family="monospace, 'Courier New', Courier" font-size="12" fill="#ffffff" text-anchor="middle">Rewards early adoption</text>
-      <text x="175" y="105" font-family="monospace, 'Courier New', Courier" font-size="12" fill="#fbbf24" text-anchor="middle">Day 1 ≈ 3x, Day 7 ≈ 0.2x</text>
+      <text x="175" y="50" font-family="monospace, 'Courier New', Courier" font-size="18" font-weight="bold" fill="#fbbf24" text-anchor="middle">1 + 2 × e^(-days / 2)</text>
+      <text x="175" y="70" font-family="monospace, 'Courier New', Courier" font-size="12" fill="#ffffff" text-anchor="middle">Earlier = Higher multiplier</text>
+      <text x="175" y="85" font-family="monospace, 'Courier New', Courier" font-size="12" fill="#ffffff" text-anchor="middle">Exponential decay bonus</text>
+      <text x="175" y="100" font-family="monospace, 'Courier New', Courier" font-size="12" fill="#fbbf24" text-anchor="middle">Day 0 ≈ 3x, Day 2 ≈ 1.7x</text>
     </g>
     
     <!-- Loyalty -->
@@ -88,19 +88,19 @@
     <rect x="0" y="40" width="1000" height="160" fill="#000000" opacity="0.3" stroke="#fbbf24" stroke-width="2" rx="12"/>
     
     <g transform="translate(20, 70)">
-      <text x="0" y="20" font-family="monospace, 'Courier New', Courier" font-size="16" font-weight="bold" fill="#fbbf24">Wallet A: 20k tokens, bought Day 1, held 7 days</text>
-      <text x="0" y="45" font-family="monospace, 'Courier New', Courier" font-size="14" fill="#ffffff">Balance: log₂(20000+1) = 14.3</text>
-      <text x="0" y="65" font-family="monospace, 'Courier New', Courier" font-size="14" fill="#ffffff">Earlyness: 3 - log₂(1+1) = 2.0</text>
+      <text x="0" y="20" font-family="monospace, 'Courier New', Courier" font-size="16" font-weight="bold" fill="#fbbf24">Wallet A: 200k tokens, bought Day 0, held 7 days</text>
+      <text x="0" y="45" font-family="monospace, 'Courier New', Courier" font-size="14" fill="#ffffff">Balance: 1 + log₁₀(200k/20k) = 2.0</text>
+      <text x="0" y="65" font-family="monospace, 'Courier New', Courier" font-size="14" fill="#ffffff">Earlyness: 1 + 2 × e^(-0/2) = 3.0</text>
       <text x="0" y="85" font-family="monospace, 'Courier New', Courier" font-size="14" fill="#ffffff">Loyalty: 1 + 0.6×log₂(7+1) = 2.8</text>
-      <text x="0" y="110" font-family="monospace, 'Courier New', Courier" font-size="16" font-weight="bold" fill="#00fb1a">Total Weight: 14.3 × 2.0 × 2.8 = 80.1</text>
+      <text x="0" y="110" font-family="monospace, 'Courier New', Courier" font-size="16" font-weight="bold" fill="#00fb1a">Total Weight: 2.0 × 3.0 × 2.8 = 16.8</text>
     </g>
     
     <g transform="translate(520, 70)">
-      <text x="0" y="20" font-family="monospace, 'Courier New', Courier" font-size="16" font-weight="bold" fill="#fbbf24">Wallet B: 200k tokens, bought Day 7, held 1 day</text>
-      <text x="0" y="45" font-family="monospace, 'Courier New', Courier" font-size="14" fill="#ffffff">Balance: log₂(200000+1) = 17.6</text>
-      <text x="0" y="65" font-family="monospace, 'Courier New', Courier" font-size="14" fill="#ffffff">Earlyness: 3 - log₂(7+1) = 0.0</text>
+      <text x="0" y="20" font-family="monospace, 'Courier New', Courier" font-size="16" font-weight="bold" fill="#fbbf24">Wallet B: 2M tokens, bought Day 7, held 1 day</text>
+      <text x="0" y="45" font-family="monospace, 'Courier New', Courier" font-size="14" fill="#ffffff">Balance: 1 + log₁₀(2M/20k) = 3.0</text>
+      <text x="0" y="65" font-family="monospace, 'Courier New', Courier" font-size="14" fill="#ffffff">Earlyness: 1 + 2 × e^(-7/2) = 1.06</text>
       <text x="0" y="85" font-family="monospace, 'Courier New', Courier" font-size="14" fill="#ffffff">Loyalty: 1 + 0.6×log₂(1+1) = 1.6</text>
-      <text x="0" y="110" font-family="monospace, 'Courier New', Courier" font-size="16" font-weight="bold" fill="#8b5cf6">Total Weight: 17.6 × 0.0 × 1.6 = 0.0</text>
+      <text x="0" y="110" font-family="monospace, 'Courier New', Courier" font-size="16" font-weight="bold" fill="#8b5cf6">Total Weight: 3.0 × 1.06 × 1.6 = 5.1</text>
     </g>
   </g>
   
