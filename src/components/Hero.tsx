@@ -82,8 +82,8 @@ export default function Hero() {
       
       <div className="relative z-10">
         <div className="mb-6">
-          <div className="text-sm text-blue-400 font-mono mb-2 tracking-widest">
-            [TEST]
+          <div className="text-lg text-red-500 font-mono mb-2 tracking-widest font-bold">
+            *POINTING TO TEST TOKEN*
           </div>
           <h1 className="text-6xl md:text-8xl font-bold text-green-400 mb-4 tracking-wider" style={{textShadow: '0 0 15px rgba(34, 197, 94, 0.6)'}}>
             CREATOR FEES GO TO YOU
