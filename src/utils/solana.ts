@@ -215,3 +215,8 @@ export function calculateDistribution(
     };
   });
 }
+
+// Test connection function
+export async function testConnection() {
+  return { success: true, message: 'Connection test' };
+}
