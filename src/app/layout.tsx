@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "hold2earn",
-  description: "Rewarding all holders with creator fees from Pump.fun! More volume, more fees distributed!",
+  title: "REWARDFLOW",
+  description: "Advanced algorithms distribute creator fees to token holders. Automated, transparent, and fair reward distribution on Solana.",
 };
 
 export default function RootLayout({
@@ -26,19 +26,19 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
-        <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png" />
-        <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png" />
+        <link rel="icon" href="/logo.svg" type="image/svg+xml" />
         <link rel="icon" href="/favicon.ico" sizes="any" type="image/x-icon" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="192x192" type="image/png" />
-        <meta property="og:title" content="hold2earn" />
-        <meta property="og:description" content="Rewarding all holders with creator fees from Pump.fun! More volume, more fees distributed!" />
+        <link rel="apple-touch-icon" href="/logo.svg" type="image/svg+xml" />
+        <meta property="og:title" content="MATRIX REWARDS" />
+        <meta property="og:description" content="Enter the Matrix of automated token distribution. Advanced algorithms reward holders with creator fees from the digital realm." />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="hold2earn" />
-        <meta name="twitter:description" content="Rewarding all holders with creator fees from Pump.fun! More volume, more fees distributed!" />
+        <meta name="twitter:title" content="MATRIX REWARDS" />
+        <meta name="twitter:description" content="Enter the Matrix of automated token distribution. Advanced algorithms reward holders with creator fees from the digital realm." />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-900 text-white min-h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}
+        style={{ fontFamily: "'Courier New', monospace" }}
       >
         {children}
       </body>

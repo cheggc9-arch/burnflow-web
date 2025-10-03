@@ -13,6 +13,22 @@ export default function TreasuryBalance() {
   const [data, setData] = useState<TreasuryData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
+
+  const copyToClipboard = async () => {
+    try {
+      const creatorWallet = process.env.NEXT_PUBLIC_CREATOR_WALLET_ADDRESS;
+      if (!creatorWallet) {
+        console.error("NEXT_PUBLIC_CREATOR_WALLET_ADDRESS not found in environment variables");
+        return;
+      }
+      await navigator.clipboard.writeText(creatorWallet);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy address:", err);
+    }
+  };
 
   useEffect(() => {
     const fetchTreasuryBalance = async () => {
@@ -87,12 +103,54 @@ export default function TreasuryBalance() {
             <p className="text-gray-400 text-sm">
               Available in creator wallet • Distribution every 20 minutes
             </p>
-            <p className="text-[var(--pump-green)] text-xs font-medium">
+            <p className="text-gray-300 text-xs font-semibold">
               ~{data?.distributionAmount.toFixed(4) || '0.0000'} SOL will be distributed (95% of treasury)
             </p>
-            <p className="text-gray-500 text-xs">
-              Network: {data?.network || 'unknown'}
-            </p>
+            <div className="mt-4 pt-4 border-t border-gray-600">
+              <div className="text-lg font-semibold text-gray-300 mb-2">TREASURY WALLET</div>
+              <div className="flex items-center justify-center space-x-2">
+                <span className="font-mono text-sm text-green-400">
+                  {process.env.NEXT_PUBLIC_CREATOR_WALLET_ADDRESS || 'Address not configured'}
+                </span>
+                <button
+                  onClick={copyToClipboard}
+                  className="text-green-400 hover:text-green-300 transition-colors cursor-pointer"
+                >
+                  {copied ? (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="w-4 h-4 text-green-400"
+                    >
+                      <path d="M20 6 9 17l-5-5"></path>
+                    </svg>
+                  ) : (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="w-4 h-4"
+                    >
+                      <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+                      <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+                    </svg>
+                  )}
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

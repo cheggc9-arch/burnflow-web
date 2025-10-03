@@ -4,7 +4,6 @@ import Stats from "@/components/Stats";
 import TreasuryBalance from "@/components/TreasuryBalance";
 import DistributionTimer from "@/components/DistributionTimer";
 import LatestDistribution from "@/components/LatestDistribution";
-import DistributionStats from "@/components/DistributionStats";
 import HolderLeaderboard from "@/components/HolderLeaderboard";
 import HowItWorks from "@/components/HowItWorks";
 import EarlyAdopterAdvantage from "@/components/EarlyAdopterAdvantage";
@@ -20,7 +19,6 @@ export default function Home() {
         <TreasuryBalance />
         <DistributionTimer />
         <LatestDistribution />
-        <DistributionStats />
         <HolderLeaderboard />
         <HowItWorks />
         <EarlyAdopterAdvantage />

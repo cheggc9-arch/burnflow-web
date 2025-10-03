@@ -14,12 +14,12 @@ export default function EarlyAdopterAdvantage() {
         <div className="space-y-6">
           {/* First Row */}
           <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-gradient-to-r from-green-900/30 to-transparent rounded-lg p-4 border border-green-500/20">
-              <div className="text-[var(--pump-green)] font-bold text-lg mb-1">🔥 MASSIVE Early Bonuses</div>
+            <div className="bg-gradient-to-r from-yellow-900/30 to-transparent rounded-lg p-4 border border-yellow-500/20">
+              <div className="text-yellow-400 font-bold text-lg mb-1">🔥 MASSIVE Early Bonuses</div>
               <div className="text-gray-300 text-sm">First buyers get exponential rewards that decay over time. Every hour you wait, your potential earnings drop!</div>
             </div>
             <div className="bg-gradient-to-r from-blue-900/30 to-transparent rounded-lg p-4 border border-blue-500/20">
-              <div className="text-[var(--pump-blue)] font-bold text-lg mb-1">💰 Beat the Whales</div>
+              <div className="text-blue-400 font-bold text-lg mb-1">💰 Beat the Whales</div>
               <div className="text-gray-300 text-sm">Small early positions can outearn massive late positions. Timing beats size in the first 24 hours!</div>
             </div>
           </div>

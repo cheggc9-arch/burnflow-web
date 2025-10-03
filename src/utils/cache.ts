@@ -397,12 +397,12 @@ if (fileCache) {
 // Ensure cache is not reset on module reloads
 if (typeof global !== 'undefined') {
   // @ts-ignore
-  if (!global.__hold2earn_cache) {
+  if (!global.__rewardflow_cache) {
     // @ts-ignore
-    global.__hold2earn_cache = cache;
+    global.__rewardflow_cache = cache;
   } else {
     // @ts-ignore
-    cache = global.__hold2earn_cache;
+    cache = global.__rewardflow_cache;
   }
 }
 
@@ -422,12 +422,12 @@ let holderCache: HolderCacheData = {
 // Ensure holder cache is not reset on module reloads
 if (typeof global !== 'undefined') {
   // @ts-ignore
-  if (!global.__hold2earn_holder_cache) {
+  if (!global.__rewardflow_holder_cache) {
     // @ts-ignore
-    global.__hold2earn_holder_cache = holderCache;
+    global.__rewardflow_holder_cache = holderCache;
   } else {
     // @ts-ignore
-    holderCache = global.__hold2earn_holder_cache;
+    holderCache = global.__rewardflow_holder_cache;
   }
 }
 

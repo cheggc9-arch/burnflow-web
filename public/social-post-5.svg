@@ -1,0 +1,125 @@
+<svg width="1200" height="675" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#000000;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#0a0a0a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Grid pattern -->
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#00fb1a" stroke-width="0.15" opacity="0.08"/>
+    </pattern>
+    
+    <!-- Glow effect -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="675" fill="url(#bgGradient)"/>
+  <rect width="1200" height="675" fill="url(#grid)"/>
+  
+  <!-- Header -->
+  <g transform="translate(60, 40)">
+    <!-- Logo -->
+    <rect x="0" y="0" width="60" height="60" fill="#000000" stroke="#00fb1a" stroke-width="3" rx="8"/>
+    <text x="30" y="30" font-family="monospace, 'Courier New', Courier" font-size="36" font-weight="bold" fill="#00fb1a" text-anchor="middle" dominant-baseline="middle">R</text>
+    
+    <!-- Title -->
+    <text x="80" y="30" font-family="monospace, 'Courier New', Courier" font-size="28" font-weight="bold" fill="#00fb1a">REWARDFLOW</text>
+    <text x="80" y="50" font-family="monospace, 'Courier New', Courier" font-size="14" fill="#fbbf24">[The Math Behind Fair Distribution]</text>
+  </g>
+  
+  <!-- Main formula section -->
+  <g transform="translate(100, 140)">
+    <text x="0" y="30" font-family="monospace, 'Courier New', Courier" font-size="32" font-weight="bold" fill="#fbbf24">🧮 THE FORMULA</text>
+    
+    <!-- Main formula box -->
+    <rect x="0" y="50" width="1000" height="100" fill="#00fb1a" opacity="0.05" stroke="#00fb1a" stroke-width="3" rx="15" filter="url(#glow)"/>
+    
+    <text x="500" y="90" font-family="monospace, 'Courier New', Courier" font-size="36" font-weight="bold" fill="#00fb1a" text-anchor="middle">Your Reward Weight =</text>
+    <text x="500" y="125" font-family="monospace, 'Courier New', Courier" font-size="28" fill="#fbbf24" text-anchor="middle">Token Balance × Earlyness × Loyalty</text>
+  </g>
+  
+  <!-- Formula breakdown -->
+  <g transform="translate(75, 320)">
+    <!-- Token Balance -->
+    <g transform="translate(0, 0)">
+      <rect x="0" y="0" width="350" height="120" fill="#8b5cf6" opacity="0.1" stroke="#8b5cf6" stroke-width="2" rx="12"/>
+      <text x="175" y="25" font-family="monospace, 'Courier New', Courier" font-size="18" font-weight="bold" fill="#8b5cf6" text-anchor="middle">TOKEN BALANCE</text>
+      <text x="175" y="50" font-family="monospace, 'Courier New', Courier" font-size="20" font-weight="bold" fill="#00fb1a" text-anchor="middle">1 + log₁₀(tokens / 20k)</text>
+      <text x="175" y="70" font-family="monospace, 'Courier New', Courier" font-size="12" fill="#ffffff" text-anchor="middle">Prevents whale dominance</text>
+      <text x="175" y="85" font-family="monospace, 'Courier New', Courier" font-size="12" fill="#ffffff" text-anchor="middle">Min 20k tokens required</text>
+      <text x="175" y="100" font-family="monospace, 'Courier New', Courier" font-size="12" fill="#fbbf24" text-anchor="middle">200k tokens ≈ 2.0 weight</text>
+    </g>
+    
+    <!-- Earlyness -->
+    <g transform="translate(375, 0)">
+      <rect x="0" y="0" width="350" height="120" fill="#00fb1a" opacity="0.1" stroke="#00fb1a" stroke-width="2" rx="12"/>
+      <text x="175" y="25" font-family="monospace, 'Courier New', Courier" font-size="18" font-weight="bold" fill="#00fb1a" text-anchor="middle">EARLYNESS</text>
+      <text x="175" y="50" font-family="monospace, 'Courier New', Courier" font-size="18" font-weight="bold" fill="#fbbf24" text-anchor="middle">1 + 2 × e^(-days / 2)</text>
+      <text x="175" y="70" font-family="monospace, 'Courier New', Courier" font-size="12" fill="#ffffff" text-anchor="middle">Earlier = Higher multiplier</text>
+      <text x="175" y="85" font-family="monospace, 'Courier New', Courier" font-size="12" fill="#ffffff" text-anchor="middle">Exponential decay bonus</text>
+      <text x="175" y="100" font-family="monospace, 'Courier New', Courier" font-size="12" fill="#fbbf24" text-anchor="middle">Day 0 ≈ 3x, Day 2 ≈ 1.7x</text>
+    </g>
+    
+    <!-- Loyalty -->
+    <g transform="translate(750, 0)">
+      <rect x="0" y="0" width="350" height="120" fill="#fbbf24" opacity="0.1" stroke="#fbbf24" stroke-width="2" rx="12"/>
+      <text x="175" y="25" font-family="monospace, 'Courier New', Courier" font-size="18" font-weight="bold" fill="#fbbf24" text-anchor="middle">LOYALTY</text>
+      <text x="175" y="50" font-family="monospace, 'Courier New', Courier" font-size="24" font-weight="bold" fill="#8b5cf6" text-anchor="middle">1 + 0.6×log₂(days+1)</text>
+      <text x="175" y="75" font-family="monospace, 'Courier New', Courier" font-size="12" fill="#ffffff" text-anchor="middle">Holding time matters</text>
+      <text x="175" y="90" font-family="monospace, 'Courier New', Courier" font-size="12" fill="#ffffff" text-anchor="middle">Grows with tenure</text>
+      <text x="175" y="105" font-family="monospace, 'Courier New', Courier" font-size="12" fill="#fbbf24" text-anchor="middle">1 day ≈ 1.6x, 30 days ≈ 4x</text>
+    </g>
+  </g>
+  
+  <!-- Example calculation -->
+  <g transform="translate(100, 470)">
+    <text x="0" y="25" font-family="monospace, 'Courier New', Courier" font-size="24" font-weight="bold" fill="#00fb1a">📊 REAL EXAMPLE</text>
+    
+    <rect x="0" y="40" width="1000" height="160" fill="#000000" opacity="0.3" stroke="#fbbf24" stroke-width="2" rx="12"/>
+    
+    <g transform="translate(20, 70)">
+      <text x="0" y="20" font-family="monospace, 'Courier New', Courier" font-size="16" font-weight="bold" fill="#fbbf24">Wallet A: 200k tokens, bought Day 0, held 7 days</text>
+      <text x="0" y="45" font-family="monospace, 'Courier New', Courier" font-size="14" fill="#ffffff">Balance: 1 + log₁₀(200k/20k) = 2.0</text>
+      <text x="0" y="65" font-family="monospace, 'Courier New', Courier" font-size="14" fill="#ffffff">Earlyness: 1 + 2 × e^(-0/2) = 3.0</text>
+      <text x="0" y="85" font-family="monospace, 'Courier New', Courier" font-size="14" fill="#ffffff">Loyalty: 1 + 0.6×log₂(7+1) = 2.8</text>
+      <text x="0" y="110" font-family="monospace, 'Courier New', Courier" font-size="16" font-weight="bold" fill="#00fb1a">Total Weight: 2.0 × 3.0 × 2.8 = 16.8</text>
+    </g>
+    
+    <g transform="translate(520, 70)">
+      <text x="0" y="20" font-family="monospace, 'Courier New', Courier" font-size="16" font-weight="bold" fill="#fbbf24">Wallet B: 2M tokens, bought Day 7, held 1 day</text>
+      <text x="0" y="45" font-family="monospace, 'Courier New', Courier" font-size="14" fill="#ffffff">Balance: 1 + log₁₀(2M/20k) = 3.0</text>
+      <text x="0" y="65" font-family="monospace, 'Courier New', Courier" font-size="14" fill="#ffffff">Earlyness: 1 + 2 × e^(-7/2) = 1.06</text>
+      <text x="0" y="85" font-family="monospace, 'Courier New', Courier" font-size="14" fill="#ffffff">Loyalty: 1 + 0.6×log₂(1+1) = 1.6</text>
+      <text x="0" y="110" font-family="monospace, 'Courier New', Courier" font-size="16" font-weight="bold" fill="#8b5cf6">Total Weight: 3.0 × 1.06 × 1.6 = 5.1</text>
+    </g>
+  </g>
+  
+  
+  <!-- Decorative elements -->
+  <g opacity="0.2">
+    <text x="50" y="200" font-family="monospace, 'Courier New', Courier" font-size="16" fill="#00fb1a">∑</text>
+    <text x="1150" y="300" font-family="monospace, 'Courier New', Courier" font-size="18" fill="#fbbf24">∫</text>
+    <text x="30" y="500" font-family="monospace, 'Courier New', Courier" font-size="14" fill="#8b5cf6">π</text>
+    
+    <!-- Animated particles -->
+    <circle cx="1150" cy="150" r="2" fill="#00fb1a">
+      <animate attributeName="opacity" values="0.2;0.8;0.2" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="50" cy="600" r="1.5" fill="#fbbf24">
+      <animate attributeName="opacity" values="0.8;0.2;0.8" dur="4s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  
+  <!-- Border -->
+  <rect x="0" y="0" width="1200" height="675" fill="none" stroke="#00fb1a" stroke-width="2" opacity="0.3"/>
+</svg>

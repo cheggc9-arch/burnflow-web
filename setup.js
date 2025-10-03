@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 
-console.log('🚀 Hold2Earn Setup\n');
+console.log('🚀 RewardFlow Setup\n');
 
 // Check if .env already exists
 if (fs.existsSync('.env')) {

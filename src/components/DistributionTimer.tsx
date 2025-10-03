@@ -116,7 +116,7 @@ export default function DistributionTimer() {
             <div className="text-4xl font-bold pump-gradient-text mb-0">
               {hours.toString().padStart(2, '0')}
             </div>
-            <div className="text-sm text-gray-400 uppercase">
+            <div className="text-lg font-semibold text-gray-300 uppercase">
               HOURS
             </div>
           </div>
@@ -124,7 +124,7 @@ export default function DistributionTimer() {
             <div className="text-4xl font-bold pump-gradient-text mb-0">
               {minutes.toString().padStart(2, '0')}
             </div>
-            <div className="text-sm text-gray-400 uppercase">
+            <div className="text-lg font-semibold text-gray-300 uppercase">
               MINUTES
             </div>
           </div>
@@ -132,24 +132,24 @@ export default function DistributionTimer() {
             <div className="text-4xl font-bold pump-gradient-text mb-0">
               {seconds.toString().padStart(2, '0')}
             </div>
-            <div className="text-sm text-gray-400 uppercase">
+            <div className="text-lg font-semibold text-gray-300 uppercase">
               SECONDS
             </div>
           </div>
         </div>
         <div className="flex justify-center mt-4">
-          <div className="w-100 bg-gray-700 rounded-full h-2">
+          <div className="w-80 bg-gray-800 rounded-full h-2">
             <div 
-              className="bg-gradient-to-r from-[var(--pump-green)] to-[var(--pump-blue)] h-2 rounded-full transition-all duration-1000"
+              className="bg-gradient-to-r from-green-400 to-cyan-400 h-2 rounded-full transition-all duration-1000"
               style={{ width: `${getProgressPercentage()}%` }}
             ></div>
           </div>
         </div>
-        <div className="text-sm text-gray-400 mt-4">
+        <div className="text-sm font-semibold text-gray-300 mt-4">
           {data?.isDistributionTime ? 'Distribution in progress...' : 'Until next reward distribution'}
         </div>
         {data && (
-          <div className="text-xs text-gray-500 mt-2">
+          <div className="text-sm text-gray-400 mt-4">
             Last distribution: {new Date(data.lastDistributionTime).toLocaleTimeString()}
           </div>
         )}

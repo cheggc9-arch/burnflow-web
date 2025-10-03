@@ -1,42 +1,100 @@
-import Image from "next/image";
+'use client';
+
+import { useRouter, usePathname } from 'next/navigation';
+import { useEffect } from 'react';
 
 export default function Header() {
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const handleSectionClick = (sectionId: string) => {
+    if (pathname === '/') {
+      // If already on home page, just scroll
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // If on another page, navigate to home first, then scroll
+      router.push('/');
+      // Wait for navigation to complete, then scroll
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 500);
+    }
+  };
+
+  // Handle hash scrolling when page loads
+  useEffect(() => {
+    if (pathname === '/' && window.location.hash) {
+      const hash = window.location.hash.substring(1);
+      setTimeout(() => {
+        const element = document.getElementById(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  }, [pathname]);
   return (
-    <header className="border-b border-gray-800 bg-gray-900/50 backdrop-blur-sm sticky top-0 z-50">
-      <div className="container mx-auto px-4 py-6">
+    <header className="border-b-2 border-green-400 bg-black/80 backdrop-blur-sm sticky top-0 z-50">
+      <div className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
-          <div className="flex items-center space-x-3">
-            <Image
-              src="/logo.png"
-              alt="Logo"
-              width={48}
-              height={48}
-              className="w-12 h-12 rounded-full"
-            />
-            <h1 className="text-2xl font-bold pump-gradient-text">hold2earn</h1>
-          </div>
-          <div className="flex items-center space-x-4">
+          <a href="/" className="flex items-center space-x-4 hover:opacity-80 transition-opacity">
+            <div className="relative">
+              <img src="/logo.svg" alt="RewardFlow Logo" className="w-16 h-16" />
+            </div>
+            <div>
+              <h1 className="text-2xl font-bold pump-gradient-text font-mono tracking-wider">REWARDFLOW</h1>
+              <p className="text-xs text-green-400 font-mono tracking-widest">[ REWARD ]</p>
+            </div>
+          </a>
+          <div className="flex items-center space-x-6">
+            <button
+              className="bg-green-400 text-black px-4 py-2 rounded font-mono text-sm font-semibold hover:bg-yellow-400 transition-colors tracking-wider"
+              onClick={() => handleSectionClick('how-it-works')}
+            >
+              HOW IT WORKS
+            </button>
             <a
-              href="https://x.com/hold2earnsol"
+              href="/formula"
+              className="bg-cyan-400 text-black px-4 py-2 rounded font-mono text-sm font-bold hover:bg-cyan-300 transition-all duration-300 tracking-wider border-2 border-cyan-300 shadow-lg hover:shadow-cyan-400/50"
+            >
+              FORMULA
+            </a>
+            <a
+              href="/roadmap"
+              className="bg-green-400 text-black px-4 py-2 rounded font-mono text-sm font-semibold hover:bg-yellow-400 transition-colors tracking-wider"
+            >
+              ROADMAP
+            </a>
+            <button
+              className="bg-green-400 text-black px-4 py-2 rounded font-mono text-sm font-semibold hover:bg-yellow-400 transition-colors tracking-wider"
+              onClick={() => handleSectionClick('leaderboard')}
+            >
+              LEADERBOARD
+            </button>
+            <a
+              href="https://x.com/rewardflowsol"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center space-x-2 text-gray-400 hover:text-[var(--pump-blue)] transition-colors"
+              className="flex items-center space-x-2 text-green-400 hover:text-yellow-400 transition-colors font-mono text-sm tracking-wider"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
+                width="20"
+                height="20"
                 viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="lucide lucide-twitter w-5 h-5"
+                fill="currentColor"
+                className="lucide lucide-x"
                 aria-hidden="true"
               >
-                <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
               </svg>
+              <span>[ FOLLOW ]</span>
             </a>
           </div>
         </div>
