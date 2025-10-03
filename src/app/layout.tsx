@@ -29,12 +29,12 @@ export default function RootLayout({
         <link rel="icon" href="/logo.svg" type="image/svg+xml" />
         <link rel="icon" href="/favicon.ico" sizes="any" type="image/x-icon" />
         <link rel="apple-touch-icon" href="/logo.svg" type="image/svg+xml" />
-        <meta property="og:title" content="MATRIX REWARDS" />
-        <meta property="og:description" content="Enter the Matrix of automated token distribution. Advanced algorithms reward holders with creator fees from the digital realm." />
+        <meta property="og:title" content="REWARDFLOW" />
+        <meta property="og:description" content="Automated token reward distribution. Advanced algorithms reward holders with creator fees from Pump.fun trading." />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="MATRIX REWARDS" />
-        <meta name="twitter:description" content="Enter the Matrix of automated token distribution. Advanced algorithms reward holders with creator fees from the digital realm." />
+        <meta name="twitter:title" content="REWARDFLOW" />
+        <meta name="twitter:description" content="Automated token reward distribution. Advanced algorithms reward holders with creator fees from Pump.fun trading." />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}
