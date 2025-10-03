@@ -1,0 +1,151 @@
+<svg width="1200" height="675" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#000000;stop-opacity:1" />
+      <stop offset="30%" style="stop-color:#0a0a0a;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#0a0a0a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Matrix rain gradient -->
+    <linearGradient id="matrixGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#00fb1a;stop-opacity:0" />
+      <stop offset="50%" style="stop-color:#00fb1a;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#00fb1a;stop-opacity:0" />
+    </linearGradient>
+    
+    <!-- Glow effect -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Strong glow -->
+    <filter id="strongGlow">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Neon glow -->
+    <filter id="neonGlow">
+      <feGaussianBlur stdDeviation="12" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="675" fill="url(#bgGradient)"/>
+  
+  <!-- Matrix-style falling code -->
+  <g opacity="0.3" font-family="monospace" font-size="12" fill="url(#matrixGradient)">
+    <text x="50" y="100" transform="rotate(90 50 100)">01001000 01001111 01001100 01000100</text>
+    <text x="150" y="80" transform="rotate(90 150 80)">01010010 01000101 01010111 01000001</text>
+    <text x="250" y="120" transform="rotate(90 250 120)">01010010 01000100 01000110 01001100</text>
+    <text x="350" y="60" transform="rotate(90 350 60)">01001111 01010111 00100000 01000101</text>
+    <text x="450" y="140" transform="rotate(90 450 140)">01000001 01010010 01001110 00100000</text>
+    <text x="750" y="90" transform="rotate(90 750 90)">01010010 01000101 01010111 01000001</text>
+    <text x="850" y="110" transform="rotate(90 850 110)">01010010 01000100 01000110 01001100</text>
+    <text x="950" y="70" transform="rotate(90 950 70)">01001111 01010111 00100000 01000101</text>
+    <text x="1050" y="130" transform="rotate(90 1050 130)">01000001 01010010 01001110 00100000</text>
+    <text x="1150" y="100" transform="rotate(90 1150 100)">01001000 01001111 01001100 01000100</text>
+  </g>
+  
+  <!-- Logo -->
+  <g transform="translate(100, 80)">
+    <rect x="-25" y="-25" width="50" height="50" fill="#000000" stroke="#00fb1a" stroke-width="3" rx="6" filter="url(#glow)"/>
+    <text x="0" y="0" font-family="monospace" font-size="30" font-weight="bold" fill="#00fb1a" text-anchor="middle" dominant-baseline="central">R</text>
+  </g>
+  
+  <!-- Main terminal window -->
+  <g transform="translate(600, 200)">
+    <!-- Terminal header -->
+    <rect x="-350" y="-80" width="700" height="40" fill="#1a1a1a" stroke="#00fb1a" stroke-width="2" rx="8 8 0 0"/>
+    <circle cx="-320" cy="-60" r="6" fill="#ff5f56"/>
+    <circle cx="-300" cy="-60" r="6" fill="#ffbd2e"/>
+    <circle cx="-280" cy="-60" r="6" fill="#27ca3f"/>
+    <text x="0" y="-55" font-family="monospace" font-size="14" fill="#ffffff" text-anchor="middle">REWARDFLOW TERMINAL v2.0</text>
+    
+    <!-- Terminal body -->
+    <rect x="-350" y="-40" width="700" height="300" fill="#000000" stroke="#00fb1a" stroke-width="2" rx="0 0 8 8" opacity="0.9"/>
+    
+    <!-- Terminal content -->
+    <g transform="translate(-330, -20)">
+      <text x="0" y="20" font-family="monospace" font-size="16" fill="#00fb1a">$ ./rewardflow --status</text>
+      <text x="0" y="45" font-family="monospace" font-size="14" fill="#ffffff">✓ Treasury Balance: 47.3 SOL</text>
+      <text x="0" y="65" font-family="monospace" font-size="14" fill="#ffffff">✓ Active Holders: 847</text>
+      <text x="0" y="85" font-family="monospace" font-size="14" fill="#ffffff">✓ Next Distribution: 12 minutes</text>
+      <text x="0" y="105" font-family="monospace" font-size="14" fill="#ffffff">✓ Total Rewards Paid: 1,247 SOL</text>
+      
+      <text x="0" y="140" font-family="monospace" font-size="16" fill="#fbbf24">$ ./calculate_rewards --wallet=YOUR_ADDRESS</text>
+      <text x="0" y="165" font-family="monospace" font-size="14" fill="#ffffff">Analyzing wallet...</text>
+      <text x="0" y="185" font-family="monospace" font-size="14" fill="#00fb1a">✓ Balance Weight: 2.47x</text>
+      <text x="0" y="205" font-family="monospace" font-size="14" fill="#00fb1a">✓ Earlyness Bonus: 3.12x</text>
+      <text x="0" y="225" font-family="monospace" font-size="14" fill="#00fb1a">✓ Loyalty Multiplier: 1.89x</text>
+      <text x="0" y="245" font-family="monospace" font-size="14" fill="#fbbf24">→ Your Total Weight: 14.8x</text>
+      
+      <text x="0" y="275" font-family="monospace" font-size="14" fill="#8b5cf6" opacity="0.8">Press ENTER to join the revolution...</text>
+    </g>
+  </g>
+  
+  <!-- Side stats panels -->
+  <g transform="translate(150, 400)">
+    <rect x="-80" y="-40" width="160" height="80" fill="#000000" stroke="#00fb1a" stroke-width="2" rx="8" opacity="0.8"/>
+    <text x="0" y="-15" font-family="monospace" font-size="18" font-weight="bold" fill="#00fb1a" text-anchor="middle">AUTOMATED</text>
+    <text x="0" y="5" font-family="monospace" font-size="14" fill="#ffffff" text-anchor="middle">DISTRIBUTION</text>
+    <text x="0" y="25" font-family="monospace" font-size="12" fill="#fbbf24" text-anchor="middle">EVERY 20 MIN</text>
+  </g>
+  
+  <g transform="translate(1050, 400)">
+    <rect x="-80" y="-40" width="160" height="80" fill="#000000" stroke="#fbbf24" stroke-width="2" rx="8" opacity="0.8"/>
+    <text x="0" y="-15" font-family="monospace" font-size="18" font-weight="bold" fill="#fbbf24" text-anchor="middle">OPEN SOURCE</text>
+    <text x="0" y="5" font-family="monospace" font-size="14" fill="#ffffff" text-anchor="middle">TRANSPARENT</text>
+    <text x="0" y="25" font-family="monospace" font-size="12" fill="#00fb1a" text-anchor="middle">VERIFIABLE</text>
+  </g>
+  
+  <!-- Bottom call to action -->
+  <g transform="translate(600, 550)">
+    <rect x="-250" y="-30" width="500" height="60" fill="#00fb1a" opacity="0.1" stroke="#00fb1a" stroke-width="3" rx="10" filter="url(#glow)"/>
+    <text x="0" y="-5" font-family="monospace" font-size="22" font-weight="bold" fill="#00fb1a" text-anchor="middle">JOIN THE REVOLUTION</text>
+    <text x="0" y="15" font-family="monospace" font-size="14" fill="#ffffff" text-anchor="middle">Start earning rewards automatically</text>
+  </g>
+  
+  <!-- Floating code snippets -->
+  <g opacity="0.4" font-family="monospace" font-size="10" fill="#00fb1a">
+    <text x="50" y="550" transform="rotate(-15 50 550)">if (holder) { distribute(rewards); }</text>
+    <text x="1000" y="150" transform="rotate(12 1000 150)">calculateWeight(balance, time)</text>
+    <text x="200" y="300" transform="rotate(-8 200 300)">treasury.balance += fees</text>
+    <text x="950" y="550" transform="rotate(18 950 550)">earlyBonus *= 2.5</text>
+  </g>
+  
+  <!-- Digital particles -->
+  <g opacity="0.6">
+    <rect x="80" y="200" width="3" height="3" fill="#00fb1a" filter="url(#glow)"/>
+    <rect x="1100" y="300" width="2" height="2" fill="#fbbf24" filter="url(#glow)"/>
+    <rect x="150" y="500" width="4" height="4" fill="#8b5cf6" filter="url(#glow)"/>
+    <rect x="1050" y="200" width="3" height="3" fill="#00fb1a" filter="url(#glow)"/>
+    <rect x="100" y="350" width="2" height="2" fill="#fbbf24" filter="url(#glow)"/>
+    <rect x="1150" y="450" width="4" height="4" fill="#8b5cf6" filter="url(#glow)"/>
+  </g>
+  
+  <!-- Scan lines effect -->
+  <g opacity="0.1">
+    <rect x="0" y="100" width="1200" height="1" fill="#00fb1a"/>
+    <rect x="0" y="200" width="1200" height="1" fill="#00fb1a"/>
+    <rect x="0" y="300" width="1200" height="1" fill="#00fb1a"/>
+    <rect x="0" y="400" width="1200" height="1" fill="#00fb1a"/>
+    <rect x="0" y="500" width="1200" height="1" fill="#00fb1a"/>
+  </g>
+  
+  <!-- Border -->
+  <rect x="0" y="0" width="1200" height="675" fill="none" stroke="#00fb1a" stroke-width="2" opacity="0.7"/>
+</svg>

@@ -49,7 +49,7 @@
   </g>
   
   <!-- Formula breakdown -->
-  <g transform="translate(80, 320)">
+  <g transform="translate(75, 320)">
     <!-- Token Balance -->
     <g transform="translate(0, 0)">
       <rect x="0" y="0" width="350" height="120" fill="#8b5cf6" opacity="0.1" stroke="#8b5cf6" stroke-width="2" rx="12"/>
