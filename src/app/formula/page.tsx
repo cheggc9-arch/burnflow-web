@@ -40,7 +40,7 @@ export default function FormulaPage() {
               <div className="text-center mb-12">
                 <p className="text-lg text-gray-300 leading-relaxed max-w-4xl mx-auto">
                   This token is built on Pump.fun, but it uses a open source custom reward distribution script. 
-                  All creator rewards collected in the treasury are distributed fairly using a formula 
+                  All creator fees collected in the treasury are distributed fairly using a formula 
                   that rewards not only on token balance, but also on how early you've joined and how long you've held.
                 </p>
               </div>
@@ -165,7 +165,7 @@ export default function FormulaPage() {
                 <h3 className="text-2xl font-bold text-green-400 mb-4">STRATEGY</h3>
                 <p className="text-gray-300 text-lg mb-4">
                   Every hour you wait, your earlyness bonus shrinks. Every day you don't hold, 
-                  your tenure bonus doesn't grow. If you want the maximum share of creator rewards, 
+                  your tenure bonus doesn't grow. If you want the maximum share of creator fees, 
                   the best move is simple:
                 </p>
                 <div className="text-2xl font-bold text-yellow-400">

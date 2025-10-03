@@ -34,7 +34,7 @@ export default function HowItWorks() {
               <span className="text-4xl" style={{filter: 'hue-rotate(120deg) saturate(2) brightness(1.2)'}}>🎁</span>
             </div>
             <h3 className="font-semibold text-lg text-[var(--pump-blue)]">3. Get Rewards</h3>
-            <p className="text-gray-400 text-sm">Receive your portion of creator rewards based on your weightage.</p>
+            <p className="text-gray-400 text-sm">Receive your portion of creator fees based on your weightage.</p>
             <div className="bg-yellow-900/20 rounded-lg p-3 border border-yellow-500/20">
               <div className="text-xs text-yellow-400 font-medium">Auto Distribution</div>
               <div className="text-xs text-gray-300">Every 20 minutes</div>

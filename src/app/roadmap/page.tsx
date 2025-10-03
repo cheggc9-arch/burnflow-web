@@ -160,7 +160,7 @@ export default function Roadmap() {
               </p>
               <div className="flex space-x-4">
                 <a
-                  href="https://x.com/hold2earnsol"
+                  href="https://x.com/rewardflowsol"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center space-x-2 text-green-400 hover:text-yellow-400 transition-colors font-mono text-sm"
@@ -179,7 +179,7 @@ export default function Roadmap() {
                   <span>Follow on X</span>
                 </a>
                 <a
-                  href="https://github.com/your-username/hold2earn-algorithm"
+                  href="https://github.com/your-username/rewardflow-algorithm"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center space-x-2 text-green-400 hover:text-yellow-400 transition-colors font-mono text-sm"

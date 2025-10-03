@@ -86,11 +86,11 @@ export default function Hero() {
             [TEST]
           </div>
           <h1 className="text-6xl md:text-8xl font-bold text-green-400 mb-4 tracking-wider" style={{textShadow: '0 0 15px rgba(34, 197, 94, 0.6)'}}>
-            CREATOR REWARDS GO TO YOU
+            CREATOR FEES GO TO YOU
           </h1>
         </div>
           <p className="text-xl md:text-2xl font-semibold text-gray-300 max-w-4xl mx-auto leading-relaxed">
-            Holders recieve 100% of creator rewards from Pump.fun!<br/>
+            Holders recieve 100% of creator fees from Pump.fun!<br/>
             <span className="text-green-400">More volume, more fees distributed!</span><br/>
             <span className="text-yellow-400">[AUTOMATED OPEN SOURCE ALGORITHM]</span>
           </p>
@@ -108,12 +108,12 @@ export default function Hero() {
               [ OPEN SOURCE CODE ]
             </div>
             <a 
-              href="https://github.com/your-username/hold2earn-algorithm" 
+              href="https://github.com/your-username/rewardflow-algorithm" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-yellow-400 hover:text-yellow-300 font-mono text-sm break-all transition-colors duration-200"
             >
-              github.com/hold2earn-algorithm
+              github.com/rewardflow-algorithm
             </a>
             <div className="text-gray-400 font-mono text-xs mt-1">
               View the distribution algorithm

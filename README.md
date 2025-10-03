@@ -1,4 +1,4 @@
-# Hold2Earn - Solana Token Reward Distribution System
+# RewardFlow - Solana Token Reward Distribution System
 
 A Next.js application that automatically distributes creator fees from Pump.fun to token holders every 20 minutes using a sophisticated weighted algorithm.
 
