@@ -21,7 +21,7 @@ export default function Home() {
         <DistributionTimer />
         <DistributionHistory />
         <HolderLeaderboard />
-        {process.env.NODE_ENV === 'development' && <DistributionTrigger />}
+        {(process.env.NODE_ENV === 'development' || process.env.SHOW_DISTRIBUTION_TRIGGER === 'true') && <DistributionTrigger />}
         <HowItWorks />
         <EarlyAdopterAdvantage />
       </main>
