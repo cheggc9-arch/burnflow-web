@@ -8,18 +8,7 @@ export async function POST(request: NextRequest) {
     
     const distributionService = new DistributionService();
     
-    // Check if distribution should run
-    const shouldRun = await distributionService.shouldRunDistribution();
-    
-    if (!shouldRun) {
-      return NextResponse.json({
-        success: false,
-        message: 'Distribution conditions not met',
-        timestamp: new Date().toISOString(),
-      });
-    }
-
-    // Run the distribution
+    // Always run distribution (conditions checked inside distributeRewards)
     const result = await distributionService.distributeRewards();
     
     if (result.success) {
