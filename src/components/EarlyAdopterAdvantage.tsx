@@ -33,7 +33,7 @@ export default function EarlyAdopterAdvantage() {
             <div className="space-y-2 text-sm text-gray-300">
               <div className="flex items-center space-x-2">
                 <span className="text-[var(--pump-green)] font-bold">✓</span>
-                <span>Minimum 20,000 tokens to qualify for rewards</span>
+                <span>Minimum 1,000,000 tokens to qualify for rewards</span>
               </div>
               <div className="flex items-center space-x-2">
                 <span className="text-[var(--pump-green)] font-bold">✓</span>

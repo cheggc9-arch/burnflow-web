@@ -1,158 +1,30 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-
-interface DistributionData {
-  timeRemainingSeconds: number;
-  nextDistributionTime: number;
-  lastDistributionTime: number;
-  distributionInterval: number;
-  isDistributionTime: boolean;
-  lastUpdated: number;
-}
-
 export default function DistributionTimer() {
-  const [timeLeft, setTimeLeft] = useState(20 * 60); // 20 minutes in seconds
-  const [data, setData] = useState<DistributionData | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  // Fetch distribution data from server
-  const fetchDistributionData = async () => {
-    try {
-      const response = await fetch('/api/next-distribution');
-      const result = await response.json();
-      
-      if (result.success) {
-        setData(result.data);
-        setTimeLeft(result.data.timeRemainingSeconds);
-        setError(null);
-      } else {
-        setError(result.error || 'Failed to fetch distribution data');
-      }
-    } catch (err) {
-      setError('Network error');
-      console.error('Error fetching distribution data:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    // Initial fetch
-    fetchDistributionData();
-    
-    // Refresh every 10 seconds to stay synchronized
-    const interval = setInterval(fetchDistributionData, 10 * 1000);
-    
-    return () => clearInterval(interval);
-  }, []);
-
-  // Local countdown timer
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev <= 1) {
-          // When countdown reaches 0, fetch fresh data from server
-          fetchDistributionData();
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
-
-  const hours = Math.floor(timeLeft / 3600);
-  const minutes = Math.floor((timeLeft % 3600) / 60);
-  const seconds = timeLeft % 60;
-  
-  const getProgressPercentage = () => {
-    if (!data) return 0;
-    const totalInterval = data.distributionInterval / 1000; // Convert to seconds
-    return ((totalInterval - timeLeft) / totalInterval) * 100;
-  };
-
-  if (loading) {
-    return (
-      <div className="pump-card rounded-xl p-6">
-        <div className="mb-6">
-          <h3 className="text-xl font-bold pump-gradient-text">Next Distribution</h3>
-        </div>
-        <div className="text-center">
-          <div className="text-2xl text-gray-400">Loading...</div>
-        </div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="pump-card rounded-xl p-6">
-        <div className="mb-6">
-          <h3 className="text-xl font-bold pump-gradient-text">Next Distribution</h3>
-        </div>
-        <div className="text-center">
-          <div className="text-red-400">Error: {error}</div>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="pump-card rounded-xl p-6 animate-pulse-green">
+    <div className="pump-card rounded-xl p-6">
       <div className="mb-6">
-        <h3 className="text-xl font-bold pump-gradient-text">Next Distribution</h3>
-        {data?.isDistributionTime && (
-          <div className="text-sm text-[var(--pump-green)] font-semibold">
-            🎉 Distribution in progress!
-          </div>
-        )}
+        <h3 className="text-xl font-bold pump-gradient-text">Distribution Status</h3>
+        <div className="text-sm text-yellow-400 font-semibold mt-2">
+          🧪 TESTING MODE - Manual Distribution Only
+        </div>
       </div>
       <div className="text-center">
-        <div className="grid grid-cols-3 gap-0 max-w-xs mx-auto">
-          <div className="text-center">
-            <div className="text-4xl font-bold pump-gradient-text mb-0">
-              {hours.toString().padStart(2, '0')}
-            </div>
-            <div className="text-lg font-semibold text-gray-300 uppercase">
-              HOURS
-            </div>
+        <div className="text-6xl mb-4">⏸️</div>
+        <div className="text-2xl font-bold text-gray-300 mb-2">
+          Timer Disabled
+        </div>
+        <div className="text-lg text-gray-400 mb-4">
+          Automatic distributions are disabled for testing
+        </div>
+        <div className="bg-yellow-900/20 border border-yellow-500/30 rounded-lg p-4 max-w-md mx-auto">
+          <div className="text-yellow-400 font-semibold text-sm mb-2">
+            Manual Distribution Available
           </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold pump-gradient-text mb-0">
-              {minutes.toString().padStart(2, '0')}
-            </div>
-            <div className="text-lg font-semibold text-gray-300 uppercase">
-              MINUTES
-            </div>
-          </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold pump-gradient-text mb-0">
-              {seconds.toString().padStart(2, '0')}
-            </div>
-            <div className="text-lg font-semibold text-gray-300 uppercase">
-              SECONDS
-            </div>
+          <div className="text-gray-300 text-sm">
+            Use the "Trigger Distribution Now" button below to manually test the distribution system.
           </div>
         </div>
-        <div className="flex justify-center mt-4">
-          <div className="w-80 bg-gray-800 rounded-full h-2">
-            <div 
-              className="bg-gradient-to-r from-green-400 to-cyan-400 h-2 rounded-full transition-all duration-1000"
-              style={{ width: `${getProgressPercentage()}%` }}
-            ></div>
-          </div>
-        </div>
-        <div className="text-sm font-semibold text-gray-300 mt-4">
-          {data?.isDistributionTime ? 'Distribution in progress...' : 'Until next reward distribution'}
-        </div>
-        {data && (
-          <div className="text-sm text-gray-400 mt-4">
-            Last distribution: {new Date(data.lastDistributionTime).toLocaleTimeString()}
-          </div>
-        )}
       </div>
     </div>
   );

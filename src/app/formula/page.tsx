@@ -68,12 +68,12 @@ export default function FormulaPage() {
                     </div>
                     <p className="text-gray-300 mb-4">We reward bigger holders, but with diminishing returns so whales don't overwhelm the system:</p>
                     <div className="bg-black/50 p-4 rounded border border-green-500/30 mb-4 overflow-x-auto">
-                      <code className="text-green-400 text-sm whitespace-nowrap">token_balance_weight = 1 + log10(token_balance / 20,000)</code>
+                      <code className="text-green-400 text-sm whitespace-nowrap">token_balance_weight = 1 + log10(token_balance / 1,000,000)</code>
                     </div>
                     <div className="space-y-2 text-sm text-gray-300">
-                      <div>• 20k tokens = 1.0</div>
-                      <div>• 200k tokens ≈ 2.0</div>
-                      <div>• 2M tokens ≈ 3.0</div>
+                      <div>• 1M tokens = 1.0</div>
+                      <div>• 10M tokens ≈ 2.0</div>
+                      <div>• 100M tokens ≈ 3.0</div>
                     </div>
                     <p className="text-yellow-400 text-sm mt-4">👉 You get more weight for more tokens, but each step up gives less of an advantage.</p>
                   </div>

@@ -149,7 +149,7 @@ export default function HolderLeaderboard() {
           <div className="flex justify-between items-center mb-4">
             <h3 className="text-xl font-bold pump-gradient-text">Holders Leaderboard</h3>
             <div className="text-xs text-gray-400 bg-gray-800/50 px-3 py-1 rounded-full">
-              Updated every 5min
+              Updates every 5 min
             </div>
           </div>
           <div className="flex space-x-1 bg-gray-800/50 rounded-lg p-1">
@@ -179,7 +179,7 @@ export default function HolderLeaderboard() {
           <div className="flex justify-between items-center mb-4">
             <h3 className="text-xl font-bold pump-gradient-text">Holders Leaderboard</h3>
             <div className="text-xs text-gray-400 bg-gray-800/50 px-3 py-1 rounded-full">
-              Updated every 5min
+              Updates every 5 min
             </div>
           </div>
         </div>
@@ -196,7 +196,7 @@ export default function HolderLeaderboard() {
         <div className="flex justify-between items-center mb-4">
           <h3 className="text-xl font-bold pump-gradient-text">Holders Leaderboard</h3>
           <div className="text-xs text-gray-400 bg-gray-800/50 px-3 py-1 rounded-full">
-            Updated every 5min
+            Updates every 5 min
           </div>
         </div>
         <div className="flex space-x-1 bg-gray-800/50 rounded-lg p-1">

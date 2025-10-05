@@ -1,0 +1,111 @@
+{
+  "distributions": [
+    {
+      "id": 4,
+      "timestamp": "2025-10-05T06:58:36.749Z",
+      "totalDistributed": 0,
+      "recipientsCount": 0,
+      "transactionsCount": 0,
+      "failedTransactions": 0,
+      "transactions": [],
+      "treasuryBalance": 0.000981063,
+      "status": "threshold_not_met"
+    },
+    {
+      "id": 3,
+      "timestamp": "2025-10-05T06:56:13.861Z",
+      "totalDistributed": 0,
+      "recipientsCount": 0,
+      "transactionsCount": 0,
+      "failedTransactions": 0,
+      "transactions": [],
+      "treasuryBalance": 0.000981063,
+      "status": "threshold_not_met"
+    },
+    {
+      "id": 2,
+      "timestamp": "2025-10-05T06:43:01.168Z",
+      "totalDistributed": 0.00047705299999999996,
+      "recipientsCount": 5,
+      "transactionsCount": 5,
+      "failedTransactions": 3,
+      "transactions": [
+        {
+          "recipient": "B7eRAwdDCFLhnqBHVEH85FrAo7FZeYVT7owQ1hfuEZWD",
+          "amount": 0.000240228,
+          "signature": "JDtgo1RoE2xXt3bt88YES98PcaC3Ds1sVp7DFjk754LKVkLsphnC3nBUPGHsqpDGys44J6pGjzd5GDLc8opYGvh",
+          "weightage": 5.613100307229016
+        },
+        {
+          "recipient": "7cjxi3ZA9SZW77M6LRFQBNdDyf16WJojY9n8kfsPHi7j",
+          "amount": 0.000237477,
+          "signature": "",
+          "weightage": 5.548815058138509
+        },
+        {
+          "recipient": "9bdaUcMeC9f83LLyvnPPPWs8MvLLFQiqEARX4LNF3Ar1",
+          "amount": 0.000236825,
+          "signature": "ZU7P1NAvgCySPEAqYurkcsJeQUQy3DDQU21GR1M554WmKj5WwutJJZoskY8pTaixv6fSyJm3a5jWCba4Jde1BYA",
+          "weightage": 5.533582031426559
+        },
+        {
+          "recipient": "HkrjusRG294vRH8gN5avGS2w1dgxquzjfTsfrFbcAVfC",
+          "amount": 0.0002344,
+          "signature": "",
+          "weightage": 5.476936044130842
+        },
+        {
+          "recipient": "9cs4ppiFxZjFjJCWV7KB9v4mmvuFpyrarwMQiKrkRHku",
+          "amount": 0.000231811,
+          "signature": "",
+          "weightage": 5.416431135047758
+        }
+      ],
+      "treasuryBalance": 0.001242888,
+      "status": "partial"
+    },
+    {
+      "id": 1,
+      "timestamp": "2025-10-05T06:31:13.626Z",
+      "totalDistributed": 0.004950998,
+      "recipientsCount": 5,
+      "transactionsCount": 5,
+      "failedTransactions": 0,
+      "transactions": [
+        {
+          "recipient": "B7eRAwdDCFLhnqBHVEH85FrAo7FZeYVT7owQ1hfuEZWD",
+          "amount": 0.001007307,
+          "signature": "897PpQEJ2y8Mr8or9uP4j21fdWPpRGQDDZwNASXxGadkT9emZy4euTtLXviAkay51Nuw2FFedSu2wBcv3vYhv6T",
+          "weightage": 5.584312233591392
+        },
+        {
+          "recipient": "7cjxi3ZA9SZW77M6LRFQBNdDyf16WJojY9n8kfsPHi7j",
+          "amount": 0.00099577,
+          "signature": "4mqiqMsedpV39phT2t7BHivefaBGu8fX8TZpcrQVFTfXXNL4rH6dLFeCjrAHQMQ1toaYAuSuD7ECCxqMULBsXxgX",
+          "weightage": 5.520356686160101
+        },
+        {
+          "recipient": "9bdaUcMeC9f83LLyvnPPPWs8MvLLFQiqEARX4LNF3Ar1",
+          "amount": 0.000993037,
+          "signature": "5RMqmmzthnXMxtcnqKaY8vywoC8pNiQQ3ognnY7MrdMm8ttrL8H4Xq4mX8rDcWy6Ff3uQefnhLdGXEN2wYXpfeBh",
+          "weightage": 5.505201785522994
+        },
+        {
+          "recipient": "HkrjusRG294vRH8gN5avGS2w1dgxquzjfTsfrFbcAVfC",
+          "amount": 0.000982871,
+          "signature": "5Wm5aToUFsckM4UqgiE8SV5Kn3z9UWnX6vTah9PS2J9e6q1xeRerutSCuEdKHp6Qb78tydBbxcV5s2AF5B3VA166",
+          "weightage": 5.44884536032668
+        },
+        {
+          "recipient": "9cs4ppiFxZjFjJCWV7KB9v4mmvuFpyrarwMQiKrkRHku",
+          "amount": 0.000972013,
+          "signature": "2M3WHSGohwrVvKh2AkMwy9TiFqqwDQmNe3LJT24sYuHAJDcKSLx3rU6FiAC2ci4L17R48XR3Qhx2oZgJYH3dn3HT",
+          "weightage": 5.388650775164846
+        }
+      ],
+      "treasuryBalance": 0.005211579,
+      "status": "success"
+    }
+  ],
+  "lastId": 4
+}

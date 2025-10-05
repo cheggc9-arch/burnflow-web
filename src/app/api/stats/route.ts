@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getCachedData, isCacheStale } from '@/utils/cache';
 import { getConnection } from '@/utils/solana';
+import { getAllDistributions } from '@/utils/database';
 
 export async function GET(request: NextRequest) {
   try {
@@ -16,6 +17,11 @@ export async function GET(request: NextRequest) {
     const treasuryBalance = cache.treasuryBalance || 0;
     const activeHolders = cache.activeHolders || 0;
     
+    // Get distribution history for stats
+    const distributions = getAllDistributions();
+    const totalDistributed = distributions.reduce((sum, dist) => sum + dist.totalDistributed, 0);
+    const totalRounds = distributions.length;
+    
     // Calculate distribution amounts
     const distributionAmount = treasuryBalance * 0.95;
     const keepAmount = treasuryBalance * 0.05;
@@ -27,9 +33,8 @@ export async function GET(request: NextRequest) {
         distributionAmount,
         keepAmount,
         activeHolders,
-        totalDistributed: 0, // TODO: Implement from database
-        totalRounds: 0, // TODO: Implement from database
-        totalUniqueRecipients: 0, // TODO: Implement from database
+        totalDistributed,
+        totalRounds,
         network: connection.rpcEndpoint.includes('devnet') ? 'devnet' : 'mainnet',
         lastUpdated: cache.lastUpdated,
         isUpdating: cache.isUpdating,

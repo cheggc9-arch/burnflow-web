@@ -124,7 +124,7 @@ export async function getTokenHolders(tokenMint: PublicKey): Promise<Array<{
 }
 
 // Get active holders (public data)
-export async function getActiveHolders(tokenMint: PublicKey, minBalance: number = 20000): Promise<Array<{
+export async function getActiveHolders(tokenMint: PublicKey, minBalance: number = parseInt(process.env.MIN_HOLDER_BALANCE || "1000000")): Promise<Array<{
   address: string;
   balance: number;
   firstHoldTime?: Date;

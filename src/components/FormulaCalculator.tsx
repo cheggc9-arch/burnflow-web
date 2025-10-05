@@ -3,15 +3,23 @@
 import { useState, useEffect } from "react";
 import { Calculator, Clock, Coins, Users, TrendingUp } from "lucide-react";
 
+interface CalculationResult {
+  estimatedReward: number;
+  sharePercentage: number;
+  timeWeight: number;
+  balanceWeight: number;
+  totalWeight: number;
+}
+
 export default function FormulaCalculator() {
   const [totalFees, setTotalFees] = useState(1);
-  const [userBalance, setUserBalance] = useState(50000);
+  const [userBalance, setUserBalance] = useState(1000000);
   const [holdDuration, setHoldDuration] = useState(72);
-  const [result, setResult] = useState(null);
+  const [result, setResult] = useState<CalculationResult | null>(null);
 
   useEffect(() => {
     const timeWeight = holdDuration < 24 ? 3 : holdDuration < 168 ? 1.5 : 1;
-    const balanceWeight = Math.log10(userBalance / 20000 + 1);
+    const balanceWeight = Math.log10(userBalance / 1000000 + 1);
     const totalWeight = timeWeight * balanceWeight;
     const estimatedReward = (totalWeight / 100) * totalFees;
     const sharePercentage = (totalWeight / 100) * 100;
@@ -57,7 +65,7 @@ export default function FormulaCalculator() {
               <h4 className="font-semibold text-white">Balance Weight</h4>
               <p className="text-sm text-gray-400">
                 Logarithmic scaling<br/>
-                <span className="text-xs">log₁₀(balance/20000 + 1)</span>
+                <span className="text-xs">log₁₀(balance/1000000 + 1)</span>
               </p>
             </div>
             <div className="text-center p-4 bg-gray-800/30 rounded-lg">
@@ -92,7 +100,7 @@ export default function FormulaCalculator() {
                   step="0.1"
                   value={totalFees}
                   onChange={(e) => setTotalFees(parseFloat(e.target.value))}
-                  className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer slider"
+                  className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer slider pump-slider"
                 />
                 <div className="mt-2 text-center text-[var(--pump-green)] font-bold">
                   {totalFees.toFixed(1)} SOL
@@ -106,12 +114,12 @@ export default function FormulaCalculator() {
               <div className="relative">
                 <input
                   type="range"
-                  min="20000"
+                  min="1000000"
                   max="10000000"
                   step="1000"
                   value={userBalance}
                   onChange={(e) => setUserBalance(parseInt(e.target.value))}
-                  className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer slider"
+                  className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer slider pump-slider"
                 />
                 <div className="mt-2 text-center text-[var(--pump-green)] font-bold">
                   {userBalance.toLocaleString()}
@@ -130,7 +138,7 @@ export default function FormulaCalculator() {
                   step="1"
                   value={holdDuration}
                   onChange={(e) => setHoldDuration(parseInt(e.target.value))}
-                  className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer slider"
+                  className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer slider pump-slider"
                 />
                 <div className="mt-2 text-center text-[var(--pump-green)] font-bold">
                   {holdDuration < 24 

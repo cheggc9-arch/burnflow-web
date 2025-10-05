@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getCachedData } from '@/utils/cache';
+import { DistributionService } from '@/utils/distribution-service';
 
 export async function GET(request: NextRequest) {
   try {
@@ -18,10 +19,13 @@ export async function GET(request: NextRequest) {
     const now = Date.now();
     const timeRemaining = Math.max(0, nextDistributionTime - now);
     
-    // If the next distribution time has passed, calculate the next one
+    // DISABLED FOR TESTING: Automatic distribution is disabled
     let actualNextDistribution = nextDistributionTime;
     if (timeRemaining <= 0) {
-      // Calculate how many distribution cycles have passed
+      console.log('🧪 TESTING MODE: Automatic distribution is disabled');
+      console.log('   Use manual trigger for testing distributions');
+      
+      // Calculate how many distribution cycles have passed but don't trigger
       const cyclesPassed = Math.floor((now - lastDistributionTime) / DISTRIBUTION_INTERVAL) + 1;
       actualNextDistribution = lastDistributionTime + (cyclesPassed * DISTRIBUTION_INTERVAL);
     }

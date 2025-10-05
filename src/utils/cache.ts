@@ -1,7 +1,7 @@
 import { Connection, PublicKey, LAMPORTS_PER_SOL } from '@solana/web3.js';
 import { getMint, TOKEN_PROGRAM_ID } from '@solana/spl-token';
 import { getConnection, getCreatorWalletAddress, getTokenContractAddress } from './solana';
-import { loadCacheFromFile, saveCacheToFile } from './cache-persistence';
+import { loadCacheFromFile, saveCacheToFile, CacheData } from './cache-persistence';
 
 // Global variable to store token launch time (set once at startup)
 let tokenLaunchTime: string | null = null;
@@ -92,6 +92,9 @@ async function fetchHolderDataFromAPI(tokenAddress: string) {
   try {
     console.log('🔄 Fetching: Token holder data from Bitquery API (2-step process)');
     
+    // Get the minimum balance threshold from environment variable
+    const minBalance = process.env.MIN_HOLDER_BALANCE || "1000000";
+    
     // Step 1: Query A - Get current token balances
     const queryA = `
       query {
@@ -110,7 +113,7 @@ async function fetchHolderDataFromAPI(tokenAddress: string) {
               Account { Token { Owner } }
               Holding: PostBalance(
                 maximum: Block_Slot
-                selectWhere: { gt: "20000", lt: "100000000" }
+                selectWhere: { gt: "${minBalance}", lt: "100000000" }
               )
             }
           }
@@ -317,13 +320,14 @@ function calculateWeightage(tokens: number, firstBuyTime: string, launchTime: st
     const firstBuy = new Date(firstBuyTime);
     const now = new Date();
     
-    // Only include holders with balance ≥ 20,000 tokens
-    if (tokens < 20000) {
+    // Only include holders with balance ≥ minimum threshold
+    const minBalance = parseInt(process.env.MIN_HOLDER_BALANCE || "1000000");
+    if (tokens < minBalance) {
       return 0;
     }
     
     // 1. Balance Weight (commitment)
-    const balanceWeight = 1 + Math.log10(tokens / 20000);
+    const balanceWeight = 1 + Math.log10(tokens / minBalance);
     
     // 2. Earlyness Bonus (timing)
     const daysSinceLaunch = (firstBuy.getTime() - launch.getTime()) / (1000 * 60 * 60 * 24);
@@ -350,14 +354,7 @@ function calculateWeightage(tokens: number, firstBuyTime: string, launchTime: st
   }
 }
 
-// Cache interface
-interface CacheData {
-  treasuryBalance: number;
-  activeHolders: number;
-  lastUpdated: number;
-  isUpdating: boolean;
-  lastDistributionTime: number;
-}
+// Cache interface is now imported from cache-persistence.ts
 
 // Holder cache interface
 interface HolderCacheData {

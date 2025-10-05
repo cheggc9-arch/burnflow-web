@@ -3,11 +3,12 @@ import path from 'path';
 
 const CACHE_FILE = path.join(process.cwd(), '.cache.json');
 
-interface CacheData {
+export interface CacheData {
   treasuryBalance: number;
   activeHolders: number;
   lastUpdated: number;
   isUpdating: boolean;
+  lastDistributionTime: number;
 }
 
 // Load cache from file
