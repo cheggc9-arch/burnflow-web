@@ -4,10 +4,11 @@ import { getRecentDistributions, getAllDistributions } from '@/utils/database';
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
-    const limit = parseInt(searchParams.get('limit') || '5');
+    const limit = parseInt(searchParams.get('limit') || '10');
     const all = searchParams.get('all') === 'true';
     
-    const distributions = all ? getAllDistributions() : getRecentDistributions(limit);
+    // Use async Supabase functions
+    const distributions = all ? await getAllDistributions() : await getRecentDistributions(limit);
     
     return NextResponse.json({
       success: true,

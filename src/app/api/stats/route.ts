@@ -18,7 +18,7 @@ export async function GET(request: NextRequest) {
     const activeHolders = cache.activeHolders || 0;
     
     // Get distribution history for stats
-    const distributions = getAllDistributions();
+    const distributions = await getAllDistributions();
     const totalDistributed = distributions.reduce((sum, dist) => sum + dist.totalDistributed, 0);
     const totalRounds = distributions.length;
     

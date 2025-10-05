@@ -317,7 +317,7 @@ export class DistributionService {
           status = 'threshold_not_met';
         }
 
-        saveDistributionRecord({
+        await saveDistributionRecord({
           timestamp: new Date().toISOString(),
           totalDistributed: result.totalDistributed,
           recipientsCount: result.recipientsCount,
