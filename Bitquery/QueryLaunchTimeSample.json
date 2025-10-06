@@ -1,4 +1,4 @@
-query {
+y,query {
     Solana(dataset: realtime, network: solana) {
       DEXTrades(
         where: {

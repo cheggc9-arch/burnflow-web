@@ -41,31 +41,28 @@ export default function HolderLeaderboard() {
           // Process the hashmap data to create the three sections
           const allHolders = result.data.allHolders || [];
           
-          // 1. Top Holders - Sorted by balance (highest first)
+          // 1. Top Holders - Sorted by balance (highest first) - ALL holders
           const topHolders = [...allHolders]
             .sort((a, b) => b.balance - a.balance)
-            .slice(0, 20)
             .map((holder, index) => ({
               ...holder,
               rank: index + 1,
               category: 'Top Holder'
             }));
 
-          // 2. Early Adopters - Sorted by first hold time (earliest first)
+          // 2. Early Adopters - Sorted by first hold time (earliest first) - ALL holders
           const earlyAdopters = [...allHolders]
             .filter(holder => holder.firstHoldTime)
             .sort((a, b) => new Date(a.firstHoldTime).getTime() - new Date(b.firstHoldTime).getTime())
-            .slice(0, 20)
             .map((holder, index) => ({
               ...holder,
               rank: index + 1,
               category: 'Early Adopter'
             }));
 
-          // 3. Highest Weight - Sorted by weightage (highest first)
+          // 3. Highest Weight - Sorted by weightage (highest first) - ALL holders
           const highestWeight = [...allHolders]
             .sort((a, b) => (b.weightage || 0) - (a.weightage || 0))
-            .slice(0, 20)
             .map((holder, index) => ({
               ...holder,
               rank: index + 1,
@@ -142,6 +139,9 @@ export default function HolderLeaderboard() {
     }
   };
 
+  const currentHolders = getCurrentHolders();
+  const showScrollbar = currentHolders.length > 15;
+
   if (loading) {
     return (
       <div className="pump-card rounded-xl p-6">
@@ -187,8 +187,6 @@ export default function HolderLeaderboard() {
       </div>
     );
   }
-
-  const currentHolders = getCurrentHolders();
 
   return (
     <div id="leaderboard" className="pump-card rounded-xl p-6 scroll-mt-32">
@@ -239,7 +237,8 @@ export default function HolderLeaderboard() {
       {currentHolders.length === 0 ? (
         <div className="text-center py-8 text-gray-400">No holders found</div>
       ) : (
-        <div className="space-y-2">
+        <div className="relative">
+          {/* Header */}
           <div className="grid grid-cols-4 gap-4 text-xs font-medium text-gray-400 pb-2 border-b border-gray-700">
             <div>Rank</div>
             <div>Address</div>
@@ -255,48 +254,62 @@ export default function HolderLeaderboard() {
             </div>
           </div>
           
-          {currentHolders.map((holder, index) => (
-            <div 
-              key={holder.address}
-              className={`grid grid-cols-4 gap-4 py-3 px-2 rounded-lg transition-colors hover:bg-gray-800/30 ${
-                index < 3 ? 'bg-gradient-to-r from-yellow-900/10 to-transparent' : ''
-              }`}
-            >
-              <div className="flex items-center space-x-2">
-                <span className={`text-sm font-bold ${
-                  index === 0 ? 'text-yellow-400' : 
-                  index === 1 ? 'text-gray-300' : 
-                  index === 2 ? 'text-orange-400' : 'text-gray-500'
-                }`}>
-                  #{index + 1}
-                </span>
-                {index < 3 && <Trophy className="w-3 h-3 text-yellow-400" />}
+          {/* Scrollable Container */}
+          <div 
+            className={`space-y-2 ${showScrollbar ? 'max-h-96 overflow-y-auto pr-2 leaderboard-scroll' : ''}`}
+          >
+            {currentHolders.map((holder, index) => (
+              <div 
+                key={holder.address}
+                className={`grid grid-cols-4 gap-4 py-3 px-2 rounded-lg transition-colors hover:bg-gray-800/30 ${
+                  index < 3 ? 'bg-gradient-to-r from-yellow-900/10 to-transparent' : ''
+                }`}
+              >
+                <div className="flex items-center space-x-2">
+                  <span className={`text-sm font-bold ${
+                    index === 0 ? 'text-yellow-400' : 
+                    index === 1 ? 'text-gray-300' : 
+                    index === 2 ? 'text-orange-400' : 'text-gray-500'
+                  }`}>
+                    #{index + 1}
+                  </span>
+                  {index < 3 && <Trophy className="w-3 h-3 text-yellow-400" />}
+                </div>
+                
+                <div className="font-mono text-sm">
+                  <a 
+                    href={`https://solscan.io/account/${holder.address}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[var(--pump-blue)] hover:text-[var(--pump-green)] transition-colors underline"
+                  >
+                    {holder.address.slice(0, 4)}...{holder.address.slice(-4)}
+                  </a>
+                </div>
+                
+                <div className="text-sm font-medium">
+                  {activeTab === 'weight' && (holder.weightage || 0).toFixed(2)}
+                  {activeTab === 'early' && holder.firstHoldTime && formatTimeAgo(holder.firstHoldTime)}
+                  {activeTab === 'balance' && formatNumber(holder.balance)}
+                </div>
+                
+                <div className="text-sm text-gray-400">
+                  {activeTab === 'weight' && formatNumber(holder.balance)}
+                  {activeTab === 'early' && formatNumber(holder.balance)}
+                  {activeTab === 'balance' && holder.firstHoldTime && formatTimeAgo(holder.firstHoldTime)}
+                </div>
               </div>
-              
-              <div className="font-mono text-sm">
-                <a 
-                  href={`https://solscan.io/account/${holder.address}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[var(--pump-blue)] hover:text-[var(--pump-green)] transition-colors underline"
-                >
-                  {holder.address.slice(0, 4)}...{holder.address.slice(-4)}
-                </a>
-              </div>
-              
-              <div className="text-sm font-medium">
-                {activeTab === 'weight' && (holder.weightage || 0).toFixed(2)}
-                {activeTab === 'early' && holder.firstHoldTime && formatTimeAgo(holder.firstHoldTime)}
-                {activeTab === 'balance' && formatNumber(holder.balance)}
-              </div>
-              
-              <div className="text-sm text-gray-400">
-                {activeTab === 'weight' && formatNumber(holder.balance)}
-                {activeTab === 'early' && formatNumber(holder.balance)}
-                {activeTab === 'balance' && holder.firstHoldTime && formatTimeAgo(holder.firstHoldTime)}
+            ))}
+          </div>
+          
+          {/* Scroll Indicator */}
+          {showScrollbar && (
+            <div className="mt-2 text-center">
+              <div className="text-xs text-gray-500 bg-gray-800/30 px-3 py-1 rounded-full inline-block">
+                Scroll to see all {currentHolders.length} holders
               </div>
             </div>
-          ))}
+          )}
         </div>
       )}
     </div>

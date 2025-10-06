@@ -95,31 +95,34 @@ async function fetchHolderDataFromAPI(tokenAddress: string) {
     // Get the minimum balance threshold from environment variable
     const minBalance = process.env.MIN_HOLDER_BALANCE || "1000000";
     
-    // Step 1: Query A - Get current token balances
-    const queryA = `
-      query {
-        Solana(dataset: realtime, network: solana, aggregates: yes) {
-          BalanceUpdates(
-            limit: { count: 10000 }
-            orderBy: { descendingByField: "BalanceUpdate_Holding_maximum" }
-            where: {
-              BalanceUpdate: {
-                Currency: { MintAddress: { is: "${tokenAddress}" } }
-              }
-              Transaction: { Result: { Success: true } }
-            }
-          ) {
-            BalanceUpdate {
-              Account { Token { Owner } }
-              Holding: PostBalance(
-                maximum: Block_Slot
-                selectWhere: { gt: "${minBalance}", lt: "100000000" }
-              )
-            }
-          }
-        }
-      }
-    `;
+    console.log(`🔍 Using token address: ${tokenAddress}`);
+    console.log(`🔍 Using min balance: ${minBalance}`);
+    
+     // Step 1: Query A - Get current token balances (using exact sample query)
+     const queryA = `
+       query {
+         Solana(dataset: realtime, network: solana, aggregates: yes) {
+           BalanceUpdates(
+             limit: { count: 10000 }
+             orderBy: { descendingByField: "BalanceUpdate_Holding_maximum" }
+             where: {
+               BalanceUpdate: {
+                 Currency: { MintAddress: { is: "${tokenAddress}" } }
+               }
+               Transaction: { Result: { Success: true } }
+             }
+           ) {
+             BalanceUpdate {
+               Account { Token { Owner } }
+               Holding: PostBalance(
+                 maximum: Block_Slot
+                 selectWhere: { gt: "${minBalance}", lt: "100000000" }
+               )
+             }
+           }
+         }
+       }
+     `;
 
     const responseA = await fetch('https://streaming.bitquery.io/eap', {
       method: 'POST',
@@ -147,15 +150,17 @@ async function fetchHolderDataFromAPI(tokenAddress: string) {
     // Initialize hashmap with high future time
     const futureTime = "2099-12-31T23:59:59Z";
     
-    balanceUpdates.forEach((update: any) => {
-      const owner = update.BalanceUpdate.Account.Token.Owner;
-      const tokens = parseFloat(update.BalanceUpdate.Holding);
-      holdersMap.set(owner, {
-        tokens: tokens,
-        first_buy_time: futureTime,
-        weightage: 0 // Will be calculated after Query B
-      });
-    });
+     balanceUpdates.forEach((update: any) => {
+       const owner = update.BalanceUpdate.Account.Token.Owner;
+       const tokens = parseFloat(update.BalanceUpdate.Holding);
+       console.log(`🔍 Initial holder: ${owner}, tokens: ${tokens}`);
+       
+       holdersMap.set(owner, {
+         tokens: tokens,
+         first_buy_time: futureTime,
+         weightage: 0 // Will be calculated after Query B
+       });
+     });
 
     console.log(`✅ Query A: Found ${holdersMap.size} token holders`);
 
@@ -220,32 +225,55 @@ async function fetchHolderDataFromAPI(tokenAddress: string) {
         continue;
       }
 
+      // Debug: Log the response structure
+      console.log(`🔍 Query B response for chunk:`, {
+        hasData: !!dataB.data,
+        hasSolana: !!dataB.data?.Solana,
+        hasDEXTrades: !!dataB.data?.Solana?.DEXTrades,
+        tradesCount: dataB.data?.Solana?.DEXTrades?.length || 0,
+        chunkSize: chunk.length,
+        chunkAddresses: chunk
+      });
+
       // Update first_buy_time for each holder
       const dexTrades = dataB.data?.Solana?.DEXTrades || [];
       
-      dexTrades.forEach((trade: any) => {
-        const owner = trade.Trade.Buy.Account.Token.Owner;
-        const buyTime = trade.Block.Time;
-        
-        if (holdersMap.has(owner)) {
-          const currentData = holdersMap.get(owner)!;
-          if (buyTime < currentData.first_buy_time) {
-            currentData.first_buy_time = buyTime;
-          }
-        }
-      });
+       dexTrades.forEach((trade: any) => {
+         const owner = trade.Trade.Buy.Account.Token.Owner;
+         const buyTime = trade.Block.Time;
+         
+         console.log(`🔍 Trade found: ${owner}, buyTime: ${buyTime}`);
+         
+         if (holdersMap.has(owner)) {
+           const currentData = holdersMap.get(owner)!;
+           console.log(`🔍 Before update: ${owner}, current first_buy_time: ${currentData.first_buy_time}`);
+           
+           if (buyTime < currentData.first_buy_time) {
+             currentData.first_buy_time = buyTime;
+             console.log(`🔍 Updated: ${owner}, new first_buy_time: ${buyTime}`);
+           }
+         }
+       });
 
       console.log(`✅ Query B: Processed ${dexTrades.length} trades for chunk`);
     }
 
-    // Filter out holders with invalid first_buy_time (future dates = no trades found)
+    // Fallback system: Use token launch time for holders without trade data
     const currentDate = new Date();
-    const validHolders = Array.from(holdersMap.entries()).filter(([address, data]) => {
-      const firstBuyTime = new Date(data.first_buy_time);
-      return firstBuyTime <= currentDate; // Only include holders with real buy times
+    console.log(`🔍 Current time: ${currentDate.toISOString()}`);
+    
+    let fallbackCount = 0;
+    const validHolders = Array.from(holdersMap.entries()).map(([address, data]) => {
+      // If no trade data found (future time), use token launch time as fallback
+      if (data.first_buy_time === futureTime) {
+        console.log(`🔄 Using fallback: ${address} -> token launch time (${tokenLaunchTime})`);
+        data.first_buy_time = tokenLaunchTime || futureTime;
+        fallbackCount++;
+      }
+      return [address, data] as [string, typeof data];
     });
 
-    console.log(`🔍 Filtered out ${holdersMap.size - validHolders.length} holders with invalid buy times`);
+    console.log(`✅ Applied fallback for ${fallbackCount} holders without trade data`);
 
     // Calculate weightage for each holder BEFORE saving to JSON
     console.log(`🔍 Token launch time: ${tokenLaunchTime}`);

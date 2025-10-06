@@ -1,6 +1,8 @@
 import { Connection, PublicKey, Keypair, Transaction, SystemProgram, LAMPORTS_PER_SOL } from '@solana/web3.js';
 import { getConnection, getCreatorWalletAddress } from './solana';
 import { saveDistributionRecord, DistributionTransaction } from './database';
+import { getCachedData } from './cache';
+import { saveCacheToFile } from './cache-persistence';
 import bs58 from 'bs58';
 import fs from 'fs';
 import path from 'path';
@@ -343,11 +345,20 @@ export class DistributionService {
           const balanceLamports = await connection.getBalance(creatorAddress);
           const balanceSOL = balanceLamports / LAMPORTS_PER_SOL;
           
-          // Update cache with new balance
-          const cache = getCachedData();
+          // Update cache with new balance using direct file operations
+          const cacheFilePath = path.join(process.cwd(), '.cache.json');
+          let cache = { treasuryBalance: 0, activeHolders: 0, lastUpdated: 0, isUpdating: false, lastDistributionTime: 0 };
+          
+          try {
+            const cacheData = fs.readFileSync(cacheFilePath, 'utf8');
+            cache = JSON.parse(cacheData);
+          } catch (error) {
+            console.log('No existing cache file, using defaults');
+          }
+          
           cache.treasuryBalance = balanceSOL;
           cache.lastUpdated = Date.now();
-          await saveCacheToFile(cache);
+          fs.writeFileSync(cacheFilePath, JSON.stringify(cache, null, 2));
           
           console.log(`✅ Treasury balance refreshed: ${balanceSOL.toFixed(4)} SOL`);
         } catch (refreshError) {

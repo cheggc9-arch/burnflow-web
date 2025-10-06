@@ -14,6 +14,8 @@ if (fs.existsSync('.env')) {
   console.log('   - NEXT_PUBLIC_SOLANA_NETWORK: mainnet or devnet');
   console.log('   - NEXT_PUBLIC_SUPABASE_URL: Your Supabase project URL');
   console.log('   - NEXT_PUBLIC_SUPABASE_ANON_KEY: Your Supabase anonymous key');
+  console.log('   - ENABLE_AUTOMATIC_DISTRIBUTION: true/false (default: false for testing)');
+  console.log('   - DISTRIBUTION_INTERVAL_MINUTES: Timer interval in minutes (default: 20)');
   return;
 }
 
@@ -28,6 +30,8 @@ if (fs.existsSync('env.example')) {
     console.log('   - NEXT_PUBLIC_SOLANA_RPC_URL (if different)');
     console.log('   - NEXT_PUBLIC_SUPABASE_URL');
     console.log('   - NEXT_PUBLIC_SUPABASE_ANON_KEY');
+    console.log('   - ENABLE_AUTOMATIC_DISTRIBUTION (set to true for production)');
+    console.log('   - DISTRIBUTION_INTERVAL_MINUTES (set timer interval)');
   } catch (error) {
     console.error('❌ Error creating .env file:', error.message);
   }

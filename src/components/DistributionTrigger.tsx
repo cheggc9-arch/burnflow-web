@@ -33,6 +33,13 @@ export default function DistributionTrigger() {
 
       const data = await response.json();
       setResult(data);
+      
+      // Dispatch custom event to notify other components
+      if (data.success) {
+        window.dispatchEvent(new CustomEvent('distributionCompleted', { 
+          detail: { success: true, data: data.data } 
+        }));
+      }
     } catch (error) {
       setResult({
         success: false,

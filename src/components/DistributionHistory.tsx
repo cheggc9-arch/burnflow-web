@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ChevronDown, ChevronUp, ExternalLink, Clock, Users, Coins, CheckCircle, XCircle, AlertCircle } from 'lucide-react';
+import { ChevronDown, ChevronUp, ExternalLink, Users, Coins, CheckCircle, XCircle, AlertCircle } from 'lucide-react';
 
 interface DistributionTransaction {
   recipient: string;
@@ -28,30 +28,41 @@ export default function DistributionHistory() {
   const [error, setError] = useState<string | null>(null);
   const [expandedDistributions, setExpandedDistributions] = useState<Set<number>>(new Set());
 
-  useEffect(() => {
-    const fetchHistory = async () => {
-      try {
-        const response = await fetch('/api/distribution-history?limit=10');
-        const result = await response.json();
-        
-        if (result.success) {
-          setDistributions(result.data.distributions);
-        } else {
-          setError(result.error || 'Failed to fetch distribution history');
-        }
-      } catch (err) {
-        setError('Network error');
-        console.error('Error fetching distribution history:', err);
-      } finally {
-        setLoading(false);
+  const fetchHistory = async () => {
+    try {
+      const response = await fetch('/api/distribution-history?limit=10');
+      const result = await response.json();
+      
+      if (result.success) {
+        setDistributions(result.data.distributions);
+      } else {
+        setError(result.error || 'Failed to fetch distribution history');
       }
+    } catch (err) {
+      setError('Network error');
+      console.error('Error fetching distribution history:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchHistory();
+  }, []);
+
+  // Listen for distribution completion events
+  useEffect(() => {
+    const handleDistributionComplete = () => {
+      console.log('🔄 Distribution completed, refreshing history...');
+      fetchHistory();
     };
 
-    fetchHistory();
+    // Listen for custom events from distribution trigger
+    window.addEventListener('distributionCompleted', handleDistributionComplete);
     
-    // Refresh every 30 seconds to catch new distributions
-    const interval = setInterval(fetchHistory, 30 * 1000);
-    return () => clearInterval(interval);
+    return () => {
+      window.removeEventListener('distributionCompleted', handleDistributionComplete);
+    };
   }, []);
 
   const toggleExpanded = (distributionId: number) => {
@@ -126,7 +137,6 @@ export default function DistributionHistory() {
       <div className="pump-card rounded-xl p-6">
         <h3 className="text-xl font-bold pump-gradient-text mb-4">Distribution History</h3>
         <div className="text-center py-8 text-gray-400">
-          <Clock className="w-12 h-12 mx-auto mb-4 text-gray-500" />
           <p>No distributions yet</p>
           <p className="text-sm text-gray-500 mt-2">Distributions will appear here once they start</p>
         </div>
@@ -137,8 +147,10 @@ export default function DistributionHistory() {
   return (
     <div className="pump-card rounded-xl p-6">
       <div className="mb-6">
-        <h3 className="text-xl font-bold pump-gradient-text">Distribution History</h3>
-        <p className="text-gray-400 text-sm mt-2">Complete transaction history with blockchain verification</p>
+        <div>
+          <h3 className="text-xl font-bold pump-gradient-text">Distribution History</h3>
+          <p className="text-gray-400 text-sm mt-2">Complete transaction history with blockchain verification</p>
+        </div>
       </div>
       
       <div className="space-y-4 max-h-96 overflow-y-auto pr-2">

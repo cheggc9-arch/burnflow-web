@@ -1,1 +1,27 @@
-{}
+{
+  "B7eRAwdDCFLhnqBHVEH85FrAo7FZeYVT7owQ1hfuEZWD": {
+    "tokens": 4232741.610681,
+    "first_buy_time": "2025-10-05T21:11:34Z",
+    "weightage": 5.758729744293652
+  },
+  "7cjxi3ZA9SZW77M6LRFQBNdDyf16WJojY9n8kfsPHi7j": {
+    "tokens": 4055015.503832,
+    "first_buy_time": "2025-10-05T21:11:34Z",
+    "weightage": 5.692776642479305
+  },
+  "9bdaUcMeC9f83LLyvnPPPWs8MvLLFQiqEARX4LNF3Ar1": {
+    "tokens": 4014007.100198,
+    "first_buy_time": "2025-10-05T21:11:34Z",
+    "weightage": 5.677148401539311
+  },
+  "HkrjusRG294vRH8gN5avGS2w1dgxquzjfTsfrFbcAVfC": {
+    "tokens": 3865433.188911,
+    "first_buy_time": "2025-10-05T21:11:34Z",
+    "weightage": 5.61915840355707
+  },
+  "9cs4ppiFxZjFjJCWV7KB9v4mmvuFpyrarwMQiKrkRHku": {
+    "tokens": 3712479.346612,
+    "first_buy_time": "2025-10-05T21:11:34Z",
+    "weightage": 5.557082332996596
+  }
+}

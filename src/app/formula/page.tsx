@@ -66,16 +66,11 @@ export default function FormulaPage() {
                       <div className="w-8 h-8 bg-pink-300 text-black rounded-full flex items-center justify-center font-bold text-sm mr-3">1</div>
                       <h4 className="text-xl font-bold text-pink-300">TOKEN BALANCE WEIGHT</h4>
                     </div>
-                    <p className="text-gray-300 mb-4">We reward bigger holders, but with diminishing returns so whales don't overwhelm the system:</p>
+                    <p className="text-gray-300 mb-4">We reward bigger holders, but with diminishing returns:</p>
                     <div className="bg-black/50 p-4 rounded border border-green-500/30 mb-4 overflow-x-auto">
-                      <code className="text-green-400 text-sm whitespace-nowrap">token_balance_weight = 1 + log10(token_balance / 1,000,000)</code>
+                      <code className="text-green-400 text-sm whitespace-nowrap">token_balance_weight = 1 + log10(token_balance / {process.env.NEXT_PUBLIC_MIN_HOLDER_BALANCE || "1000000"})</code>
                     </div>
-                    <div className="space-y-2 text-sm text-gray-300">
-                      <div>• 1M tokens = 1.0</div>
-                      <div>• 10M tokens ≈ 2.0</div>
-                      <div>• 100M tokens ≈ 3.0</div>
-                    </div>
-                    <p className="text-yellow-400 text-sm mt-4">👉 You get more weight for more tokens, but each step up gives less of an advantage.</p>
+                    <p className="text-yellow-400 text-sm mt-4">👉 Each step up gives less of an advantage so whales don't dominate.</p>
                   </div>
 
                   {/* Earlyness Bonus */}
@@ -87,11 +82,6 @@ export default function FormulaPage() {
                     <p className="text-gray-300 mb-4">The closer you buy to launch, the stronger your multiplier:</p>
                     <div className="bg-black/50 p-4 rounded border border-cyan-500/30 mb-4 overflow-x-auto">
                       <code className="text-cyan-400 text-sm whitespace-nowrap">early_bonus = 1 + 2 × exp(-days_since_launch / 2)</code>
-                    </div>
-                    <div className="space-y-2 text-sm text-gray-300">
-                      <div>• At launch: ~3.0× boost</div>
-                      <div>• 2 days late: ~1.7× boost</div>
-                      <div>• 1 week late: ~1.1× boost</div>
                     </div>
                     <p className="text-yellow-400 text-sm mt-4">👉 Early buyers lock in a powerful head start.</p>
                   </div>
@@ -105,11 +95,6 @@ export default function FormulaPage() {
                     <p className="text-gray-300 mb-4">The longer you hold, the more your weight grows:</p>
                     <div className="bg-black/50 p-4 rounded border border-purple-500/30 mb-4 overflow-x-auto">
                       <code className="text-purple-400 text-sm whitespace-nowrap">tenure_bonus = 1 + 0.6 × log2(days_held + 1)</code>
-                    </div>
-                    <div className="space-y-2 text-sm text-gray-300">
-                      <div>• 1 day: 1.6×</div>
-                      <div>• 30 days: ~4.0×</div>
-                      <div>• 90 days: ~5.0×</div>
                     </div>
                     <p className="text-yellow-400 text-sm mt-4">👉 Hold longer = steadily grow your multiplier.</p>
                   </div>

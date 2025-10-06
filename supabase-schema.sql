@@ -23,23 +23,4 @@ ALTER TABLE distributions ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Allow all operations on distributions" ON distributions
   FOR ALL USING (true) WITH CHECK (true);
 
--- Insert a sample record to test the table structure
-INSERT INTO distributions (
-  timestamp,
-  total_distributed,
-  recipients_count,
-  transactions_count,
-  failed_transactions,
-  transactions,
-  treasury_balance,
-  status
-) VALUES (
-  NOW(),
-  0.0,
-  0,
-  0,
-  0,
-  '[]',
-  0.0,
-  'threshold_not_met'
-) ON CONFLICT DO NOTHING;
+-- Note: No sample record inserted to avoid sequence conflicts

@@ -13,13 +13,14 @@ interface CalculationResult {
 
 export default function FormulaCalculator() {
   const [totalFees, setTotalFees] = useState(1);
-  const [userBalance, setUserBalance] = useState(1000000);
+  const [userBalance, setUserBalance] = useState(parseInt(process.env.NEXT_PUBLIC_MIN_HOLDER_BALANCE || "1000000"));
   const [holdDuration, setHoldDuration] = useState(72);
   const [result, setResult] = useState<CalculationResult | null>(null);
 
   useEffect(() => {
+    const minBalance = parseInt(process.env.NEXT_PUBLIC_MIN_HOLDER_BALANCE || "1000000");
     const timeWeight = holdDuration < 24 ? 3 : holdDuration < 168 ? 1.5 : 1;
-    const balanceWeight = Math.log10(userBalance / 1000000 + 1);
+    const balanceWeight = Math.log10(userBalance / minBalance + 1);
     const totalWeight = timeWeight * balanceWeight;
     const estimatedReward = (totalWeight / 100) * totalFees;
     const sharePercentage = (totalWeight / 100) * 100;
@@ -65,7 +66,7 @@ export default function FormulaCalculator() {
               <h4 className="font-semibold text-white">Balance Weight</h4>
               <p className="text-sm text-gray-400">
                 Logarithmic scaling<br/>
-                <span className="text-xs">log₁₀(balance/1000000 + 1)</span>
+                <span className="text-xs">log₁₀(balance/{parseInt(process.env.NEXT_PUBLIC_MIN_HOLDER_BALANCE || "1000000")} + 1)</span>
               </p>
             </div>
             <div className="text-center p-4 bg-gray-800/30 rounded-lg">
@@ -114,7 +115,7 @@ export default function FormulaCalculator() {
               <div className="relative">
                 <input
                   type="range"
-                  min="1000000"
+                  min={parseInt(process.env.NEXT_PUBLIC_MIN_HOLDER_BALANCE || "1000000")}
                   max="10000000"
                   step="1000"
                   value={userBalance}
