@@ -13,8 +13,43 @@ export async function GET(request: NextRequest) {
     // Check if automatic distribution is enabled
     const isAutomaticMode = process.env.ENABLE_AUTOMATIC_DISTRIBUTION === 'true';
     
-    // Get the last distribution time from cache or use current time as fallback
-    const lastDistributionTime = cache.lastDistributionTime || Date.now();
+    // Get the actual last distribution time from database
+    let actualLastDistributionTime;
+    try {
+      const { getRecentDistributions } = await import('@/utils/database');
+      const recentDistributions = await getRecentDistributions(1);
+      actualLastDistributionTime = recentDistributions.length > 0 
+        ? new Date(recentDistributions[0].timestamp).getTime() 
+        : Date.now();
+    } catch (error) {
+      console.error('Error fetching last distribution from database:', error);
+      // Fallback to cache if database fails
+      actualLastDistributionTime = cache.lastDistributionTime || Date.now();
+    }
+    
+    // Check if this is a fresh deployment (no lastDistributionTime in cache)
+    // OR if we should force reset and haven't reset yet in this session
+    const forceReset = process.env.RESET_TIMER_ON_DEPLOY === 'true';
+    const hasResetThisSession = (global as any).__timerResetThisSession;
+    const isFreshDeployment = !cache.lastDistributionTime || (forceReset && !hasResetThisSession);
+    
+    // TIMER BEHAVIOR:
+    // - Fresh deployment: Start timer from current time (full interval)
+    // - Existing deployment: Use actual last distribution time from database
+    const lastDistributionTime = isFreshDeployment ? Date.now() : actualLastDistributionTime;
+    
+    // If this is a fresh deployment, update the cache with the new start time
+    if (isFreshDeployment) {
+      console.log('🔄 FRESH DEPLOYMENT: Starting timer from current time');
+      console.log(`   Reason: ${!cache.lastDistributionTime ? 'No lastDistributionTime' : 'RESET_TIMER_ON_DEPLOY=true'}`);
+      const { updateLastDistributionTime } = await import('@/utils/cache');
+      updateLastDistributionTime();
+      
+      // Mark that we've reset this session to prevent repeated resets
+      if (forceReset) {
+        (global as any).__timerResetThisSession = true;
+      }
+    }
     
     // Calculate next distribution time
     const nextDistributionTime = lastDistributionTime + DISTRIBUTION_INTERVAL;
@@ -43,12 +78,8 @@ export async function GET(request: NextRequest) {
           
           if (result.success) {
             console.log('✅ Automatic distribution completed successfully');
-            // Dispatch event for frontend updates
-            if (typeof window !== 'undefined') {
-              window.dispatchEvent(new CustomEvent('distributionCompleted', { 
-                detail: { success: true, data: result } 
-              }));
-            }
+            // Note: Frontend will auto-refresh via the 10-second interval
+            // No need to dispatch window events from server-side
           } else {
             console.error('❌ Automatic distribution failed:', result.errors);
           }
@@ -85,6 +116,7 @@ export async function GET(request: NextRequest) {
         isAutomaticMode,
         intervalMinutes,
         lastUpdated: cache.lastUpdated,
+        distributionJustTriggered: shouldTriggerDistribution, // Flag to indicate distribution was just triggered
       },
     });
   } catch (error) {

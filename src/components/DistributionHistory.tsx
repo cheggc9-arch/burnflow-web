@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { ChevronDown, ChevronUp, ExternalLink, Users, Coins, CheckCircle, XCircle, AlertCircle } from 'lucide-react';
+import { formatUTCTime } from '@/utils/timezone';
 
 interface DistributionTransaction {
   recipient: string;
@@ -30,7 +31,7 @@ export default function DistributionHistory() {
 
   const fetchHistory = async () => {
     try {
-      const response = await fetch('/api/distribution-history?limit=10');
+      const response = await fetch('/api/distribution-history?all=true');
       const result = await response.json();
       
       if (result.success) {
@@ -52,7 +53,7 @@ export default function DistributionHistory() {
 
   // Listen for distribution completion events
   useEffect(() => {
-    const handleDistributionComplete = () => {
+    const handleDistributionComplete = (event: any) => {
       console.log('🔄 Distribution completed, refreshing history...');
       fetchHistory();
     };
@@ -64,6 +65,7 @@ export default function DistributionHistory() {
       window.removeEventListener('distributionCompleted', handleDistributionComplete);
     };
   }, []);
+
 
   const toggleExpanded = (distributionId: number) => {
     const newExpanded = new Set(expandedDistributions);
@@ -106,8 +108,7 @@ export default function DistributionHistory() {
   };
 
   const formatTime = (timestamp: string) => {
-    const date = new Date(timestamp);
-    return date.toLocaleString();
+    return formatUTCTime(timestamp);
   };
 
   const openSolscan = (signature: string) => {
@@ -149,7 +150,9 @@ export default function DistributionHistory() {
       <div className="mb-6">
         <div>
           <h3 className="text-xl font-bold pump-gradient-text">Distribution History</h3>
-          <p className="text-gray-400 text-sm mt-2">Complete transaction history with blockchain verification</p>
+          <p className="text-gray-400 text-sm mt-2">
+            Complete transaction history with blockchain verification ({distributions.length} distributions)
+          </p>
         </div>
       </div>
       
@@ -252,6 +255,15 @@ export default function DistributionHistory() {
           </div>
         ))}
       </div>
+
+      {/* Scroll Indicator */}
+      {distributions.length > 8 && (
+        <div className="mt-4 text-center">
+          <div className="text-xs text-gray-500 bg-gray-800/30 px-3 py-1 rounded-full inline-block">
+            Scroll to see all {distributions.length} distributions
+          </div>
+        </div>
+      )}
 
       {/* Footer Message */}
       <div className="mt-6 pt-4 border-t border-gray-700">

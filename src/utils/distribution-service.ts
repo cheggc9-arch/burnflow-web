@@ -376,6 +376,8 @@ export class DistributionService {
       result.errors.push(errorMsg);
     }
 
+    // Note: Event dispatch is handled by the timer component when it detects distribution completion
+
     return result;
   }
 

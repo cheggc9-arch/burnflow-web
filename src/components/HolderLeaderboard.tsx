@@ -189,7 +189,7 @@ export default function HolderLeaderboard() {
   }
 
   return (
-    <div id="leaderboard" className="pump-card rounded-xl p-6 scroll-mt-32">
+    <div id="leaderboard" className="pump-card rounded-xl p-6">
       <div className="mb-6">
         <div className="flex justify-between items-center mb-4">
           <h3 className="text-xl font-bold pump-gradient-text">Holders Leaderboard</h3>

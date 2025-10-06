@@ -9,21 +9,32 @@ export default function Header() {
 
   const handleSectionClick = (sectionId: string) => {
     if (pathname === '/') {
-      // If already on home page, just scroll
+      // If already on home page, use smaller offset (going too far down)
       const element = document.getElementById(sectionId);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        const scrollOffset = 200; // Offset to scroll up more
+        const elementPosition = element.offsetTop - scrollOffset;
+        window.scrollTo({
+          top: elementPosition,
+          behavior: 'smooth'
+        });
       }
     } else {
-      // If on another page, navigate to home first, then scroll
-      router.push('/');
+      // If on another page, use different offsets for different sections
+      router.push(`/#${sectionId}`);
       // Wait for navigation to complete, then scroll
       setTimeout(() => {
         const element = document.getElementById(sectionId);
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
+          // Different offsets for different sections
+          const scrollOffset = sectionId === 'how-it-works' ? 1500 : 300;
+          const elementPosition = element.offsetTop + scrollOffset;
+          window.scrollTo({
+            top: elementPosition,
+            behavior: 'smooth'
+          });
         }
-      }, 500);
+      }, 800);
     }
   };
 
@@ -31,12 +42,18 @@ export default function Header() {
   useEffect(() => {
     if (pathname === '/' && window.location.hash) {
       const hash = window.location.hash.substring(1);
+      // Wait for page to fully load and render
       setTimeout(() => {
         const element = document.getElementById(hash);
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
+          const headerHeight = 80; // Medium offset for hash scrolling
+          const elementPosition = element.offsetTop - headerHeight;
+          window.scrollTo({
+            top: elementPosition,
+            behavior: 'smooth'
+          });
         }
-      }, 100);
+      }, 300);
     }
   }, [pathname]);
   return (
@@ -48,13 +65,13 @@ export default function Header() {
               <img src="/logo.svg" alt="RewardFlow Logo" className="w-16 h-16" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold pump-gradient-text font-mono tracking-wider">REWARDFLOW</h1>
-              <p className="text-xs text-green-400 font-mono tracking-widest">[ REWARD ]</p>
+              <h1 className="text-2xl font-bold text-gray-300 font-mono tracking-wider">REWARDFLOW</h1>
+              <p className="text-xs text-green-400 font-mono tracking-widest">[AUTOMATED OPEN SOURCE DISTRIBUTION]</p>
             </div>
           </a>
           <div className="flex items-center space-x-6">
             <button
-              className="bg-green-400 text-black px-4 py-2 rounded font-mono text-sm font-semibold hover:bg-yellow-400 transition-colors tracking-wider"
+              className="bg-green-400 text-black px-4 py-2 rounded font-mono text-sm font-semibold hover:bg-yellow-400 transition-colors tracking-wider cursor-pointer"
               onClick={() => handleSectionClick('how-it-works')}
             >
               HOW IT WORKS
@@ -72,7 +89,7 @@ export default function Header() {
               ROADMAP
             </a>
             <button
-              className="bg-green-400 text-black px-4 py-2 rounded font-mono text-sm font-semibold hover:bg-yellow-400 transition-colors tracking-wider"
+              className="bg-green-400 text-black px-4 py-2 rounded font-mono text-sm font-semibold hover:bg-yellow-400 transition-colors tracking-wider cursor-pointer"
               onClick={() => handleSectionClick('leaderboard')}
             >
               LEADERBOARD

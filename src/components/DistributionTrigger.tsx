@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { formatUTCTime } from '@/utils/timezone';
 
 interface DistributionResult {
   success: boolean;
@@ -78,7 +79,7 @@ export default function DistributionTrigger() {
                 {result.success ? '✅ Success' : '❌ Failed'}
               </span>
               <span className="text-gray-400 text-sm ml-auto">
-                {new Date(result.timestamp).toLocaleTimeString()}
+                {formatUTCTime(result.timestamp)}
               </span>
             </div>
             
