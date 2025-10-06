@@ -92,7 +92,8 @@ export class DistributionService {
       }));
 
     if (validHolders.length === 0) {
-      throw new Error('No valid holders found for distribution');
+      console.log('⚠️ No valid holders found, but continuing with empty distribution');
+      return [];
     }
 
     // Calculate total weightage
@@ -370,28 +371,23 @@ export class DistributionService {
   // Method to check if distribution should run
   async shouldRunDistribution(): Promise<boolean> {
     try {
-      // Check if we have valid holders data
+      // Always allow distribution to maintain history continuity
       const holdersData = this.loadHoldersData();
       const validHolders = Object.values(holdersData).filter(data => data.weightage > 0);
       
-      if (validHolders.length === 0) {
-        console.log('⚠️ No valid holders found, skipping distribution');
-        return false;
-      }
-
       // Check treasury balance
       const creatorAddress = getCreatorWalletAddress();
       const balanceLamports = await this.connection.getBalance(creatorAddress);
       const balanceSOL = balanceLamports / LAMPORTS_PER_SOL;
 
-      // No minimum threshold - always allow distribution to maintain history continuity
       console.log(`💰 Treasury balance: ${balanceSOL.toFixed(4)} SOL`);
+      console.log(`📋 Valid holders: ${validHolders.length}`);
+      console.log(`✅ Distribution will proceed regardless of conditions`);
 
-      console.log(`✅ Distribution conditions met: ${validHolders.length} holders, ${balanceSOL.toFixed(4)} SOL`);
-      return true;
+      return true; // Always return true to allow distribution
     } catch (error) {
       console.error(`❌ Error checking distribution conditions: ${error}`);
-      return false;
+      return true; // Even on error, allow distribution to maintain history
     }
   }
 }
