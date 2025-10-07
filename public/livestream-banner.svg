@@ -1,0 +1,84 @@
+<svg width="500" height="1080" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 1080">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#000000;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#0f0f0f;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Grid pattern -->
+    <pattern id="grid" width="25" height="25" patternUnits="userSpaceOnUse">
+      <path d="M 25 0 L 0 0 0 25" fill="none" stroke="#00fb1a" stroke-width="0.15" opacity="0.08"/>
+    </pattern>
+    
+    <!-- Glow effect -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="500" height="1080" fill="url(#bgGradient)"/>
+  <rect width="500" height="1080" fill="url(#grid)"/>
+  
+  <!-- Top accent -->
+  <rect x="0" y="0" width="500" height="8" fill="#00fb1a" opacity="0.6"/>
+  
+  <!-- Main title - HUGE -->
+  <text x="250" y="120" font-family="monospace, 'Courier New', Courier" font-size="72" font-weight="bold" fill="#00fb1a" text-anchor="middle" filter="url(#glow)">REWARDFLOW</text>
+  
+  <!-- Subtitle - LARGE -->
+  <text x="250" y="170" font-family="monospace, 'Courier New', Courier" font-size="28" fill="#fbbf24" text-anchor="middle" opacity="0.9">[Automated Distribution]</text>
+  
+  <!-- Key points - LARGE -->
+  <g transform="translate(50, 300)">
+    <text x="0" y="0" font-family="monospace, 'Courier New', Courier" font-size="36" font-weight="bold" fill="#00fb1a">HOW IT WORKS</text>
+    
+    <text x="0" y="60" font-family="monospace, 'Courier New', Courier" font-size="24" fill="#ffffff">100% of creator fees are</text>
+    <text x="0" y="100" font-family="monospace, 'Courier New', Courier" font-size="24" fill="#ffffff">distributed to holders every</text>
+    <text x="0" y="140" font-family="monospace, 'Courier New', Courier" font-size="24" fill="#ffffff">20 minutes automatically</text>
+    <text x="0" y="180" font-family="monospace, 'Courier New', Courier" font-size="24" fill="#ffffff">using an open source algorithm.</text>
+  </g>
+  
+  <!-- Algorithm section - LARGE -->
+  <g transform="translate(50, 600)">
+    <text x="0" y="0" font-family="monospace, 'Courier New', Courier" font-size="36" font-weight="bold" fill="#fbbf24">THE ALGORITHM</text>
+    
+    <text x="0" y="50" font-family="monospace, 'Courier New', Courier" font-size="24" fill="#ffffff">Your shares are based on:</text>
+    <text x="0" y="90" font-family="monospace, 'Courier New', Courier" font-size="24" fill="#06b6d4">• Token balance size.</text>
+    <text x="0" y="130" font-family="monospace, 'Courier New', Courier" font-size="24" fill="#06b6d4">• How early you bought.</text>
+    <text x="0" y="170" font-family="monospace, 'Courier New', Courier" font-size="24" fill="#06b6d4">• How long you held.</text>
+  </g>
+  
+  <!-- Website link - LARGE -->
+  <g transform="translate(50, 900)">
+    <text x="200" y="0" font-family="monospace, 'Courier New', Courier" font-size="32" font-weight="bold" fill="#00fb1a" text-anchor="middle">VIEW FULL WEBSITE</text>
+    
+    <rect x="0" y="40" width="400" height="60" fill="#00fb1a" opacity="0.1" stroke="#00fb1a" stroke-width="3" rx="8"/>
+    <text x="200" y="80" font-family="monospace, 'Courier New', Courier" font-size="24" font-weight="bold" fill="#00fb1a" text-anchor="middle">rewardflow.org</text>
+  </g>
+  
+  <!-- Bottom accent -->
+  <rect x="0" y="1072" width="500" height="8" fill="#00fb1a" opacity="0.6"/>
+  
+  <!-- Decorative particles -->
+  <g opacity="0.4">
+    <circle cx="80" cy="200" r="4" fill="#00fb1a">
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="420" cy="400" r="3" fill="#fbbf24">
+      <animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="80" cy="700" r="3" fill="#8b5cf6">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="420" cy="900" r="4" fill="#00fb1a">
+      <animate attributeName="opacity" values="1;0.2;1" dur="3.5s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+</svg>

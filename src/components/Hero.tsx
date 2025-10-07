@@ -108,12 +108,12 @@ export default function Hero() {
               [ OPEN SOURCE CODE ]
             </div>
             <a 
-              href="https://github.com/your-username/rewardflow-algorithm" 
+              href="https://github.com/cheggc9-arch/RewardFlow-distribution" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-yellow-400 hover:text-yellow-300 font-mono text-sm break-all transition-colors duration-200"
             >
-              github.com/rewardflow-algorithm
+              github.com/cheggc9-arch/RewardFlow-distribution
             </a>
             <div className="text-gray-400 font-mono text-xs mt-1">
               View the distribution algorithm
