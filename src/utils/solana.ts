@@ -8,7 +8,7 @@ const RPC_URL = process.env.NEXT_PUBLIC_SOLANA_RPC_URL || 'https://api.mainnet-b
 export const connection = new Connection(RPC_URL, {
   commitment: 'confirmed',
   confirmTransactionInitialTimeout: 60000,
-  disableRetryOnRateLimit: false,
+  disableRetryOnRateLimit: true, // Disable retries to prevent RPC stress
 });
 
 // Get the appropriate connection based on environment
