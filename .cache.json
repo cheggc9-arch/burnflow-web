@@ -1,7 +1,7 @@
 {
-  "treasuryBalance": 0.001093351,
+  "treasuryBalance": 0,
   "activeHolders": 7,
-  "lastUpdated": 1759806317722,
+  "lastUpdated": 1759875672722,
   "isUpdating": false,
-  "lastDistributionTime": 1759806317722
+  "lastDistributionTime": 1759875527514
 }

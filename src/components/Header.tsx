@@ -62,7 +62,7 @@ export default function Header() {
         <div className="flex justify-between items-center">
           <a href="/" className="flex items-center space-x-4 hover:opacity-80 transition-opacity">
             <div className="relative">
-              <img src="/logo.svg" alt="RewardFlow Logo" className="w-16 h-16" />
+              <img src="/ProfilePicMain.png" alt="RewardFlow Logo" className="w-16 h-16" />
             </div>
             <div>
               <h1 className="text-2xl font-bold text-gray-300 font-mono tracking-wider">REWARDFLOW</h1>

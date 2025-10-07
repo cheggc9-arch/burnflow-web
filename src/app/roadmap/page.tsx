@@ -179,7 +179,7 @@ export default function Roadmap() {
                   <span>Follow on X</span>
                 </a>
                 <a
-                  href="https://github.com/your-username/rewardflow-algorithm"
+                  href="https://github.com/cheggc9-arch/RewardFlow-distribution"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center space-x-2 text-green-400 hover:text-yellow-400 transition-colors font-mono text-sm"
