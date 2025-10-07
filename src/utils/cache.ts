@@ -2,15 +2,31 @@ import { Connection, PublicKey, LAMPORTS_PER_SOL } from '@solana/web3.js';
 import { getMint, TOKEN_PROGRAM_ID } from '@solana/spl-token';
 import { getConnection, getCreatorWalletAddress, getTokenContractAddress } from './solana';
 import { loadCacheFromFile, saveCacheToFile, CacheData } from './cache-persistence';
+import { supabase } from '../lib/supabase';
 
 // Global variable to store token launch time (set once at startup)
 let tokenLaunchTime: string | null = null;
 
 // Function to get token launch time (run once at startup)
-async function getTokenLaunchTime(tokenAddress: string): Promise<string> {
+export async function getTokenLaunchTime(tokenAddress: string): Promise<string> {
   try {
-    console.log('🔄 Fetching: Token launch time from Bitquery API');
+    console.log('🔄 Checking for existing token launch time in database');
     
+    // First, check if launch time exists in Supabase
+    const { data: existingData, error: fetchError } = await supabase
+      .from('token_metadata')
+      .select('launch_time')
+      .eq('token_address', tokenAddress)
+      .single();
+
+    if (!fetchError && existingData?.launch_time) {
+      console.log(`✅ Using existing token launch time from database: ${existingData.launch_time}`);
+      return existingData.launch_time;
+    }
+
+    console.log('🔄 No existing launch time found, fetching from Bitquery API');
+    
+    // If not found in database, fetch from Bitquery API
     const launchQuery = `
       query {
         Solana(dataset: realtime, network: solana) {
@@ -58,25 +74,26 @@ async function getTokenLaunchTime(tokenAddress: string): Promise<string> {
     const launchTime = data.data?.Solana?.DEXTrades?.[0]?.Block?.Time;
     
     if (!launchTime) {
-      throw new Error('No launch time found');
+      throw new Error('No launch time found in Bitquery API');
     }
 
-    console.log(`✅ Token launch time: ${launchTime}`);
+    console.log(`✅ Token launch time fetched from API: ${launchTime}`);
     
-    // Save launch time to JSON file
-    try {
-      const fs = require('fs');
-      const path = require('path');
-      const filePath = path.join(process.cwd(), 'token-launch-time.json');
-      const launchData = {
-        launchTime: launchTime,
-        tokenAddress: tokenAddress,
-        fetchedAt: new Date().toISOString()
-      };
-      fs.writeFileSync(filePath, JSON.stringify(launchData, null, 2));
-      console.log(`📄 Launch time saved to token-launch-time.json`);
-    } catch (error) {
-      console.warn('Failed to save launch time to JSON file:', error);
+    // Save launch time to Supabase database
+    const { error: insertError } = await supabase
+      .from('token_metadata')
+      .upsert({
+        token_address: tokenAddress,
+        launch_time: launchTime
+      }, {
+        onConflict: 'token_address'
+      });
+
+    if (insertError) {
+      console.error('Failed to save launch time to database:', insertError);
+      // Continue anyway - we have the launch time
+    } else {
+      console.log(`📄 Launch time saved to database for token: ${tokenAddress}`);
     }
     
     return launchTime;
