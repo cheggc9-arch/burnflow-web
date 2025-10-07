@@ -151,20 +151,30 @@ export class DistributionService {
   }
 
   private async sendTransaction(transaction: Transaction): Promise<string> {
-    // Sign the transaction
-    transaction.sign(this.creatorKeypair);
+    try {
+      // Sign the transaction
+      transaction.sign(this.creatorKeypair);
 
-    // Send the transaction
-    const signature = await this.connection.sendRawTransaction(transaction.serialize());
-    
-    // Confirm the transaction
-    const confirmation = await this.connection.confirmTransaction(signature, 'confirmed');
-    
-    if (confirmation.value.err) {
-      throw new Error(`Transaction failed: ${confirmation.value.err}`);
+      // Send the transaction
+      const signature = await this.connection.sendRawTransaction(transaction.serialize());
+      
+      // Confirm the transaction
+      const confirmation = await this.connection.confirmTransaction(signature, 'confirmed');
+      
+      if (confirmation.value.err) {
+        const errorDetails = JSON.stringify(confirmation.value.err);
+        throw new Error(`Transaction failed: ${errorDetails}`);
+      }
+
+      return signature;
+    } catch (error) {
+      // Provide more detailed error information
+      if (error instanceof Error) {
+        throw new Error(`Transaction error: ${error.message}`);
+      } else {
+        throw new Error(`Transaction error: ${String(error)}`);
+      }
     }
-
-    return signature;
   }
 
   async distributeRewards(): Promise<DistributionResult> {
@@ -257,6 +267,7 @@ export class DistributionService {
         // Process batch in parallel
         const batchPromises = batch.map(async (item) => {
           try {
+            console.log(`  🔄 Processing ${item.address}: ${(item.amount / LAMPORTS_PER_SOL).toFixed(6)} SOL`);
             const transaction = await this.createTransferTransaction(item.address, item.amount);
             const signature = await this.sendTransaction(transaction);
             
@@ -272,8 +283,10 @@ export class DistributionService {
               weightage: item.weightage
             };
           } catch (error) {
-            const errorMsg = `Failed to send to ${item.address}: ${error}`;
+            const errorMessage = error instanceof Error ? error.message : String(error);
+            const errorMsg = `Failed to send to ${item.address}: ${errorMessage}`;
             console.error(`  ❌ ${errorMsg}`);
+            console.error(`  📊 Transaction details: Amount: ${(item.amount / LAMPORTS_PER_SOL).toFixed(6)} SOL, Weightage: ${item.weightage}`);
             
             return {
               recipient: item.address,
@@ -309,7 +322,8 @@ export class DistributionService {
           recipient: tx.recipient,
           amount: tx.amount,
           signature: tx.signature || '',
-          weightage: tx.weightage
+          weightage: tx.weightage,
+          error: tx.error || undefined
         }));
 
         const failedCount = result.transactions.filter(t => t.error).length;

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ChevronDown, ChevronUp, ExternalLink, Users, Coins, CheckCircle, XCircle, AlertCircle } from 'lucide-react';
+import { ChevronDown, ChevronUp, ExternalLink, Users, Coins, CheckCircle, XCircle, AlertCircle, RefreshCw } from 'lucide-react';
 import { formatUTCTime } from '@/utils/timezone';
 
 interface DistributionTransaction {
@@ -9,6 +9,7 @@ interface DistributionTransaction {
   amount: number;
   signature: string;
   weightage: number;
+  error?: string;
 }
 
 interface DistributionRecord {
@@ -26,16 +27,22 @@ interface DistributionRecord {
 export default function DistributionHistory() {
   const [distributions, setDistributions] = useState<DistributionRecord[]>([]);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [expandedDistributions, setExpandedDistributions] = useState<Set<number>>(new Set());
+  const [errorPopup, setErrorPopup] = useState<{isOpen: boolean, error: string}>({isOpen: false, error: ''});
 
-  const fetchHistory = async () => {
+  const fetchHistory = async (isRefresh = false) => {
     try {
+      if (isRefresh) {
+        setRefreshing(true);
+      }
       const response = await fetch('/api/distribution-history?all=true');
       const result = await response.json();
       
       if (result.success) {
         setDistributions(result.data.distributions);
+        setError(null);
       } else {
         setError(result.error || 'Failed to fetch distribution history');
       }
@@ -44,6 +51,7 @@ export default function DistributionHistory() {
       console.error('Error fetching distribution history:', err);
     } finally {
       setLoading(false);
+      setRefreshing(false);
     }
   };
 
@@ -55,7 +63,7 @@ export default function DistributionHistory() {
   useEffect(() => {
     const handleDistributionComplete = (event: any) => {
       console.log('🔄 Distribution completed, refreshing history...');
-      fetchHistory();
+      fetchHistory(true);
     };
 
     // Listen for custom events from distribution trigger
@@ -64,6 +72,16 @@ export default function DistributionHistory() {
     return () => {
       window.removeEventListener('distributionCompleted', handleDistributionComplete);
     };
+  }, []);
+
+  // Periodic refresh every 30 seconds to catch any missed events
+  useEffect(() => {
+    const interval = setInterval(() => {
+      console.log('🔄 Periodic refresh of distribution history...');
+      fetchHistory(true);
+    }, 30000); // 30 seconds
+
+    return () => clearInterval(interval);
   }, []);
 
 
@@ -84,7 +102,7 @@ export default function DistributionHistory() {
       case 'failed':
         return <XCircle className="w-4 h-4 text-red-400" />;
       case 'partial':
-        return <AlertCircle className="w-4 h-4 text-yellow-400" />;
+        return <CheckCircle className="w-4 h-4 text-green-400" />; // Show checkmark for partial success
       case 'threshold_not_met':
         return <AlertCircle className="w-4 h-4 text-orange-400" />;
       default:
@@ -113,6 +131,14 @@ export default function DistributionHistory() {
 
   const openSolscan = (signature: string) => {
     window.open(`https://solscan.io/tx/${signature}`, '_blank');
+  };
+
+  const openErrorPopup = (error: string) => {
+    setErrorPopup({isOpen: true, error});
+  };
+
+  const closeErrorPopup = () => {
+    setErrorPopup({isOpen: false, error: ''});
   };
 
   if (loading) {
@@ -148,11 +174,22 @@ export default function DistributionHistory() {
   return (
     <div className="pump-card rounded-xl p-6">
       <div className="mb-6">
-        <div>
-          <h3 className="text-xl font-bold pump-gradient-text">Distribution History</h3>
-          <p className="text-gray-400 text-sm mt-2">
-            Complete transaction history with blockchain verification ({distributions.length} distributions)
-          </p>
+        <div className="flex justify-between items-start">
+          <div>
+            <h3 className="text-xl font-bold pump-gradient-text">Distribution History</h3>
+            <p className="text-gray-400 text-sm mt-2">
+              Complete transaction history with blockchain verification ({distributions.length} distributions)
+            </p>
+          </div>
+          <button
+            onClick={() => fetchHistory(true)}
+            disabled={refreshing}
+            className="flex items-center space-x-2 px-3 py-2 bg-gray-800 hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg transition-colors"
+            title="Refresh distribution history"
+          >
+            <RefreshCw className={`w-4 h-4 ${refreshing ? 'animate-spin' : ''}`} />
+            <span className="text-sm">{refreshing ? 'Refreshing...' : 'Refresh'}</span>
+          </button>
         </div>
       </div>
       
@@ -232,11 +269,11 @@ export default function DistributionHistory() {
                             {tx.amount.toFixed(6)} SOL
                           </div>
                           <div className="text-xs text-gray-400">
-                            {tx.signature ? 'Completed' : 'Pending'}
+                            {tx.signature ? 'Completed' : (tx.error ? 'Failed' : 'Pending')}
                           </div>
                         </div>
                         
-                        {tx.signature && (
+                        {tx.signature ? (
                           <button
                             onClick={() => openSolscan(tx.signature)}
                             className="flex items-center space-x-1 text-blue-400 hover:text-blue-300 transition-colors"
@@ -244,7 +281,15 @@ export default function DistributionHistory() {
                             <ExternalLink className="w-4 h-4" />
                             <span className="text-xs">View</span>
                           </button>
-                        )}
+                        ) : tx.error ? (
+                          <button
+                            onClick={() => openErrorPopup(tx.error)}
+                            className="flex items-center space-x-1 text-red-400 hover:text-red-300 transition-colors"
+                          >
+                            <XCircle className="w-4 h-4" />
+                            <span className="text-xs">View</span>
+                          </button>
+                        ) : null}
                       </div>
                     </div>
                   ))}
@@ -271,6 +316,36 @@ export default function DistributionHistory() {
           All transactions are verifiable on Solscan. Click "View" to see transaction details on blockchain.
         </div>
       </div>
+
+      {/* Error Popup Modal */}
+      {errorPopup.isOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-gray-800 rounded-lg p-6 max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-bold text-red-400">Transaction Error</h3>
+              <button
+                onClick={closeErrorPopup}
+                className="text-gray-400 hover:text-white transition-colors"
+              >
+                <XCircle className="w-6 h-6" />
+              </button>
+            </div>
+            <div className="bg-gray-900 rounded p-4 flex-1 overflow-y-auto min-h-0">
+              <pre className="text-sm text-gray-300 whitespace-pre-wrap break-words">
+                {errorPopup.error}
+              </pre>
+            </div>
+            <div className="mt-4 flex justify-end">
+              <button
+                onClick={closeErrorPopup}
+                className="px-4 py-2 bg-gray-700 hover:bg-gray-600 rounded transition-colors"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

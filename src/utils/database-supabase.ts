@@ -5,6 +5,7 @@ export interface DistributionTransaction {
   amount: number;
   signature: string;
   weightage: number;
+  error?: string;
 }
 
 export interface DistributionRecord {

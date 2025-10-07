@@ -35,9 +35,12 @@ export default function DistributionTimer() {
         // Check if a distribution was just triggered
         if (newData.distributionJustTriggered) {
           console.log('🔄 Distribution was just triggered, dispatching event...');
-          window.dispatchEvent(new CustomEvent('distributionCompleted', {
-            detail: { success: true, data: { timestamp: new Date().toISOString() } }
-          }));
+          // Dispatch event with a small delay to ensure distribution is complete
+          setTimeout(() => {
+            window.dispatchEvent(new CustomEvent('distributionCompleted', {
+              detail: { success: true, data: { timestamp: new Date().toISOString() } }
+            }));
+          }, 1000); // 1 second delay
         }
       } else {
         setError(result.error || 'Failed to fetch distribution data');
