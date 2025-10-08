@@ -82,6 +82,9 @@ export default function Hero() {
       
       <div className="relative z-10">
         <div className="mb-6">
+          <div className="text-lg text-blue-500 font-mono mb-2 tracking-widest font-bold">
+            *LAUNCH DAY*
+          </div>
           <h1 className="text-6xl md:text-8xl font-bold text-green-400 mb-4 tracking-wider" style={{textShadow: '0 0 15px rgba(34, 197, 94, 0.6)'}}>
             CREATOR FEES GO TO YOU
           </h1>
