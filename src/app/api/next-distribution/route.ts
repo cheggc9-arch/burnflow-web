@@ -1,9 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getCachedData } from '@/utils/cache';
 import { DistributionService } from '@/utils/distribution-service';
-
-// Simple lock to prevent multiple distributions running simultaneously
-let isDistributionRunning = false;
+import { getDistributionRunning, setDistributionRunning } from '@/utils/distribution-status';
 
 export async function GET(request: NextRequest) {
   try {
@@ -96,7 +94,7 @@ export async function GET(request: NextRequest) {
     if (timeRemaining <= 0) {
       if (isAutomaticMode) {
         // Check if distribution is already running
-        if (isDistributionRunning) {
+        if (getDistributionRunning()) {
           console.log('⏳ Distribution already running, skipping this cycle');
           return NextResponse.json({
             success: true,
@@ -106,6 +104,7 @@ export async function GET(request: NextRequest) {
               lastDistributionTime,
               distributionInterval: DISTRIBUTION_INTERVAL,
               isDistributionTime: false,
+              isDistributionRunning: true,
               isAutomaticMode,
               intervalMinutes,
               lastUpdated: cache.lastUpdated,
@@ -118,7 +117,10 @@ export async function GET(request: NextRequest) {
         // AUTOMATIC MODE: Trigger distribution
         console.log('🚀 AUTOMATIC MODE: Triggering distribution...');
         shouldTriggerDistribution = true;
-        isDistributionRunning = true;
+        setDistributionRunning(true);
+        
+        // Dispatch event to notify frontend that distribution has started
+        // Note: This is server-side, so we'll handle the event dispatch in the frontend
         
         // Run the distribution FIRST
         let distributionSucceeded = false;
@@ -140,7 +142,7 @@ export async function GET(request: NextRequest) {
           console.log('⏭️ Skipping timer update - will retry in next 20min cycle');
         } finally {
           // Always release the lock
-          isDistributionRunning = false;
+          setDistributionRunning(false);
         }
         
         // Only update timer if distribution succeeded
@@ -177,6 +179,7 @@ export async function GET(request: NextRequest) {
         lastDistributionTime,
         distributionInterval: DISTRIBUTION_INTERVAL,
         isDistributionTime: timeRemainingSeconds <= 0,
+        isDistributionRunning: getDistributionRunning(), // Expose the distribution running status
         isAutomaticMode,
         intervalMinutes,
         lastUpdated: cache.lastUpdated,

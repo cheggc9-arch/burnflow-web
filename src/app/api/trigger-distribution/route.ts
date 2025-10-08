@@ -1,10 +1,23 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { DistributionService } from '@/utils/distribution-service';
 import { updateLastDistributionTime } from '@/utils/cache';
+import { getDistributionRunning, setDistributionRunning } from '@/utils/distribution-status';
 
 export async function POST(request: NextRequest) {
   try {
     console.log('🎯 Distribution trigger received');
+    
+    // Check if distribution is already running
+    if (getDistributionRunning()) {
+      return NextResponse.json({
+        success: false,
+        message: 'Distribution already running',
+        timestamp: new Date().toISOString(),
+      }, { status: 409 });
+    }
+    
+    // Set distribution running flag
+    setDistributionRunning(true);
     
     const distributionService = new DistributionService();
     
@@ -48,6 +61,9 @@ export async function POST(request: NextRequest) {
       error: error instanceof Error ? error.message : 'Unknown error',
       timestamp: new Date().toISOString(),
     }, { status: 500 });
+  } finally {
+    // Always release the distribution running flag
+    setDistributionRunning(false);
   }
 }
 

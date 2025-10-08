@@ -1,5 +1,7 @@
 import { Connection, PublicKey, LAMPORTS_PER_SOL } from '@solana/web3.js';
 import { getMint, TOKEN_PROGRAM_ID } from '@solana/spl-token';
+import { withRateLimit } from './rate-limiter';
+import { rateLimitConfig } from '../config/rate-limiting';
 
 // Solana connection configuration
 const RPC_URL = process.env.NEXT_PUBLIC_SOLANA_RPC_URL || 'https://api.mainnet-beta.solana.com';
@@ -8,7 +10,10 @@ const RPC_URL = process.env.NEXT_PUBLIC_SOLANA_RPC_URL || 'https://api.mainnet-b
 export const connection = new Connection(RPC_URL, {
   commitment: 'confirmed',
   confirmTransactionInitialTimeout: 60000,
-  disableRetryOnRateLimit: true, // Disable retries to prevent RPC stress
+  disableRetryOnRateLimit: false, // Enable retries with our custom rate limiting
+  httpHeaders: {
+    'User-Agent': 'RewardFlow/1.0',
+  },
 });
 
 // Get the appropriate connection based on environment
@@ -57,7 +62,10 @@ export async function getCreatorWalletBalance(): Promise<number> {
     const connection = getConnection();
     const creatorAddress = getCreatorWalletAddress();
     
-    const balanceLamports = await connection.getBalance(creatorAddress);
+    const balanceLamports = await withRateLimit(
+      () => connection.getBalance(creatorAddress),
+      rateLimitConfig.rpcCalls.getBalance
+    );
     return balanceLamports / LAMPORTS_PER_SOL;
   } catch (error) {
     console.error('Error fetching creator wallet balance:', error);
@@ -75,18 +83,21 @@ export async function getTokenHolders(tokenMint: PublicKey): Promise<Array<{
   try {
     const connection = getConnection();
     
-    // Get all token accounts for this mint
-    const tokenAccounts = await connection.getProgramAccounts(TOKEN_PROGRAM_ID, {
-      filters: [
-        { dataSize: 165 }, // Token account data size
-        {
-          memcmp: {
-            offset: 0, // Mint address offset
-            bytes: tokenMint.toBase58(),
+    // Get all token accounts for this mint with rate limiting
+    const tokenAccounts = await withRateLimit(
+      () => connection.getProgramAccounts(TOKEN_PROGRAM_ID, {
+        filters: [
+          { dataSize: 165 }, // Token account data size
+          {
+            memcmp: {
+              offset: 0, // Mint address offset
+              bytes: tokenMint.toBase58(),
+            },
           },
-        },
-      ],
-    });
+        ],
+      }),
+      rateLimitConfig.rpcCalls.getProgramAccounts
+    );
     
     const holders: Array<{
       address: string;

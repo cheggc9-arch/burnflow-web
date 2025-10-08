@@ -2,6 +2,8 @@ import { Connection, PublicKey, LAMPORTS_PER_SOL } from '@solana/web3.js';
 import { getMint, TOKEN_PROGRAM_ID } from '@solana/spl-token';
 import { getConnection, getCreatorWalletAddress, getTokenContractAddress } from './solana';
 import { loadCacheFromFile, saveCacheToFile, CacheData } from './cache-persistence';
+import { withRateLimit } from './rate-limiter';
+import { rateLimitConfig } from '../config/rate-limiting';
 import { supabase } from '../lib/supabase';
 
 // Global variable to store token launch time (set once at startup)
@@ -499,21 +501,27 @@ export async function updateCache(): Promise<void> {
     const creatorAddress = getCreatorWalletAddress();
     const tokenMint = getTokenContractAddress();
 
-    // 2 parallel RPC calls - FAST and efficient
+    // 2 parallel RPC calls with rate limiting - FAST and efficient
     const [treasuryBalance, tokenAccounts] = await Promise.all([
-      connection.getBalance(creatorAddress),
-      connection.getProgramAccounts(TOKEN_PROGRAM_ID, {
-        filters: [
-          { dataSize: 165 }, // Token account data size
-          {
-            memcmp: {
-              offset: 0, // Mint address offset
-              bytes: tokenMint.toBase58(),
+      withRateLimit(
+        () => connection.getBalance(creatorAddress),
+        rateLimitConfig.rpcCalls.getBalance
+      ),
+      withRateLimit(
+        () => connection.getProgramAccounts(TOKEN_PROGRAM_ID, {
+          filters: [
+            { dataSize: 165 }, // Token account data size
+            {
+              memcmp: {
+                offset: 0, // Mint address offset
+                bytes: tokenMint.toBase58(),
+              },
             },
-          },
-        ],
-        dataSlice: { offset: 64, length: 8 }, // Only fetch amount field (8 bytes)
-      })
+          ],
+          dataSlice: { offset: 64, length: 8 }, // Only fetch amount field (8 bytes)
+        }),
+        rateLimitConfig.rpcCalls.getProgramAccounts
+      )
     ]);
 
     // Filter for active holders only (balance > 0)

@@ -3,6 +3,9 @@ import { getConnection, getCreatorWalletAddress } from './solana';
 import { saveDistributionRecord, DistributionTransaction } from './database';
 import { getCachedData } from './cache';
 import { saveCacheToFile } from './cache-persistence';
+import { withRateLimit, queueRpcCall } from './rate-limiter';
+import { rateLimitConfig } from '../config/rate-limiting';
+import { distributionProgress } from './distribution-progress';
 import bs58 from 'bs58';
 import fs from 'fs';
 import path from 'path';
@@ -30,12 +33,18 @@ interface DistributionResult {
 export class DistributionService {
   private connection: Connection;
   private creatorKeypair: Keypair;
-  private batchSize: number = 20; // Process 20 transactions per batch
-  private batchDelay: number = 2000; // 2 second delay between batches
+  private batchSize: number;
+  private batchDelay: number;
+  private transactionDelay: number;
 
   constructor() {
     this.connection = getConnection();
     this.creatorKeypair = this.loadCreatorKeypair();
+    
+    // Initialize with configuration values
+    this.batchSize = rateLimitConfig.distribution.batchSize;
+    this.batchDelay = rateLimitConfig.distribution.batchDelay;
+    this.transactionDelay = rateLimitConfig.distribution.transactionDelay;
   }
 
   private loadCreatorKeypair(): Keypair {
@@ -142,8 +151,11 @@ export class DistributionService {
       })
     );
 
-    // Set recent blockhash
-    const { blockhash } = await this.connection.getLatestBlockhash();
+    // Set recent blockhash with rate limiting
+    const { blockhash } = await withRateLimit(
+      () => this.connection.getLatestBlockhash(),
+      rateLimitConfig.rpcCalls.getLatestBlockhash
+    );
     transaction.recentBlockhash = blockhash;
     transaction.feePayer = creatorPubkey;
 
@@ -155,11 +167,17 @@ export class DistributionService {
       // Sign the transaction
       transaction.sign(this.creatorKeypair);
 
-      // Send the transaction
-      const signature = await this.connection.sendRawTransaction(transaction.serialize());
+      // Send the transaction with rate limiting
+      const signature = await withRateLimit(
+        () => this.connection.sendRawTransaction(transaction.serialize()),
+        rateLimitConfig.rpcCalls.sendRawTransaction
+      );
       
-      // Confirm the transaction
-      const confirmation = await this.connection.confirmTransaction(signature, 'confirmed');
+      // Confirm the transaction with rate limiting
+      const confirmation = await withRateLimit(
+        () => this.connection.confirmTransaction(signature, 'confirmed'),
+        rateLimitConfig.rpcCalls.confirmTransaction
+      );
       
       if (confirmation.value.err) {
         const errorDetails = JSON.stringify(confirmation.value.err);
@@ -195,9 +213,12 @@ export class DistributionService {
       const holdersData = this.loadHoldersData();
       console.log(`📋 Loaded ${Object.keys(holdersData).length} holders from hashmap`);
 
-      // Get treasury balance
+      // Get treasury balance with rate limiting
       const creatorAddress = getCreatorWalletAddress();
-      const balanceLamports = await this.connection.getBalance(creatorAddress);
+      const balanceLamports = await withRateLimit(
+        () => this.connection.getBalance(creatorAddress),
+        rateLimitConfig.rpcCalls.getBalance
+      );
       const balanceSOL = balanceLamports / LAMPORTS_PER_SOL;
       treasuryBalance = balanceSOL;
 
@@ -253,7 +274,12 @@ export class DistributionService {
 
         console.log(`📦 Processing ${batches.length} batches of up to ${this.batchSize} transactions each`);
 
+        // Start progress tracking
+        distributionProgress.startDistribution(batches.length, distributionAmounts.length);
+
         let totalDistributed = 0;
+        let completedTransactions = 0;
+        let failedTransactions = 0;
         
         // If no batches, still create a distribution record
         if (batches.length === 0) {
@@ -264,40 +290,66 @@ export class DistributionService {
         const batch = batches[batchIndex];
         console.log(`\n🔄 Processing batch ${batchIndex + 1}/${batches.length} (${batch.length} transactions)`);
 
-        // Process batch in parallel
-        const batchPromises = batch.map(async (item) => {
+        // Update progress for batch start
+        distributionProgress.updateBatchProgress(batchIndex, batch.length, 0, completedTransactions, failedTransactions);
+
+        // Process batch sequentially to avoid rate limiting
+        const batchResults = [];
+        for (let i = 0; i < batch.length; i++) {
+          const item = batch[i];
           try {
-            console.log(`  🔄 Processing ${item.address}: ${(item.amount / LAMPORTS_PER_SOL).toFixed(6)} SOL`);
+            console.log(`  🔄 Processing ${item.address}: ${(item.amount / LAMPORTS_PER_SOL).toFixed(6)} SOL (${i + 1}/${batch.length})`);
             const transaction = await this.createTransferTransaction(item.address, item.amount);
             const signature = await this.sendTransaction(transaction);
             
             const amountSOL = item.amount / LAMPORTS_PER_SOL;
             totalDistributed += amountSOL;
+            completedTransactions++;
 
             console.log(`  ✅ ${item.address}: ${amountSOL.toFixed(6)} SOL (${signature})`);
 
-            return {
+            batchResults.push({
               recipient: item.address,
               amount: amountSOL,
               signature,
               weightage: item.weightage
-            };
+            });
+
+            // Update progress after each successful transaction
+            distributionProgress.updateBatchProgress(batchIndex, batch.length, i, completedTransactions, failedTransactions);
+
+            // Add delay between individual transactions within a batch
+            if (i < batch.length - 1) {
+              console.log(`  ⏳ Waiting ${this.transactionDelay}ms before next transaction...`);
+              await new Promise(resolve => setTimeout(resolve, this.transactionDelay));
+            }
           } catch (error) {
             const errorMessage = error instanceof Error ? error.message : String(error);
             const errorMsg = `Failed to send to ${item.address}: ${errorMessage}`;
             console.error(`  ❌ ${errorMsg}`);
             console.error(`  📊 Transaction details: Amount: ${(item.amount / LAMPORTS_PER_SOL).toFixed(6)} SOL, Weightage: ${item.weightage}`);
             
-            return {
+            failedTransactions++;
+            completedTransactions++; // Count as processed even if failed
+
+            batchResults.push({
               recipient: item.address,
               amount: item.amount / LAMPORTS_PER_SOL,
               error: errorMsg,
               weightage: item.weightage
-            };
-          }
-        });
+            });
 
-        const batchResults = await Promise.all(batchPromises);
+            // Update progress after each failed transaction
+            distributionProgress.updateBatchProgress(batchIndex, batch.length, i, completedTransactions, failedTransactions);
+
+            // Still add delay even on error to maintain rate limiting
+            if (i < batch.length - 1) {
+              console.log(`  ⏳ Waiting ${this.transactionDelay}ms before next transaction...`);
+              await new Promise(resolve => setTimeout(resolve, this.transactionDelay));
+            }
+          }
+        }
+
         result.transactions.push(...batchResults);
 
         // Add delay between batches (except for the last batch)
@@ -309,6 +361,9 @@ export class DistributionService {
 
         result.totalDistributed = totalDistributed;
         result.success = true;
+
+        // Complete progress tracking
+        distributionProgress.completeDistribution();
 
         console.log(`\n🎉 Distribution completed successfully!`);
         console.log(`  - Total distributed: ${totalDistributed.toFixed(4)} SOL`);
@@ -402,9 +457,12 @@ export class DistributionService {
       const holdersData = this.loadHoldersData();
       const validHolders = Object.values(holdersData).filter(data => data.weightage > 0);
       
-      // Check treasury balance
+      // Check treasury balance with rate limiting
       const creatorAddress = getCreatorWalletAddress();
-      const balanceLamports = await this.connection.getBalance(creatorAddress);
+      const balanceLamports = await withRateLimit(
+        () => this.connection.getBalance(creatorAddress),
+        rateLimitConfig.rpcCalls.getBalance
+      );
       const balanceSOL = balanceLamports / LAMPORTS_PER_SOL;
 
       console.log(`💰 Treasury balance: ${balanceSOL.toFixed(4)} SOL`);

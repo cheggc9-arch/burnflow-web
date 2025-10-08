@@ -24,6 +24,11 @@ export default function DistributionTrigger() {
     setIsLoading(true);
     setResult(null);
 
+    // Dispatch event that distribution has started
+    window.dispatchEvent(new CustomEvent('distributionStarted', { 
+      detail: { timestamp: new Date().toISOString() } 
+    }));
+
     try {
       const response = await fetch('/api/trigger-distribution', {
         method: 'POST',
