@@ -160,7 +160,7 @@ export default function Roadmap() {
               </p>
               <div className="flex space-x-4">
                 <a
-                  href="https://x.com/rewardflowsol"
+                  href="https://x.com/RewardFlow1"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center space-x-2 text-green-400 hover:text-yellow-400 transition-colors font-mono text-sm"
