@@ -293,13 +293,23 @@ async function fetchHolderDataFromAPI(tokenAddress: string) {
     console.log(`✅ Applied fallback for ${fallbackCount} holders without trade data`);
 
     // Calculate weightage for each holder BEFORE saving to JSON
-    console.log(`🔍 Token launch time: ${tokenLaunchTime}`);
-    if (tokenLaunchTime) {
+    // Get launch time from database for each calculation
+    let currentLaunchTime: string | null = null;
+    try {
+      const tokenMint = getTokenContractAddress();
+      currentLaunchTime = await getTokenLaunchTime(tokenMint.toBase58());
+      console.log(`🔍 Using launch time from database: ${currentLaunchTime}`);
+    } catch (error) {
+      console.error('Failed to get launch time from database:', error);
+      console.warn('⚠️ No token launch time available - weightage will be 0');
+    }
+
+    if (currentLaunchTime) {
       let calculatedCount = 0;
       let futureTimeCount = 0;
       holdersMap.forEach((data, address) => {
         if (data.first_buy_time !== futureTime) {
-          data.weightage = calculateWeightage(data.tokens, data.first_buy_time, tokenLaunchTime!);
+          data.weightage = calculateWeightage(data.tokens, data.first_buy_time, currentLaunchTime!);
           if (data.weightage > 0) calculatedCount++;
         } else {
           futureTimeCount++;
