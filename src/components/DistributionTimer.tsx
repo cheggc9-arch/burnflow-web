@@ -20,6 +20,7 @@ export default function DistributionTimer() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [progress, setProgress] = useState<DistributionProgress | null>(null);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
   // Fetch distribution data from server
   const fetchDistributionData = async () => {
@@ -67,6 +68,21 @@ export default function DistributionTimer() {
       }
     } catch (err) {
       console.error('Error fetching distribution progress:', err);
+    }
+  };
+
+  // Manual refresh function
+  const handleManualRefresh = async () => {
+    setIsRefreshing(true);
+    try {
+      await Promise.all([
+        fetchDistributionData(),
+        fetchProgress()
+      ]);
+    } catch (error) {
+      console.error('Manual refresh error:', error);
+    } finally {
+      setIsRefreshing(false);
     }
   };
 
@@ -132,6 +148,28 @@ export default function DistributionTimer() {
     return () => clearInterval(timer);
   }, []);
 
+  // Immediate response when timer hits zero
+  useEffect(() => {
+    if (timeLeft === 0 && data && !data.isDistributionRunning) {
+      console.log('⏰ Timer hit zero, starting immediate polling for distribution status...');
+      // Start aggressive polling when timer hits zero
+      const immediateInterval = setInterval(() => {
+        fetchDistributionData();
+        fetchProgress();
+      }, 1000); // Poll every 1 second
+      
+      // Stop after 30 seconds to avoid infinite polling
+      const timeout = setTimeout(() => {
+        clearInterval(immediateInterval);
+      }, 30000);
+      
+      return () => {
+        clearInterval(immediateInterval);
+        clearTimeout(timeout);
+      };
+    }
+  }, [timeLeft, data?.isDistributionRunning]);
+
   // More frequent polling when distribution might be starting
   useEffect(() => {
     if (data?.isDistributionTime && !data?.isDistributionRunning) {
@@ -149,6 +187,16 @@ export default function DistributionTimer() {
       const veryFrequentInterval = setInterval(fetchDistributionData, 1000); // Poll every 1 second
       
       return () => clearInterval(veryFrequentInterval);
+    }
+  }, [timeLeft, data?.isDistributionRunning]);
+
+  // Ultra-frequent polling in the last 10 seconds
+  useEffect(() => {
+    if (timeLeft <= 10 && timeLeft > 0 && !data?.isDistributionRunning) {
+      console.log('🔄 Last 10 seconds, starting ultra-frequent polling...');
+      const ultraFrequentInterval = setInterval(fetchDistributionData, 500); // Poll every 500ms
+      
+      return () => clearInterval(ultraFrequentInterval);
     }
   }, [timeLeft, data?.isDistributionRunning]);
 
@@ -200,15 +248,39 @@ export default function DistributionTimer() {
   return (
     <div className="pump-card rounded-xl p-6 animate-pulse-green">
       <div className="mb-6">
-        <h3 className="text-xl font-bold pump-gradient-text">Next Distribution</h3>
+        <div className="flex items-center justify-between">
+          <h3 className="text-xl font-bold pump-gradient-text">Next Distribution</h3>
+          <button
+            onClick={handleManualRefresh}
+            disabled={isRefreshing}
+            className="flex items-center gap-2 px-3 py-1.5 text-xs bg-gray-700 hover:bg-gray-600 disabled:bg-gray-800 disabled:cursor-not-allowed text-gray-300 rounded-lg transition-colors duration-200"
+            title="Refresh distribution status"
+          >
+            <svg 
+              className={`w-3 h-3 ${isRefreshing ? 'animate-spin' : ''}`} 
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            {isRefreshing ? 'Refreshing...' : 'Refresh'}
+          </button>
+        </div>
+        
         {data?.isDistributionRunning && (
-          <div className="text-sm text-[var(--pump-green)] font-semibold">
+          <div className="text-sm text-[var(--pump-green)] font-semibold mt-2">
             🎉 Distribution in progress!
           </div>
         )}
         {!data?.isDistributionRunning && timeLeft <= 10 && timeLeft > 0 && (
-          <div className="text-sm text-yellow-400 font-semibold animate-pulse">
+          <div className="text-sm text-yellow-400 font-semibold animate-pulse mt-2">
             ⚡ Distribution starting soon...
+          </div>
+        )}
+        {!data?.isDistributionRunning && timeLeft === 0 && (
+          <div className="text-sm text-blue-400 font-semibold animate-pulse mt-2">
+            🔍 Checking for distribution status...
           </div>
         )}
       </div>
@@ -225,8 +297,25 @@ export default function DistributionTimer() {
             
             {progress && progress.currentBatch && (
               <div className="bg-gray-800/50 rounded-lg p-4 max-w-md mx-auto">
-                <div className="text-sm text-gray-300 mb-2">
-                  Processing batch {progress.currentBatch.batchIndex} of {progress.currentBatch.totalBatches}
+                <div className="flex items-center justify-between mb-2">
+                  <div className="text-sm text-gray-300">
+                    Processing batch {progress.currentBatch.batchIndex} of {progress.currentBatch.totalBatches}
+                  </div>
+                  <button
+                    onClick={handleManualRefresh}
+                    disabled={isRefreshing}
+                    className="p-1 text-gray-400 hover:text-gray-300 disabled:cursor-not-allowed"
+                    title="Refresh progress"
+                  >
+                    <svg 
+                      className={`w-3 h-3 ${isRefreshing ? 'animate-spin' : ''}`} 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                  </button>
                 </div>
                 <div className="text-xs text-gray-400 mb-3">
                   Transaction {progress.currentBatch.currentTransaction} of {progress.currentBatch.batchSize} in current batch
@@ -254,6 +343,31 @@ export default function DistributionTimer() {
                 )}
               </div>
             )}
+          </div>
+        ) : timeLeft === 0 ? (
+          <div className="py-8">
+            <div className="text-6xl mb-4 animate-spin">⏳</div>
+            <div className="text-2xl font-bold text-blue-400 mb-2">
+              Checking...
+            </div>
+            <div className="text-lg text-gray-300 mb-4">
+              Waiting for distribution to start
+            </div>
+            <button
+              onClick={handleManualRefresh}
+              disabled={isRefreshing}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-800 disabled:cursor-not-allowed text-white text-sm font-medium rounded-lg transition-colors duration-200"
+            >
+              <svg 
+                className={`w-4 h-4 ${isRefreshing ? 'animate-spin' : ''}`} 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+              {isRefreshing ? 'Refreshing...' : 'Check Status'}
+            </button>
           </div>
         ) : (
           <div className="grid grid-cols-3 gap-0 max-w-xs mx-auto">
@@ -283,7 +397,7 @@ export default function DistributionTimer() {
             </div>
           </div>
         )}
-        {!data?.isDistributionRunning && (
+        {!data?.isDistributionRunning && timeLeft > 0 && (
           <div className="flex justify-center mt-4">
             <div className="w-80 bg-gray-800 rounded-full h-2">
               <div 
@@ -300,8 +414,20 @@ export default function DistributionTimer() {
             </div>
           </div>
         )}
+        {!data?.isDistributionRunning && timeLeft === 0 && (
+          <div className="flex justify-center mt-4">
+            <div className="w-80 bg-gray-800 rounded-full h-2">
+              <div className="bg-gradient-to-r from-blue-400 to-cyan-400 h-2 rounded-full animate-pulse"></div>
+            </div>
+          </div>
+        )}
         <div className="text-sm font-semibold text-gray-300 mt-4">
-          {data?.isDistributionRunning ? 'Processing transactions...' : 'Until next reward distribution'}
+          {data?.isDistributionRunning 
+            ? 'Processing transactions...' 
+            : timeLeft === 0 
+              ? 'Checking for distribution status...' 
+              : 'Until next reward distribution'
+          }
         </div>
         {data?.isDistributionRunning && (
           <div className="text-xs text-gray-400 mt-2">
