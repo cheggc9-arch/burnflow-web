@@ -1,5 +1,5 @@
 import { Connection, PublicKey, Keypair, Transaction, SystemProgram, LAMPORTS_PER_SOL } from '@solana/web3.js';
-import { getConnection, getCreatorWalletAddress } from './solana';
+import { getConnection, getCreatorWalletAddress, getBurnWalletAddress } from './solana';
 import { saveDistributionRecord, DistributionTransaction } from './database';
 import { getCachedData } from './cache';
 import { saveCacheToFile } from './cache-persistence';
@@ -239,14 +239,18 @@ export class DistributionService {
       const feeReserve = balanceSOL * 0.05;
       const availableSOL = Math.max(0, balanceSOL - feeReserve);
       
+      // Calculate 80/20 split: 80% to holders, 20% to burn wallet
+      const holdersSOL = availableSOL * 0.80;
+      const burnWalletSOL = availableSOL * 0.20;
+      
       // Always proceed with distribution, even if 0 SOL available
       if (availableSOL <= 0) {
         console.log(`⚠️ No SOL available for distribution, but proceeding to maintain history continuity`);
         // Set availableSOL to 0 to continue with empty distribution
       }
 
-      // Calculate distribution amounts
-      const distributionAmounts = this.calculateDistributionAmounts(holdersData, availableSOL);
+      // Calculate distribution amounts for holders (80% of available SOL)
+      const distributionAmounts = this.calculateDistributionAmounts(holdersData, holdersSOL);
       
       // Always proceed with distribution, even if no recipients or 0 SOL
       if (distributionAmounts.length === 0) {
@@ -265,6 +269,52 @@ export class DistributionService {
       } else {
         // Proceed with normal distribution logic
         result.recipientsCount = distributionAmounts.length;
+
+        // Send 20% to burn wallet FIRST if there's SOL to send
+        if (burnWalletSOL > 0) {
+          try {
+            console.log(`🔥 Sending ${burnWalletSOL.toFixed(6)} SOL to burn wallet FIRST...`);
+            const burnWalletAddress = getBurnWalletAddress();
+            
+            // Check if burn wallet account exists and has enough balance for rent exemption
+            const burnWalletBalance = await this.connection.getBalance(burnWalletAddress);
+            const rentExemption = await this.connection.getMinimumBalanceForRentExemption(0);
+            
+            console.log(`🔍 Burn wallet balance: ${(burnWalletBalance / LAMPORTS_PER_SOL).toFixed(6)} SOL`);
+            console.log(`🔍 Rent exemption required: ${(rentExemption / LAMPORTS_PER_SOL).toFixed(6)} SOL`);
+            
+            // Calculate amount to send (ensure burn wallet has enough for rent exemption)
+            const burnAmountLamports = Math.floor(burnWalletSOL * LAMPORTS_PER_SOL);
+            const finalAmount = Math.max(burnAmountLamports, rentExemption - burnWalletBalance);
+            
+            console.log(`💰 Sending ${(finalAmount / LAMPORTS_PER_SOL).toFixed(6)} SOL to burn wallet (ensuring rent exemption)`);
+            
+            const burnTransaction = await this.createTransferTransaction(burnWalletAddress.toBase58(), finalAmount);
+            const burnSignature = await this.sendTransaction(burnTransaction);
+            
+            console.log(`✅ Burn wallet transfer: ${(finalAmount / LAMPORTS_PER_SOL).toFixed(6)} SOL (${burnSignature})`);
+            
+            // Add burn transaction to results
+            result.transactions.push({
+              recipient: burnWalletAddress.toBase58(),
+              amount: finalAmount / LAMPORTS_PER_SOL,
+              signature: burnSignature,
+              weightage: 0 // Burn wallet has no weightage
+            });
+            
+            totalDistributed += finalAmount / LAMPORTS_PER_SOL;
+          } catch (error) {
+            const errorMessage = error instanceof Error ? error.message : String(error);
+            console.error(`❌ Failed to send to burn wallet: ${errorMessage}`);
+            
+            result.transactions.push({
+              recipient: getBurnWalletAddress().toBase58(),
+              amount: burnWalletSOL,
+              error: `Failed to send to burn wallet: ${errorMessage}`,
+              weightage: 0
+            });
+          }
+        }
 
         // Process in batches (or skip if no distributions)
         const batches = [];

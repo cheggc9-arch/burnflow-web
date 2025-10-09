@@ -51,6 +51,21 @@ export function getTokenContractAddress(): PublicKey {
   }
 }
 
+// Get burn wallet address
+export function getBurnWalletAddress(): PublicKey {
+  const address = process.env.BURN_WALLET_ADDRESS;
+  
+  if (!address) {
+    throw new Error('BURN_WALLET_ADDRESS not found in environment variables');
+  }
+  
+  try {
+    return new PublicKey(address);
+  } catch (error) {
+    throw new Error(`Invalid burn wallet address: ${address}`);
+  }
+}
+
 // Get network info
 export function getNetwork(): string {
   return process.env.NEXT_PUBLIC_SOLANA_NETWORK || 'mainnet';

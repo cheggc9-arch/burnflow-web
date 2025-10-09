@@ -95,6 +95,12 @@ export default function Header() {
               LEADERBOARD
             </button>
             <a
+              href="/burn"
+              className="bg-red-500 text-white px-4 py-2 rounded font-mono text-sm font-bold hover:bg-red-400 transition-colors tracking-wider"
+            >
+              REWARDFLOW BURN
+            </a>
+            <a
               href="https://x.com/RewardFlow1"
               target="_blank"
               rel="noopener noreferrer"

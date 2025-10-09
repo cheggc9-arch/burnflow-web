@@ -46,6 +46,16 @@
   animation: matrix-glow 2s ease-in-out infinite alternate;
 }
 
+/* Burn gradient text */
+.burn-gradient-text {
+  background: linear-gradient(135deg, #dc2626 0%, #f97316 50%, #fbbf24 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none;
+  animation: burn-glow 2s ease-in-out infinite alternate;
+}
+
 /* Matrix gradient background */
 .pump-gradient {
   background: linear-gradient(135deg, var(--matrix-green) 0%, var(--matrix-cyan) 50%, var(--matrix-lime) 100%);
