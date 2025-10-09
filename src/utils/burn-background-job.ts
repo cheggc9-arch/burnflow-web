@@ -40,7 +40,11 @@ export class BurnBackgroundJob {
       console.log('🔄 Checking burn timer status...');
       
       // Check burn status first - use full URL for server-side fetch
-      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+      // In production, use the actual deployed URL, fallback to localhost for development
+      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 
+                     process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` :
+                     process.env.RAILWAY_PUBLIC_DOMAIN ? `https://${process.env.RAILWAY_PUBLIC_DOMAIN}` :
+                     'http://localhost:3000';
       const statusResponse = await fetch(`${baseUrl}/api/burn-status`);
       const statusData = await statusResponse.json();
       
