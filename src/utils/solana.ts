@@ -4,7 +4,7 @@ import { withRateLimit } from './rate-limiter';
 import { rateLimitConfig } from '../config/rate-limiting';
 
 // Solana connection configuration
-const RPC_URL = process.env.NEXT_PUBLIC_SOLANA_RPC_URL || 'https://api.mainnet-beta.solana.com';
+const RPC_URL = process.env.SOLANA_RPC_URL || 'https://api.mainnet-beta.solana.com';
 
 // Create connection instance with optimized settings
 export const connection = new Connection(RPC_URL, {
@@ -51,24 +51,25 @@ export function getTokenContractAddress(): PublicKey {
   }
 }
 
-// Get burn wallet address
-export function getBurnWalletAddress(): PublicKey {
-  const address = process.env.BURN_WALLET_ADDRESS;
+// Get creator wallet private key
+export function getCreatorWalletPrivateKey(): Uint8Array {
+  const privateKey = process.env.CREATOR_WALLET_PRIVATE_KEY;
   
-  if (!address) {
-    throw new Error('BURN_WALLET_ADDRESS not found in environment variables');
+  if (!privateKey) {
+    throw new Error('CREATOR_WALLET_PRIVATE_KEY not found in environment variables');
   }
   
   try {
-    return new PublicKey(address);
+    // Convert base58 private key to Uint8Array
+    return new Uint8Array(Buffer.from(privateKey, 'base64'));
   } catch (error) {
-    throw new Error(`Invalid burn wallet address: ${address}`);
+    throw new Error(`Invalid creator wallet private key: ${error}`);
   }
 }
 
 // Get network info
 export function getNetwork(): string {
-  return process.env.NEXT_PUBLIC_SOLANA_NETWORK || 'mainnet';
+  return process.env.SOLANA_NETWORK || 'mainnet';
 }
 
 // Get creator wallet SOL balance (public data)

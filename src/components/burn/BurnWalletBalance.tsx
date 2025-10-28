@@ -3,8 +3,8 @@
 import { useState, useEffect } from 'react';
 
 interface BurnWalletData {
-  burnWalletBalance: number;
-  burnWalletAddress: string;
+  creatorWalletBalance: number;
+  creatorWalletAddress: string;
   network: string;
 }
 
@@ -17,8 +17,8 @@ export default function BurnWalletBalance() {
 
   const copyToClipboard = async () => {
     try {
-      if (data?.burnWalletAddress) {
-        await navigator.clipboard.writeText(data.burnWalletAddress);
+      if (data?.creatorWalletAddress) {
+        await navigator.clipboard.writeText(data.creatorWalletAddress);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
       }
@@ -28,19 +28,23 @@ export default function BurnWalletBalance() {
   };
 
   useEffect(() => {
-    const fetchBurnWalletBalance = async () => {
+    const fetchCreatorWalletBalance = async () => {
       try {
-        const response = await fetch('/api/burn-wallet');
+        const response = await fetch('/api/burn-stats');
         const result = await response.json();
         
         if (result.success) {
-          setData(result.data);
+          setData({
+            creatorWalletBalance: result.data.creatorWalletBalance,
+            creatorWalletAddress: result.data.creatorWalletAddress || 'Address not configured',
+            network: result.data.network
+          });
         } else {
-          setError(result.error || 'Failed to fetch burn wallet balance');
+          setError(result.error || 'Failed to fetch creator wallet balance');
         }
       } catch (err) {
         setError('Network error');
-        console.error('Error fetching burn wallet balance:', err);
+        console.error('Error fetching creator wallet balance:', err);
       } finally {
         setLoading(false);
       }
@@ -59,11 +63,11 @@ export default function BurnWalletBalance() {
       }
     };
 
-    fetchBurnWalletBalance();
+    fetchCreatorWalletBalance();
     fetchBurnInterval();
     
     // Refresh every 10 seconds to catch cache updates quickly
-    const interval = setInterval(fetchBurnWalletBalance, 10 * 1000);
+    const interval = setInterval(fetchCreatorWalletBalance, 10 * 1000);
     return () => clearInterval(interval);
   }, []);
 
@@ -72,11 +76,11 @@ export default function BurnWalletBalance() {
       <div className="pump-card rounded-xl p-6 animate-pulse-red text-center">
         <div className="py-8">
           <div className="space-y-2">
-            <h3 className="text-lg font-semibold text-gray-300">BURN WALLET BALANCE</h3>
+            <h3 className="text-xl font-semibold text-red-400">BALANCE</h3>
             <div className="text-5xl md:text-6xl font-bold burn-gradient-text">...</div>
             <div className="space-y-1">
               <p className="text-gray-400 text-sm">
-                Available in burn wallet • Burns every {intervalMinutes} minutes
+                Available in creator wallet • Burns every {intervalMinutes} minutes
               </p>
               <p className="text-red-400 text-xs font-medium">Loading...</p>
             </div>
@@ -91,7 +95,7 @@ export default function BurnWalletBalance() {
       <div className="pump-card rounded-xl p-6 text-center">
         <div className="py-8">
           <div className="space-y-2">
-            <h3 className="text-lg font-semibold text-gray-300">BURN WALLET BALANCE</h3>
+            <h3 className="text-xl font-semibold text-red-400">BALANCE</h3>
             <div className="text-5xl md:text-6xl font-bold text-red-400">Error</div>
             <div className="space-y-1">
               <p className="text-gray-400 text-sm">{error}</p>
@@ -106,25 +110,22 @@ export default function BurnWalletBalance() {
     <div className="pump-card rounded-xl p-6 animate-pulse-red text-center">
       <div className="py-8">
         <div className="space-y-2">
-          <h3 className="text-lg font-semibold text-gray-300">BURN WALLET BALANCE</h3>
+          <h3 className="text-xl font-semibold text-red-400">BALANCE</h3>
           <div className="text-5xl md:text-6xl font-bold burn-gradient-text">
-            {data?.burnWalletBalance ? data.burnWalletBalance.toFixed(4) : '0.0000'} SOL
+            {data?.creatorWalletBalance ? data.creatorWalletBalance.toFixed(4) : '0.0000'} SOL
           </div>
           <div className="space-y-1">
-            <p className="text-gray-400 text-sm">
-              Available in burn wallet • Burns every {intervalMinutes} minutes
-            </p>
             <p className="text-gray-300 text-xs font-semibold">
-              This wallet automatically buys and burns tokens
+              Available in creator wallet • Burns every {intervalMinutes} minutes
             </p>
             <p className="text-gray-300 text-sm">
               0.13 SOL reserved for transaction fees
             </p>
             <div className="mt-4 pt-4 border-t border-gray-600">
-              <div className="text-lg font-semibold text-gray-300 mb-2">BURN WALLET</div>
+              <div className="text-xl font-semibold text-red-400 mb-2">CREATOR WALLET</div>
               <div className="flex items-center justify-center space-x-2">
                 <span className="font-mono text-sm text-red-400">
-                  {data?.burnWalletAddress || 'Address not configured'}
+                  {data?.creatorWalletAddress || 'Address not configured'}
                 </span>
                 <button
                   onClick={copyToClipboard}

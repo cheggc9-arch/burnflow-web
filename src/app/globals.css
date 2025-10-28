@@ -1,27 +1,27 @@
 @import "tailwindcss";
 
 :root {
-  --matrix-green: #00ff41;
-  --matrix-cyan: #00ffff;
-  --matrix-lime: #ccff00;
-  --matrix-dark: #001100;
-  --matrix-darker: #000800;
+  --matrix-red: #ff4444;
+  --matrix-orange: #ff8800;
+  --matrix-yellow: #ffdd00;
+  --matrix-dark: #110000;
+  --matrix-darker: #080000;
   --matrix-black: #000000;
   
   /* Matrix gray color scheme */
-  --color-gray-300: #00ff41;
-  --color-gray-400: #00cc33;
-  --color-gray-500: #009922;
-  --color-gray-600: #006611;
-  --color-gray-700: #003300;
-  --color-gray-800: #001a00;
-  --color-gray-900: #000d00;
+  --color-gray-300: #ff4444;
+  --color-gray-400: #cc3333;
+  --color-gray-500: #992222;
+  --color-gray-600: #661111;
+  --color-gray-700: #330000;
+  --color-gray-800: #1a0000;
+  --color-gray-900: #0d0000;
 }
 
 @theme inline {
-  --color-matrix-green: var(--matrix-green);
-  --color-matrix-cyan: var(--matrix-cyan);
-  --color-matrix-lime: var(--matrix-lime);
+  --color-matrix-red: var(--matrix-red);
+  --color-matrix-orange: var(--matrix-orange);
+  --color-matrix-yellow: var(--matrix-yellow);
   --color-matrix-dark: var(--matrix-dark);
   --color-matrix-darker: var(--matrix-darker);
   --color-matrix-black: var(--matrix-black);
@@ -34,11 +34,13 @@
   --color-gray-900: var(--color-gray-900);
   --font-sans: 'Courier New', monospace;
   --font-mono: 'Courier New', monospace;
+  --pump-green: var(--matrix-red);
+  --pump-blue: var(--matrix-orange);
 }
 
 /* Matrix gradient text */
 .pump-gradient-text {
-  background: linear-gradient(135deg, var(--matrix-green) 0%, var(--matrix-cyan) 50%, var(--matrix-lime) 100%);
+  background: linear-gradient(135deg, var(--matrix-red) 0%, var(--matrix-orange) 50%, var(--matrix-yellow) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -58,7 +60,7 @@
 
 /* Matrix gradient background */
 .pump-gradient {
-  background: linear-gradient(135deg, var(--matrix-green) 0%, var(--matrix-cyan) 50%, var(--matrix-lime) 100%);
+  background: linear-gradient(135deg, var(--matrix-red) 0%, var(--matrix-orange) 50%, var(--matrix-yellow) 100%);
   box-shadow: none;
 }
 
@@ -75,11 +77,11 @@
 /* Matrix card styling */
 .pump-card {
   background: linear-gradient(145deg, var(--matrix-darker) 0%, var(--matrix-dark) 100%);
-  border: 2px solid var(--matrix-green);
+  border: 2px solid var(--matrix-red);
   backdrop-filter: blur(10px);
   box-shadow: 
-    0 0 20px var(--matrix-green),
-    inset 0 0 20px rgba(0, 255, 65, 0.1);
+    0 0 20px var(--matrix-red),
+    inset 0 0 20px rgba(255, 68, 68, 0.1);
   position: relative;
   overflow: hidden;
 }
@@ -91,7 +93,7 @@
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.1), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 68, 68, 0.1), transparent);
   animation: matrix-scan 3s linear infinite;
   pointer-events: none;
 }
@@ -103,21 +105,21 @@
 
 /* Matrix button styling */
 .pump-button {
-  background: linear-gradient(135deg, var(--matrix-green) 0%, var(--matrix-cyan) 100%);
+  background: linear-gradient(135deg, var(--matrix-red) 0%, var(--matrix-orange) 100%);
   color: var(--matrix-black);
   font-weight: bold;
   font-family: 'Courier New', monospace;
   text-transform: uppercase;
   letter-spacing: 2px;
   transition: all 0.3s ease;
-  border: 2px solid var(--matrix-green);
+  border: 2px solid var(--matrix-red);
   box-shadow: none;
 }
 
 .pump-button:hover {
   transform: translateY(-2px);
   box-shadow: none;
-  background: linear-gradient(135deg, var(--matrix-cyan) 0%, var(--matrix-lime) 100%);
+  background: linear-gradient(135deg, var(--matrix-orange) 0%, var(--matrix-yellow) 100%);
 }
 
 /* Matrix pulse animation */
@@ -146,13 +148,13 @@
   background: var(--matrix-dark);
   height: 8px;
   border-radius: 4px;
-  border: 1px solid var(--matrix-green);
+  border: 1px solid var(--matrix-red);
 }
 
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  background: linear-gradient(135deg, var(--matrix-green), var(--matrix-cyan));
+  background: linear-gradient(135deg, var(--matrix-red), var(--matrix-orange));
   height: 20px;
   width: 20px;
   border-radius: 50%;
@@ -164,11 +166,11 @@
   background: var(--matrix-dark);
   height: 8px;
   border-radius: 4px;
-  border: 1px solid var(--matrix-green);
+  border: 1px solid var(--matrix-red);
 }
 
 .slider::-moz-range-thumb {
-  background: linear-gradient(135deg, var(--matrix-green), var(--matrix-cyan));
+  background: linear-gradient(135deg, var(--matrix-red), var(--matrix-orange));
   height: 20px;
   width: 20px;
   border-radius: 50%;
@@ -179,7 +181,7 @@
 
 /* Matrix link styling */
 .formula-link {
-  color: var(--matrix-green);
+  color: var(--matrix-red);
   text-decoration: none;
   transition: all 0.3s ease;
   text-shadow: none;
@@ -188,17 +190,17 @@
 }
 
 .formula-link:hover {
-  color: var(--matrix-cyan);
+  color: var(--matrix-orange);
   text-shadow: none;
 }
 
 /* Matrix background with digital rain effect */
 body {
-  color: var(--matrix-green);
+  color: var(--matrix-red);
   font-family: 'Courier New', monospace;
   background: 
-    radial-gradient(circle at 20% 80%, rgba(0, 255, 65, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 20% 80%, rgba(255, 68, 68, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 136, 0, 0.1) 0%, transparent 50%),
     linear-gradient(135deg, var(--matrix-black) 0%, var(--matrix-darker) 50%, var(--matrix-dark) 100%);
   background-attachment: fixed;
   min-height: 100vh;
@@ -278,12 +280,33 @@ body {
 }
 
 .leaderboard-scroll::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, var(--matrix-green) 0%, var(--matrix-cyan) 100%);
+  background: linear-gradient(135deg, var(--matrix-red) 0%, var(--matrix-orange) 100%);
   border-radius: 4px;
-  box-shadow: 0 0 5px rgba(0, 255, 65, 0.3);
+  box-shadow: 0 0 5px rgba(255, 68, 68, 0.3);
 }
 
 .leaderboard-scroll::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, var(--matrix-cyan) 0%, var(--matrix-lime) 100%);
-  box-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
+  background: linear-gradient(135deg, var(--matrix-orange) 0%, var(--matrix-yellow) 100%);
+  box-shadow: 0 0 8px rgba(255, 136, 0, 0.4);
+}
+
+/* Burn history scrollbar styling */
+.burn-history-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.burn-history-scroll::-webkit-scrollbar-track {
+  background: #1F2937;
+  border-radius: 4px;
+}
+
+.burn-history-scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, var(--matrix-red) 0%, var(--matrix-orange) 100%);
+  border-radius: 4px;
+  box-shadow: 0 0 5px rgba(255, 68, 68, 0.3);
+}
+
+.burn-history-scroll::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, var(--matrix-orange) 0%, var(--matrix-yellow) 100%);
+  box-shadow: 0 0 8px rgba(255, 136, 0, 0.4);
 }

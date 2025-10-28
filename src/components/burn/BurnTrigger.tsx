@@ -7,7 +7,7 @@ export default function BurnTrigger() {
   const [lastTrigger, setLastTrigger] = useState<string | null>(null);
   
   // Check if manual burn trigger should be shown
-  const showManualTrigger = process.env.NEXT_PUBLIC_SHOW_MANUAL_BURN_TRIGGER === 'true';
+  const showManualTrigger = process.env.SHOW_MANUAL_BURN_TRIGGER === 'true';
   
   if (!showManualTrigger) {
     return null;
@@ -27,7 +27,16 @@ export default function BurnTrigger() {
       const result = await response.json();
       
       if (result.success) {
-        setLastTrigger(new Date().toLocaleString());
+        setLastTrigger(new Date().toLocaleString('en-US', {
+          year: 'numeric',
+          month: 'short',
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: false,
+          timeZone: 'UTC'
+        }) + ' UTC');
         alert('Burn triggered successfully!');
       } else {
         alert(`Failed to trigger burn: ${result.error}`);

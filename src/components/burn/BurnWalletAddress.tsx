@@ -3,34 +3,34 @@
 import { useState, useEffect } from 'react';
 
 export default function BurnWalletAddress() {
-  const [burnWalletAddress, setBurnWalletAddress] = useState('Loading...');
+  const [creatorWalletAddress, setCreatorWalletAddress] = useState('Loading...');
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    const loadBurnWalletAddress = async () => {
+    const loadCreatorWalletAddress = async () => {
       try {
-        const response = await fetch('/api/burn-wallet');
+        const response = await fetch('/api/burn-stats');
         if (response.ok) {
           const data = await response.json();
-          if (data.success && data.data.burnWalletAddress) {
-            setBurnWalletAddress(data.data.burnWalletAddress);
+          if (data.success && data.data.creatorWalletAddress) {
+            setCreatorWalletAddress(data.data.creatorWalletAddress);
           } else {
-            setBurnWalletAddress('BURN_WALLET_ADDRESS_NOT_SET');
+            setCreatorWalletAddress('CREATOR_WALLET_ADDRESS_NOT_SET');
           }
         } else {
-          setBurnWalletAddress('BURN_WALLET_ADDRESS_NOT_SET');
+          setCreatorWalletAddress('CREATOR_WALLET_ADDRESS_NOT_SET');
         }
       } catch (error) {
-        setBurnWalletAddress('BURN_WALLET_ADDRESS_NOT_SET');
+        setCreatorWalletAddress('CREATOR_WALLET_ADDRESS_NOT_SET');
       }
     };
 
-    loadBurnWalletAddress();
+    loadCreatorWalletAddress();
   }, []);
 
   const copyToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText(burnWalletAddress);
+      await navigator.clipboard.writeText(creatorWalletAddress);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
@@ -41,11 +41,11 @@ export default function BurnWalletAddress() {
   return (
     <div className="text-center">
       <div className="text-sm font-semibold text-gray-300 mb-2 tracking-wide">
-        [ BURN WALLET ]
+        [ CREATOR WALLET ]
       </div>
       <div className="flex items-center justify-center space-x-2">
         <span className="font-mono text-sm text-red-400 break-all">
-          {burnWalletAddress}
+          {creatorWalletAddress}
         </span>
         <button
           onClick={copyToClipboard}

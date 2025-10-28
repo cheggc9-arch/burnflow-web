@@ -167,7 +167,7 @@ export const conservativeRateLimitConfig: RateLimitConfig = {
 
 // Get configuration based on environment or RPC provider
 export function getRateLimitConfig(): RateLimitConfig {
-  const rpcUrl = process.env.NEXT_PUBLIC_SOLANA_RPC_URL || '';
+  const rpcUrl = process.env.SOLANA_RPC_URL || '';
   
   // Check if using a premium RPC provider
   if (rpcUrl.includes('alchemy') || rpcUrl.includes('quicknode') || rpcUrl.includes('helius')) {

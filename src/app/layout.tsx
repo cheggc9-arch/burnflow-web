@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "REWARDFLOW",
-  description: "Advanced algorithms distribute creator fees to token holders. Automated, transparent, and fair reward distribution on Solana.",
+  title: "BURNFLOW",
+  description: "Automated token burning system that reduces supply through systematic buyback and burn operations on Solana.",
 };
 
 export default function RootLayout({
@@ -29,12 +29,12 @@ export default function RootLayout({
         <link rel="icon" href="/logo.svg" type="image/svg+xml" />
         <link rel="icon" href="/favicon.ico" sizes="any" type="image/x-icon" />
         <link rel="apple-touch-icon" href="/logo.svg" type="image/svg+xml" />
-        <meta property="og:title" content="REWARDFLOW" />
-        <meta property="og:description" content="Automated token reward distribution. Advanced algorithms reward holders with creator fees from Pump.fun trading." />
+        <meta property="og:title" content="BURNFLOW" />
+        <meta property="og:description" content="Automated token burning system that reduces supply through systematic buyback and burn operations on Solana." />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="REWARDFLOW" />
-        <meta name="twitter:description" content="Automated token reward distribution. Advanced algorithms reward holders with creator fees from Pump.fun trading." />
+        <meta name="twitter:title" content="BURNFLOW" />
+        <meta name="twitter:description" content="Automated token burning system that reduces supply through systematic buyback and burn operations on Solana." />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}

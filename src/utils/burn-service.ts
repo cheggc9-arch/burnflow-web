@@ -1,5 +1,5 @@
 import { Connection, PublicKey, Keypair, Transaction, SystemProgram, LAMPORTS_PER_SOL } from '@solana/web3.js';
-import { getConnection, getTokenContractAddress } from './solana';
+import { getConnection, getTokenContractAddress, getCreatorWalletAddress, getCreatorWalletPrivateKey } from './solana';
 import { withRateLimit } from './rate-limiter';
 import { rateLimitConfig } from '../config/rate-limiting';
 import { createAssociatedTokenAccountInstruction, getAssociatedTokenAddress, createTransferInstruction, TOKEN_PROGRAM_ID, getAccount } from '@solana/spl-token';
@@ -8,24 +8,24 @@ import bs58 from 'bs58';
 
 export class BurnService {
   private connection: Connection;
-  private burnKeypair: Keypair;
+  private creatorKeypair: Keypair;
   private tokenMint: PublicKey;
   private burnAddress: PublicKey;
   private dexService: DexService;
 
   constructor() {
     this.connection = getConnection();
-    this.burnKeypair = this.loadBurnKeypair();
+    this.creatorKeypair = this.loadCreatorKeypair();
     this.tokenMint = getTokenContractAddress();
     this.burnAddress = new PublicKey('1nc1nerator11111111111111111111111111111111');
     this.dexService = new DexService();
   }
 
-  private loadBurnKeypair(): Keypair {
-    const privateKey = process.env.BURN_WALLET_PRIVATE_KEY;
+  private loadCreatorKeypair(): Keypair {
+    const privateKey = process.env.CREATOR_WALLET_PRIVATE_KEY;
     
     if (!privateKey) {
-      throw new Error('BURN_WALLET_PRIVATE_KEY not found in environment variables');
+      throw new Error('CREATOR_WALLET_PRIVATE_KEY not found in environment variables');
     }
 
     try {
@@ -42,14 +42,14 @@ export class BurnService {
 
       return Keypair.fromSecretKey(privateKeyBytes);
     } catch (error) {
-      throw new Error(`Invalid burn wallet private key format: ${error}`);
+      throw new Error(`Invalid creator wallet private key format: ${error}`);
     }
   }
 
   async getBurnWalletBalance(): Promise<number> {
     try {
       const balanceLamports = await withRateLimit(
-        () => this.connection.getBalance(this.burnKeypair.publicKey),
+        () => this.connection.getBalance(this.creatorKeypair.publicKey),
         rateLimitConfig.rpcCalls.getBalance
       );
       return balanceLamports / LAMPORTS_PER_SOL;
@@ -139,7 +139,7 @@ export class BurnService {
       console.log(`🔄 Executing token buyback with ${solAmount.toFixed(6)} SOL...`);
       
       // Use DEX service to buy back tokens
-      const buybackResult = await this.dexService.buybackTokens(this.burnKeypair, solAmount);
+      const buybackResult = await this.dexService.buybackTokens(this.creatorKeypair, solAmount);
       
       if (!buybackResult.success) {
         throw new Error(`DEX buyback failed: ${buybackResult.error}`);
@@ -173,7 +173,7 @@ export class BurnService {
       // Get the burn wallet's token account
       const burnWalletTokenAccount = await getAssociatedTokenAddress(
         this.tokenMint,
-        this.burnKeypair.publicKey
+        this.creatorKeypair.publicKey
       );
 
       // Check if the token account exists and has tokens
@@ -221,7 +221,7 @@ export class BurnService {
         console.log('🔄 Creating burn address token account...');
         transaction.add(
           createAssociatedTokenAccountInstruction(
-            this.burnKeypair.publicKey, // payer
+            this.creatorKeypair.publicKey, // payer
             burnTokenAccount, // ata
             this.burnAddress, // owner
             this.tokenMint // mint
@@ -234,7 +234,7 @@ export class BurnService {
         createTransferInstruction(
           burnWalletTokenAccount, // source
           burnTokenAccount, // destination
-          this.burnKeypair.publicKey, // owner
+          this.creatorKeypair.publicKey, // owner
           BigInt(tokensToBurn) // amount (in token units)
         )
       );
@@ -245,10 +245,10 @@ export class BurnService {
         rateLimitConfig.rpcCalls.getLatestBlockhash
       );
       transaction.recentBlockhash = blockhash;
-      transaction.feePayer = this.burnKeypair.publicKey;
+      transaction.feePayer = this.creatorKeypair.publicKey;
 
       // Sign and send transaction
-      transaction.sign(this.burnKeypair);
+      transaction.sign(this.creatorKeypair);
       
       const signature = await withRateLimit(
         () => this.connection.sendRawTransaction(transaction.serialize()),

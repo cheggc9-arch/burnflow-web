@@ -60,13 +60,22 @@ export default function BurnHistory() {
   }, []);
 
   const formatDate = (timestamp: string) => {
-    return new Date(timestamp).toLocaleString();
+    return new Date(timestamp).toLocaleString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false,
+      timeZone: 'UTC'
+    }) + ' UTC';
   };
 
   const formatNumber = (num: number) => {
     // For token amounts, we need to convert from smallest units to display units
     // Get token decimals from environment variable (default to 6)
-    const tokenDecimals = parseInt(process.env.NEXT_PUBLIC_TOKEN_DECIMALS || '6');
+    const tokenDecimals = parseInt(process.env.TOKEN_DECIMALS || '6');
     const displayAmount = num / Math.pow(10, tokenDecimals);
     
     if (displayAmount >= 1000000) {
@@ -103,10 +112,10 @@ export default function BurnHistory() {
   }
 
   return (
-    <div className="pump-card rounded-xl p-6">
+    <div id="burn-history" className="pump-card rounded-xl p-6">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center space-x-2">
-          <h3 className="text-lg font-semibold text-gray-300">BURN HISTORY</h3>
+          <h3 className="text-xl font-semibold burn-gradient-text">BURN HISTORY</h3>
           {burns.length > 0 && (
             <span className="px-2 py-1 bg-red-600 text-white text-xs rounded-full">
               {burns.length}
@@ -148,7 +157,7 @@ export default function BurnHistory() {
                   </span>
                   <span className={`px-2 py-1 rounded text-xs font-medium ${
                     burn.status === 'success' 
-                      ? 'bg-green-900 text-green-300' 
+                      ? 'bg-orange-900 text-orange-300' 
                       : 'bg-red-900 text-red-300'
                   }`}>
                     {burn.status.toUpperCase()}

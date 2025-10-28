@@ -83,12 +83,13 @@ export default function Hero() {
       <div className="relative z-10">
         <div className="mb-6">
           <h1 className="text-6xl md:text-8xl font-bold text-red-400 mb-4 tracking-wider" style={{textShadow: '0 0 15px rgba(220, 38, 38, 0.6)'}}>
-            Burn wallet automatically buys back and burns tokens!
+            CREATOR FEES BURN TOKENS
           </h1>
         </div>
           <p className="text-xl md:text-2xl font-semibold text-gray-300 max-w-4xl mx-auto leading-relaxed">
+            <span className="text-red-500" style={{textShadow: '0 0 10px rgba(239, 68, 68, 0.8)'}}>100% of creator fees are used to buyback and burn tokens.</span><br/>
             <span className="text-red-400">More volume, more tokens burned!</span><br/>
-            <span className="text-yellow-400">[AUTOMATED BURN ALGORITHM]</span>
+            <span className="burn-gradient-text">[AUTOMATED TOKEN BURN ALGORITHM]</span>
           </p>
       </div>
       

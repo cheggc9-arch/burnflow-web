@@ -1,12 +1,13 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Users, Wallet, Coins } from "lucide-react";
+import { Users, Wallet, Coins, Flame } from "lucide-react";
 
 interface StatsData {
   burnWalletBalance: number;
   totalBurned: number;
   totalBurns: number;
+  activeHolders: number;
   network: string;
 }
 
@@ -46,7 +47,7 @@ export default function Stats() {
     
     // For token amounts, we need to convert from smallest units to display units
     // Get token decimals from environment variable (default to 6)
-    const tokenDecimals = parseInt(process.env.NEXT_PUBLIC_TOKEN_DECIMALS || '6');
+    const tokenDecimals = parseInt(process.env.TOKEN_DECIMALS || '6');
     const displayAmount = num / Math.pow(10, tokenDecimals);
     
     if (displayAmount >= 1000000) {
@@ -89,12 +90,12 @@ export default function Stats() {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       <div className="pump-card rounded-xl p-6">
         <div className="flex items-center space-x-4 p-4">
-          <Wallet className="w-10 h-10 text-red-400" />
+          <Users className="w-10 h-10 text-red-400" />
           <div>
-            <div className="text-2xl font-bold">
-              {data?.burnWalletBalance ? data.burnWalletBalance.toFixed(4) : '0.0000'} SOL
+            <div className="text-2xl font-bold text-red-400">
+              {data?.activeHolders ? data.activeHolders.toLocaleString() : '0'}
             </div>
-            <div className="text-sm text-gray-400">Burn Wallet Balance</div>
+            <div className="text-sm text-gray-400">Active Holders</div>
           </div>
         </div>
       </div>
@@ -113,7 +114,7 @@ export default function Stats() {
 
       <div className="pump-card rounded-xl p-6">
         <div className="flex items-center space-x-4 p-4">
-          <Users className="w-10 h-10 text-red-400" />
+          <Flame className="w-10 h-10 text-red-400" />
           <div>
             <div className="text-2xl font-bold text-red-400">
               {data?.totalBurns ? data.totalBurns.toString() : '0'}

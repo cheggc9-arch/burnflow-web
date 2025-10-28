@@ -1,13 +1,12 @@
 import Header from "@/components/Header";
-import Hero from "@/components/Hero";
-import Stats from "@/components/Stats";
-import TreasuryBalance from "@/components/TreasuryBalance";
-import DistributionTimer from "@/components/DistributionTimer";
-import DistributionHistory from "@/components/DistributionHistory";
-import HolderLeaderboard from "@/components/HolderLeaderboard";
-import HowItWorks from "@/components/HowItWorks";
-import EarlyAdopterAdvantage from "@/components/EarlyAdopterAdvantage";
-import DistributionTrigger from "@/components/DistributionTrigger";
+import Hero from "@/components/burn/Hero";
+import Stats from "@/components/burn/Stats";
+import ContractAddress from "@/components/ContractAddress";
+import BurnWalletBalance from "@/components/burn/BurnWalletBalance";
+import BurnTimer from "@/components/burn/BurnTimer";
+import BurnHistory from "@/components/burn/BurnHistory";
+import BurnTrigger from "@/components/burn/BurnTrigger";
+import HowItWorks from "@/components/burn/HowItWorks";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -16,14 +15,17 @@ export default function Home() {
       <Header />
       <main className="container mx-auto px-4 py-8 space-y-8">
         <Hero />
+        <div className="flex justify-center -mt-8 pb-8">
+          <div className="pump-card rounded-xl p-6">
+            <ContractAddress />
+          </div>
+        </div>
         <Stats />
-        <TreasuryBalance />
-        <DistributionTimer />
-        <DistributionHistory />
-        <HolderLeaderboard />
-        {process.env.SHOW_DISTRIBUTION_TRIGGER === 'true' && <DistributionTrigger />}
+        <BurnWalletBalance />
+        <BurnTimer />
+        <BurnHistory />
+        <BurnTrigger />
         <HowItWorks />
-        <EarlyAdopterAdvantage />
       </main>
       <Footer />
     </div>

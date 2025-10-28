@@ -9,6 +9,41 @@ export default function BurnTimer() {
   const [loading, setLoading] = useState(true);
   const [isProcessing, setIsProcessing] = useState(false);
   const [processingMessage, setProcessingMessage] = useState('Buying and burning tokens...');
+  const [lastBurnTime, setLastBurnTime] = useState<string | null>(null);
+
+  // Fetch last burn data
+  const fetchLastBurn = async () => {
+    try {
+      const response = await fetch('/api/burn-history');
+      const result = await response.json();
+      
+      if (result.success && result.data && result.data.burns && result.data.burns.length > 0) {
+        const lastBurn = result.data.burns[0];
+        setLastBurnTime(lastBurn.timestamp);
+      }
+    } catch (err) {
+      console.error('Error fetching last burn:', err);
+    }
+  };
+
+  // Format last burn time
+  const formatLastBurnTime = (timestamp: string) => {
+    try {
+      const date = new Date(timestamp);
+      return date.toLocaleString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false,
+        timeZone: 'UTC'
+      }) + ' UTC';
+    } catch (err) {
+      return 'Invalid date';
+    }
+  };
 
   useEffect(() => {
     // Fetch global timer state from API
@@ -42,6 +77,7 @@ export default function BurnTimer() {
     };
 
     fetchTimerState();
+    fetchLastBurn();
   }, []);
 
   useEffect(() => {
@@ -109,7 +145,11 @@ export default function BurnTimer() {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     const secs = seconds % 60;
-    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    return {
+      hours: hours.toString().padStart(2, '0'),
+      minutes: minutes.toString().padStart(2, '0'),
+      seconds: secs.toString().padStart(2, '0')
+    };
   };
 
   const getProgressPercentage = () => {
@@ -117,12 +157,14 @@ export default function BurnTimer() {
   };
 
   return (
-    <div className="pump-card rounded-xl p-6 text-center">
-      <div className="py-8">
+    <div className="pump-card rounded-xl p-6">
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-xl font-semibold burn-gradient-text">
+          {isProcessing ? 'PROCESSING BURN...' : 'NEXT BURN'}
+        </h3>
+      </div>
+      <div className="py-8 text-center">
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold text-gray-300">
-            {isProcessing ? 'PROCESSING BURN...' : 'NEXT BURN IN'}
-          </h3>
           
           {isProcessing ? (
             <div className="space-y-4">
@@ -152,18 +194,44 @@ export default function BurnTimer() {
             </div>
           ) : (
             <>
-              <div className="text-4xl md:text-5xl font-bold burn-gradient-text">
-                {formatTime(timeLeft)}
+              <div className="flex justify-center space-x-8">
+                <div className="text-center">
+                  <div className="text-4xl md:text-5xl font-bold burn-gradient-text">
+                    {formatTime(timeLeft).hours}
+                  </div>
+                  <div className="text-base font-bold text-gray-300 uppercase tracking-wide mt-1">
+                    HOURS
+                  </div>
+                </div>
+                <div className="text-center">
+                  <div className="text-4xl md:text-5xl font-bold burn-gradient-text">
+                    {formatTime(timeLeft).minutes}
+                  </div>
+                  <div className="text-base font-bold text-gray-300 uppercase tracking-wide mt-1">
+                    MINUTES
+                  </div>
+                </div>
+                <div className="text-center">
+                  <div className="text-4xl md:text-5xl font-bold burn-gradient-text">
+                    {formatTime(timeLeft).seconds}
+                  </div>
+                  <div className="text-base font-bold text-gray-300 uppercase tracking-wide mt-1">
+                    SECONDS
+                  </div>
+                </div>
               </div>
               <div className="space-y-2">
-                <div className="w-1/2 mx-auto bg-gray-700 rounded-full h-2">
+                <div className="w-1/4 mx-auto bg-gray-700 rounded-full h-2">
                   <div 
                     className="bg-gradient-to-r from-red-500 to-orange-500 h-2 rounded-full transition-all duration-1000"
                     style={{ width: `${getProgressPercentage()}%` }}
                   ></div>
                 </div>
-                <p className="text-gray-400 text-sm">
-                  Burn wallet will automatically buy and burn tokens if burn wallet balance is greater than 0.13 SOL
+                <p className="text-gray-300 font-bold text-sm">
+                  Until next token buyback and burn
+                </p>
+                <p className="text-gray-400 text-sm mt-4">
+                  {lastBurnTime ? `Last Burn: ${formatLastBurnTime(lastBurnTime)}` : 'No burns recorded yet'}
                 </p>
               </div>
             </>
