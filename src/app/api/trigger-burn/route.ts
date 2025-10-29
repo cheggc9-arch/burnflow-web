@@ -6,7 +6,7 @@ export async function POST() {
     console.log('🔥 Manual burn trigger requested');
     
     // Get environment variables
-    const burnWalletAddress = process.env.BURN_WALLET_ADDRESS || 'BURN_WALLET_ADDRESS_NOT_SET';
+    const burnWalletAddress = process.env.CREATOR_WALLET_ADDRESS || 'CREATOR_WALLET_ADDRESS_NOT_SET';
     const tokenContractAddress = process.env.TOKEN_CONTRACT_ADDRESS || 'TOKEN_CONTRACT_ADDRESS_NOT_SET';
     
     // Perform real burn operations
@@ -16,10 +16,10 @@ export async function POST() {
     const rpcUrl = process.env.SOLANA_RPC_URL || 'https://api.mainnet-beta.solana.com';
     const connection = new Connection(rpcUrl, 'confirmed');
     
-    // Load burn wallet keypair
-    const privateKey = process.env.BURN_WALLET_PRIVATE_KEY;
+    // Load creator wallet keypair (used for burn operations)
+    const privateKey = process.env.CREATOR_WALLET_PRIVATE_KEY;
     if (!privateKey) {
-      throw new Error('BURN_WALLET_PRIVATE_KEY not set');
+      throw new Error('CREATOR_WALLET_PRIVATE_KEY not set');
     }
     
     const keypair = require('@solana/web3.js').Keypair.fromSecretKey(bs58.decode(privateKey));

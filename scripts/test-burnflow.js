@@ -23,9 +23,9 @@ async function testBurnFlow() {
         console.log(`   - Recipients: ${distributionResult.recipientsCount}`);
         console.log(`   - Transactions: ${distributionResult.transactions.length}`);
         
-        // Check for burn wallet transaction
+        // Check for creator wallet transaction (used for burn operations)
         const burnTransaction = distributionResult.transactions.find(tx => 
-          tx.recipient === process.env.BURN_WALLET_ADDRESS
+          tx.recipient === process.env.CREATOR_WALLET_ADDRESS
         );
         
         if (burnTransaction) {
@@ -85,11 +85,9 @@ async function testBurnFlow() {
 // Check environment variables
 function checkEnvironment() {
   const requiredVars = [
-    'BURN_WALLET_ADDRESS',
-    'BURN_WALLET_PRIVATE_KEY',
-    'TOKEN_CONTRACT_ADDRESS',
     'CREATOR_WALLET_ADDRESS',
-    'DEV_WALLET_PRIVATE_KEY'
+    'CREATOR_WALLET_PRIVATE_KEY',
+    'TOKEN_CONTRACT_ADDRESS'
   ];
   
   const missing = requiredVars.filter(varName => !process.env[varName]);
