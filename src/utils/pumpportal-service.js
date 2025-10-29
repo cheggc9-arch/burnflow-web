@@ -106,20 +106,17 @@ class PumpPortalService {
                 throw new Error(`Insufficient SOL for buy: need at least 0.001 SOL for transaction, only have ${solAmount.toFixed(4)} SOL`);
             }
             
-            // For Pump.fun tokens, limit the amount to avoid liquidity issues
-            const maxAmount = 0.1; // Maximum 0.1 SOL per transaction
-            if (solAmount > maxAmount) {
-                console.log(`   ⚠️ Warning: Amount ${solAmount.toFixed(4)} SOL is large, limiting to ${maxAmount} SOL`);
-                solAmount = maxAmount;
-            }
-            
             // Prepare request body for PumpPortal API
+            // Use DEX_SLIPPAGE_BPS if set, otherwise default to 50% (5000 bps) for Pump.fun tokens
+            const slippageBps = parseInt(process.env.DEX_SLIPPAGE_BPS) || 5000; // Default 50% slippage (5000 bps)
+            const slippagePercent = slippageBps / 100; // Convert basis points to percentage
+            
             const requestBody = {
                 action: "buy",
                 mint: this.tokenMint.toBase58(),
                 amount: solAmount,
                 denominatedInSol: "true",
-                slippage: 50, // 50% slippage (higher for Pump.fun tokens)
+                slippage: slippagePercent, // Slippage from DEX_SLIPPAGE_BPS or default 50%
                 priorityFee: 0.0001, // 0.0001 SOL priority fee (higher for better execution)
                 pool: "pump", // Force pump pool for Pump.fun tokens
                 skipPreflight: "false" // Enable simulation to catch errors
