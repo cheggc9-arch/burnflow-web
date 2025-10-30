@@ -1,0 +1,112 @@
+<svg width="1200" height="675" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#000000;stop-opacity:1" />
+      <stop offset="30%" style="stop-color:#0a0a0a;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#1a0a0a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Grid pattern -->
+    <pattern id="grid" width="25" height="25" patternUnits="userSpaceOnUse">
+      <path d="M 25 0 L 0 0 0 25" fill="none" stroke="#ff0000" stroke-width="0.15" opacity="0.1"/>
+    </pattern>
+    
+    <!-- Glow effect -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="675" fill="url(#bgGradient)"/>
+  <rect width="1200" height="675" fill="url(#grid)"/>
+  
+  <!-- Central logo -->
+  <g transform="translate(500, 100)">
+    <rect x="0" y="0" width="200" height="200" fill="#000000" stroke="#ff0000" stroke-width="6" rx="20" filter="url(#glow)"/>
+    <text x="100" y="110" font-family="monospace, 'Courier New', Courier" font-size="120" font-weight="bold" fill="#ff0000" text-anchor="middle" dominant-baseline="middle">B</text>
+  </g>
+  
+  <!-- Main title -->
+  <text x="600" y="380" font-family="monospace, 'Courier New', Courier" font-size="56" font-weight="bold" fill="#ff0000" text-anchor="middle">EARLY ADOPTERS WIN</text>
+  
+  <!-- Subtitle -->
+  <text x="600" y="420" font-family="monospace, 'Courier New', Courier" font-size="24" fill="#ff6b6b" text-anchor="middle" opacity="0.9">[Automated Burns Increase Token Value]</text>
+  
+  <!-- Left side stats -->
+  <g transform="translate(80, 450)">
+    <rect x="0" y="0" width="300" height="150" fill="#ff0000" opacity="0.05" stroke="#ff0000" stroke-width="2" rx="12"/>
+    
+    <text x="150" y="30" font-family="monospace, 'Courier New', Courier" font-size="18" font-weight="bold" fill="#ff0000" text-anchor="middle">AUTOMATED BURNS</text>
+    
+    <text x="150" y="65" font-family="monospace, 'Courier New', Courier" font-size="36" font-weight="bold" fill="#ff6b00" text-anchor="middle">TIMER</text>
+    <text x="150" y="90" font-family="monospace, 'Courier New', Courier" font-size="16" fill="#ffffff" text-anchor="middle">Based Cycles</text>
+    
+    <text x="150" y="120" font-family="monospace, 'Courier New', Courier" font-size="14" fill="#ffffff" text-anchor="middle" opacity="0.8">Regular burns reduce</text>
+    <text x="150" y="135" font-family="monospace, 'Courier New', Courier" font-size="14" fill="#ffffff" text-anchor="middle" opacity="0.8">token supply</text>
+  </g>
+  
+  <!-- Center stats -->
+  <g transform="translate(450, 450)">
+    <rect x="0" y="0" width="300" height="150" fill="#ff6b00" opacity="0.05" stroke="#ff6b00" stroke-width="2" rx="12"/>
+    
+    <text x="150" y="30" font-family="monospace, 'Courier New', Courier" font-size="18" font-weight="bold" fill="#ff6b00" text-anchor="middle">VALUE INCREASE</text>
+    
+    <text x="150" y="65" font-family="monospace, 'Courier New', Courier" font-size="36" font-weight="bold" fill="#ff0000" text-anchor="middle">HOLD</text>
+    <text x="150" y="90" font-family="monospace, 'Courier New', Courier" font-size="16" fill="#ffffff" text-anchor="middle">= More Value</text>
+    
+    <text x="150" y="120" font-family="monospace, 'Courier New', Courier" font-size="14" fill="#ffffff" text-anchor="middle" opacity="0.8">Burning tokens increases</text>
+    <text x="150" y="135" font-family="monospace, 'Courier New', Courier" font-size="14" fill="#ffffff" text-anchor="middle" opacity="0.8">value for all holders</text>
+  </g>
+  
+  <!-- Right side stats -->
+  <g transform="translate(820, 450)">
+    <rect x="0" y="0" width="300" height="150" fill="#ff3333" opacity="0.05" stroke="#ff3333" stroke-width="2" rx="12"/>
+    
+    <text x="150" y="30" font-family="monospace, 'Courier New', Courier" font-size="18" font-weight="bold" fill="#ff3333" text-anchor="middle">TRANSPARENT</text>
+    
+    <text x="150" y="65" font-family="monospace, 'Courier New', Courier" font-size="32" font-weight="bold" fill="#ff0000" text-anchor="middle">100%</text>
+    <text x="150" y="90" font-family="monospace, 'Courier New', Courier" font-size="16" fill="#ffffff" text-anchor="middle">Open Source</text>
+    
+    <text x="150" y="120" font-family="monospace, 'Courier New', Courier" font-size="14" fill="#ffffff" text-anchor="middle" opacity="0.8">Verify all burns</text>
+    <text x="150" y="135" font-family="monospace, 'Courier New', Courier" font-size="14" fill="#ffffff" text-anchor="middle" opacity="0.8">Track the supply</text>
+  </g>
+  
+  <!-- Top accent bars -->
+  <rect x="0" y="0" width="1200" height="6" fill="#ff0000" opacity="0.6"/>
+  <rect x="0" y="669" width="1200" height="6" fill="#ff0000" opacity="0.6"/>
+  
+  <!-- Corner decorations -->
+  <g opacity="0.4">
+    <!-- Top corners -->
+    <circle cx="50" cy="50" r="3" fill="#ff0000">
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="1150" cy="50" r="3" fill="#ff6b00">
+      <animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+    
+    <!-- Bottom corners -->
+    <circle cx="50" cy="625" r="2" fill="#ff3333">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="1150" cy="625" r="3" fill="#ff0000">
+      <animate attributeName="opacity" values="1;0.2;1" dur="3.5s" repeatCount="indefinite"/>
+    </circle>
+    
+    <!-- Side decorations -->
+    <circle cx="30" cy="337" r="2" fill="#ff6b00">
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="1170" cy="337" r="2" fill="#ff3333">
+      <animate attributeName="opacity" values="1;0.4;1" dur="2.8s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+</svg>
+

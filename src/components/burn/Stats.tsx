@@ -19,10 +19,17 @@ export default function Stats() {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const response = await fetch('/api/burn-stats');
+        // Add cache-busting query parameter to prevent browser caching
+        const response = await fetch(`/api/burn-stats?t=${Date.now()}`, {
+          cache: 'no-store',
+          headers: {
+            'Cache-Control': 'no-cache',
+          }
+        });
         const result = await response.json();
         
         if (result.success) {
+          console.log('📊 Frontend received active holders:', result.data.activeHolders);
           setData(result.data);
         } else {
           setError(result.error || 'Failed to fetch stats');

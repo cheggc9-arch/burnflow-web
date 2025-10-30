@@ -72,18 +72,26 @@ let cache: CacheData = {
 const loadedCache = loadCacheFromFile();
 if (loadedCache) {
   cache = { ...cache, ...loadedCache };
+  // Reset isUpdating flag if it was stuck from a previous session
+  cache.isUpdating = false;
   console.log('✅ Cache loaded from file:', cache);
 }
 
 // Function to get cached data
 export function getCachedData(): CacheData {
+  // Reload from file to ensure we have the latest data (especially important in Next.js serverless)
+  const fileCache = loadCacheFromFile();
+  if (fileCache && fileCache.lastUpdated > cache.lastUpdated) {
+    cache = { ...cache, ...fileCache };
+    // Don't reset isUpdating here - let the update logic handle it
+  }
   return cache;
 }
 
 // Function to check if cache is stale
 export function isCacheStale(): boolean {
   const now = Date.now();
-  const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+  const CACHE_DURATION = 1 * 60 * 1000; // 1 minute
   return (now - cache.lastUpdated) > CACHE_DURATION;
 }
 
@@ -161,13 +169,22 @@ export async function updateActiveHolders(): Promise<void> {
 
 // Function to update cache (simplified)
 export async function updateCache(): Promise<void> {
+  // Reset stuck isUpdating flag if it's been more than 2 minutes
   if (cache.isUpdating) {
-    console.log('⏳ Cache update already in progress, skipping...');
-    return;
+    const timeSinceLastUpdate = Date.now() - cache.lastUpdated;
+    if (timeSinceLastUpdate > 2 * 60 * 1000) {
+      console.log('⚠️ Cache update appears stuck, resetting isUpdating flag...');
+      cache.isUpdating = false;
+    } else {
+      console.log('⏳ Cache update already in progress, skipping...');
+      return;
+    }
   }
 
   try {
     cache.isUpdating = true;
+    // Save immediately to persist the flag
+    saveCacheToFile(cache);
     
     console.log('🔄 Updating cache...');
     
@@ -183,6 +200,8 @@ export async function updateCache(): Promise<void> {
     console.error('❌ Error updating cache:', error);
   } finally {
     cache.isUpdating = false;
+    // Save the reset flag
+    saveCacheToFile(cache);
   }
 }
 
@@ -193,7 +212,7 @@ export function startBackgroundJob(): void {
   // Update cache immediately
   updateCache();
   
-  // Set up interval for periodic updates (every 5 minutes)
+  // Set up interval for periodic updates (every 1 minute)
   setInterval(() => {
     if (!cache.isUpdating) {
       console.log('🔄 Periodic cache update triggered...');
@@ -201,7 +220,7 @@ export function startBackgroundJob(): void {
     } else {
       console.log('⏳ Cache update already in progress, skipping periodic update...');
     }
-  }, 5 * 60 * 1000); // 5 minutes
+  }, 1 * 60 * 1000); // 1 minute
   
   console.log('✅ Background cache update job started');
 }
