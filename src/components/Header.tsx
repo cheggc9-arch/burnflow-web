@@ -110,7 +110,7 @@ export default function Header() {
               BURN HISTORY
             </button>
             <a
-              href="https://x.com/RewardFlow1"
+              href="https://x.com/Burn_Flow1"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center space-x-2 text-red-400 hover:text-orange-400 transition-colors font-mono text-sm tracking-wider"
