@@ -16,7 +16,7 @@ export default function HowItWorks() {
           <div>
             <h4 className="text-lg font-semibold text-gray-100 mb-3">Creator Fees Collection</h4>
             <p className="text-gray-200 text-base leading-relaxed">
-              100% of creator fees are sent automatically to the burn wallet.
+              Automated script claims 100% of creator fees every 20 min.
             </p>
           </div>
         </div>
@@ -29,7 +29,7 @@ export default function HowItWorks() {
           <div>
             <h4 className="text-lg font-semibold text-gray-100 mb-3">Token Purchase</h4>
             <p className="text-gray-200 text-base leading-relaxed">
-              Creator fees in the burn wallet are automatically used to buy the BurnFlow token once the timer goes to zero.
+              100% of creator fees are used to buy the BurnFlow token automatically.
             </p>
           </div>
         </div>
