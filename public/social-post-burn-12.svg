@@ -1,0 +1,100 @@
+<svg width="1200" height="675" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#000000;stop-opacity:1" />
+      <stop offset="40%" style="stop-color:#0a0a0a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Grid pattern -->
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ff0000" stroke-width="0.2" opacity="0.12"/>
+    </pattern>
+    
+    <!-- Glow effects -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="strongGlow">
+      <feGaussianBlur stdDeviation="7" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="675" fill="url(#bgGradient)"/>
+  <rect width="1200" height="675" fill="url(#grid)"/>
+  
+  <!-- Top/Bottom accents -->
+  <rect x="0" y="0" width="1200" height="6" fill="#ff0000" opacity="0.6"/>
+  <rect x="0" y="669" width="1200" height="6" fill="#ff0000" opacity="0.6"/>
+  
+  <!-- Header with logo and title -->
+  <g transform="translate(600, 110)">
+    <!-- Logo box -->
+    <rect x="-60" y="-60" width="120" height="120" fill="#000000" stroke="#ff0000" stroke-width="4" rx="16" filter="url(#strongGlow)"/>
+    <!-- Mascot inside logo -->
+    <g transform="translate(0, -5) scale(0.43)">
+      <rect x="-50" y="-80" width="100" height="80" fill="#1f1f1f" stroke="#ff0000" stroke-width="3" rx="15" filter="url(#strongGlow)"/>
+      <rect x="-35" y="-60" width="20" height="15" fill="#ff0000" rx="3" filter="url(#glow)"/>
+      <rect x="15" y="-60" width="20" height="15" fill="#ff0000" rx="3" filter="url(#glow)"/>
+      <rect x="-25" y="-30" width="50" height="8" fill="#ff6b00" rx="4"/>
+      <rect x="-40" y="0" width="80" height="100" fill="#1f1f1f" stroke="#ff0000" stroke-width="3" rx="10" filter="url(#glow)"/>
+      <rect x="-25" y="15" width="50" height="40" fill="#000000" stroke="#ff0000" stroke-width="2" rx="5"/>
+      <text x="0" y="35" font-family="monospace" font-size="28" font-weight="bold" fill="#ff0000" text-anchor="middle" dominant-baseline="middle">B</text>
+      <rect x="-70" y="10" width="25" height="15" fill="#1f1f1f" stroke="#ff0000" stroke-width="2" rx="7"/>
+      <rect x="45" y="10" width="25" height="15" fill="#1f1f1f" stroke="#ff0000" stroke-width="2" rx="7"/>
+      <rect x="-25" y="100" width="15" height="30" fill="#1f1f1f" stroke="#ff0000" stroke-width="2" rx="7"/>
+      <rect x="10" y="100" width="15" height="30" fill="#1f1f1f" stroke="#ff0000" stroke-width="2" rx="7"/>
+      <rect x="-30" y="130" width="25" height="10" fill="#1f1f1f" stroke="#ff0000" stroke-width="2" rx="5"/>
+      <rect x="5" y="130" width="25" height="10" fill="#1f1f1f" stroke="#ff0000" stroke-width="2" rx="5"/>
+      <line x1="0" y1="-80" x2="0" y2="-100" stroke="#ff0000" stroke-width="3"/>
+      <circle cx="0" cy="-105" r="5" fill="#ff6b00"/>
+    </g>
+  </g>
+  
+  <!-- Main headline -->
+  <g transform="translate(600, 290)">
+    <text x="0" y="0" font-family="monospace, 'Courier New', Courier" font-size="68" font-weight="bold" fill="#ff0000" text-anchor="middle" filter="url(#strongGlow)">BURN TIMER ACTIVE</text>
+    <text x="0" y="50" font-family="monospace, 'Courier New', Courier" font-size="28" font-weight="bold" fill="#ff6b00" text-anchor="middle">NEXT BURN IN ~20 MIN</text>
+  </g>
+  
+  <!-- Three stat boxes -->
+  <g transform="translate(600, 420)">
+    <g transform="translate(-360, 0)">
+      <rect x="0" y="-40" width="220" height="100" fill="#000000" stroke="#ff0000" stroke-width="2" rx="12" opacity="0.85"/>
+      <text x="110" y="-10" font-family="monospace" font-size="22" font-weight="bold" fill="#ff0000" text-anchor="middle">AUTOMATED</text>
+      <text x="110" y="15" font-family="monospace" font-size="16" fill="#ffffff" text-anchor="middle">BUYBACK &amp; BURNS</text>
+    </g>
+    <g transform="translate(-110, 0)">
+      <rect x="0" y="-40" width="220" height="100" fill="#000000" stroke="#ff6b00" stroke-width="2" rx="12" opacity="0.85"/>
+      <text x="110" y="-10" font-family="monospace" font-size="22" font-weight="bold" fill="#ff6b00" text-anchor="middle">TRANSPARENT</text>
+      <text x="110" y="15" font-family="monospace" font-size="16" fill="#ffffff" text-anchor="middle">ON-CHAIN STATS</text>
+    </g>
+    <g transform="translate(140, 0)">
+      <rect x="0" y="-40" width="220" height="100" fill="#000000" stroke="#ff3333" stroke-width="2" rx="12" opacity="0.85"/>
+      <text x="110" y="-10" font-family="monospace" font-size="22" font-weight="bold" fill="#ff3333" text-anchor="middle">SUPPLY</text>
+      <text x="110" y="15" font-family="monospace" font-size="16" fill="#ffffff" text-anchor="middle">GOES DOWN</text>
+    </g>
+  </g>
+  
+  <!-- CTA -->
+  <g transform="translate(600, 560)">
+    <rect x="-220" y="-28" width="440" height="56" fill="#ff0000" opacity="0.1" stroke="#ff0000" stroke-width="3" rx="14" filter="url(#glow)"/>
+    <text x="0" y="6" font-family="monospace, 'Courier New', Courier" font-size="26" font-weight="bold" fill="#ff0000" text-anchor="middle">WATCH THE BURN</text>
+  </g>
+  
+  <!-- Border -->
+  <rect x="0" y="0" width="1200" height="675" fill="none" stroke="#ff0000" stroke-width="2" opacity="0.35"/>
+</svg>
+
+
+

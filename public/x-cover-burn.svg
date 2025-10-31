@@ -1,0 +1,28 @@
+<svg width="1920" height="640" viewBox="0 0 1920 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1920" height="640" fill="#000000"/>
+
+  <!-- Grid Pattern Definition -->
+  <defs>
+    <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#ff0000" stroke-width="0.2" opacity="0.15"/>
+    </pattern>
+  </defs>
+  <!-- Apply Grid Pattern -->
+  <rect width="1920" height="640" fill="url(#grid)"/>
+
+  <!-- Text Elements -->
+  <!-- Main Title: BURNFLOW -->
+  <text x="950" y="240" font-family="monospace, 'Courier New', Courier" font-size="80" font-weight="bold" fill="#ff0000">BURNFLOW</text>
+
+  <!-- Subtitle -->
+  <text x="950" y="290" font-family="monospace, 'Courier New', Courier" font-size="30" fill="#ff6b6b">[AUTOMATED TOKEN BURN ALGORITHM]</text>
+
+  <!-- Feature 1 -->
+  <text x="950" y="370" font-family="monospace, 'Courier New', Courier" font-size="24" fill="#ff0000">🔥</text>
+  <text x="980" y="370" font-family="monospace, 'Courier New', Courier" font-size="24" fill="#ffffff">Fully Automated Token Burning</text>
+
+  <!-- Feature 2 -->
+  <text x="950" y="410" font-family="monospace, 'Courier New', Courier" font-size="24" fill="#ff0000">⚡</text>
+  <text x="980" y="410" font-family="monospace, 'Courier New', Couriel="r" font-size="24" fil#ffffff">Real-time Burn Tracking</text>
+</svg>

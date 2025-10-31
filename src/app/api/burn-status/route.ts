@@ -67,6 +67,28 @@ export async function POST() {
     const intervalMinutes = parseInt(process.env.BURN_INTERVAL_MINUTES || '60');
     const now = new Date();
     
+    // Claim Pump.fun creator fees when a new timer starts
+    console.log(`💰 New timer starting - claiming Pump.fun creator fees...`);
+    try {
+      const PumpPortalService = require('../../../utils/pumpportal-service.js');
+      const pumpPortalService = new PumpPortalService();
+      await pumpPortalService.initialize();
+      
+      const feeClaimResult = await pumpPortalService.claimCreatorFee();
+      if (feeClaimResult.success) {
+        if (feeClaimResult.signature) {
+          console.log(`✅ Creator fees claimed successfully! TX: ${feeClaimResult.signature}`);
+        } else {
+          console.log(`ℹ️ ${feeClaimResult.message || 'No fees available to claim'}`);
+        }
+      } else {
+        console.log(`⚠️ Fee claim failed (non-fatal): ${feeClaimResult.error}`);
+      }
+    } catch (feeError) {
+      // Don't fail the timer reset if fee claiming fails - log and continue
+      console.error(`⚠️ Fee claim error (non-fatal): ${feeError instanceof Error ? feeError.message : 'Unknown error'}`);
+    }
+    
     // Reset timer for next cycle
     globalTimerState.lastBurnTime = globalTimerState.nextBurnTime;
     globalTimerState.nextBurnTime = new Date(now.getTime() + (intervalMinutes * 60 * 1000));

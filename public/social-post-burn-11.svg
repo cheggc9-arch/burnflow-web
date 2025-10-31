@@ -1,0 +1,150 @@
+<svg width="1200" height="675" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#000000;stop-opacity:1" />
+      <stop offset="30%" style="stop-color:#0a0a0a;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#0a0a0a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Matrix rain gradient (red) -->
+    <linearGradient id="matrixGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff0000;stop-opacity:0" />
+      <stop offset="50%" style="stop-color:#ff0000;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#ff0000;stop-opacity:0" />
+    </linearGradient>
+    
+    <!-- Glow effects -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="strongGlow">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="neonGlow">
+      <feGaussianBlur stdDeviation="12" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="675" fill="url(#bgGradient)"/>
+  
+  <!-- Matrix-style falling code -->
+  <g opacity="0.3" font-family="monospace" font-size="12" fill="url(#matrixGradient)">
+    <text x="50" y="100" transform="rotate(90 50 100)">01000010 01010101 01010010 01001110</text>
+    <text x="150" y="80" transform="rotate(90 150 80)">01000110 01001100 01001111 01010111</text>
+    <text x="250" y="120" transform="rotate(90 250 120)">01000010 01010101 01010010 01001110</text>
+    <text x="350" y="60" transform="rotate(90 350 60)">01000110 01001100 01001111 01010111</text>
+    <text x="450" y="140" transform="rotate(90 450 140)">00100000 01010011 01010101 01010000</text>
+    <text x="750" y="90" transform="rotate(90 750 90)">01010000 01001100 01011001</text>
+    <text x="850" y="110" transform="rotate(90 850 110)">00100000 01010010 01000101 01000100</text>
+    <text x="950" y="70" transform="rotate(90 950 70)">00100000 01001101 01000001 01010100</text>
+    <text x="1050" y="130" transform="rotate(90 1050 130)">01010010 01001001 01011000</text>
+    <text x="1150" y="100" transform="rotate(90 1150 100)">00100000 00100000 00100000</text>
+  </g>
+  
+  <!-- Logo -->
+  <g transform="translate(100, 80)">
+    <rect x="-25" y="-25" width="50" height="50" fill="#000000" stroke="#ff0000" stroke-width="3" rx="6" filter="url(#glow)"/>
+    <text x="0" y="0" font-family="monospace" font-size="30" font-weight="bold" fill="#ff0000" text-anchor="middle" dominant-baseline="central">B</text>
+  </g>
+  
+  <!-- Main terminal window -->
+  <g transform="translate(600, 200)">
+    <!-- Terminal header -->
+    <rect x="-350" y="-80" width="700" height="40" fill="#1a1a1a" stroke="#ff0000" stroke-width="2" rx="8 8 0 0"/>
+    <circle cx="-320" cy="-60" r="6" fill="#ff5f56"/>
+    <circle cx="-300" cy="-60" r="6" fill="#ffbd2e"/>
+    <circle cx="-280" cy="-60" r="6" fill="#27ca3f"/>
+    <text x="0" y="-55" font-family="monospace" font-size="14" fill="#ffffff" text-anchor="middle">BURNFLOW TERMINAL v2.0</text>
+    
+    <!-- Terminal body -->
+    <rect x="-350" y="-40" width="700" height="300" fill="#000000" stroke="#ff0000" stroke-width="2" rx="0 0 8 8" opacity="0.9"/>
+    
+    <!-- Terminal content -->
+    <g transform="translate(-330, -20)">
+      <text x="0" y="20" font-family="monospace" font-size="16" fill="#ff0000">$ ./burnflow --status</text>
+      <text x="0" y="45" font-family="monospace" font-size="14" fill="#ffffff">✓ Treasury Balance: 47.3 SOL</text>
+      <text x="0" y="65" font-family="monospace" font-size="14" fill="#ffffff">✓ Active Holders: 847</text>
+      <text x="0" y="85" font-family="monospace" font-size="14" fill="#ffffff">✓ Next Burn: 12 minutes</text>
+      <text x="0" y="105" font-family="monospace" font-size="14" fill="#ffffff">✓ Total Tokens Burned: 1,247,000</text>
+      
+      <text x="0" y="140" font-family="monospace" font-size="16" fill="#ff6b00">$ ./estimate_burn_impact --wallet=YOUR_ADDRESS</text>
+      <text x="0" y="165" font-family="monospace" font-size="14" fill="#ffffff">Analyzing wallet...</text>
+      <text x="0" y="185" font-family="monospace" font-size="14" fill="#ff0000">✓ Supply Impact Weight: 2.47x</text>
+      <text x="0" y="205" font-family="monospace" font-size="14" fill="#ff0000">✓ Earlyness Bonus: 3.12x</text>
+      <text x="0" y="225" font-family="monospace" font-size="14" fill="#ff0000">✓ Loyalty Multiplier: 1.89x</text>
+      <text x="0" y="245" font-family="monospace" font-size="14" fill="#ff6b00">→ Estimated Burn Benefit: High</text>
+      
+      <text x="0" y="275" font-family="monospace" font-size="14" fill="#ff3333" opacity="0.8">Press ENTER to watch the burn...</text>
+    </g>
+  </g>
+  
+  <!-- Side stats panels -->
+  <g transform="translate(150, 400)">
+    <rect x="-80" y="-40" width="160" height="80" fill="#000000" stroke="#ff0000" stroke-width="2" rx="8" opacity="0.8"/>
+    <text x="0" y="-15" font-family="monospace" font-size="18" font-weight="bold" fill="#ff0000" text-anchor="middle">AUTOMATED</text>
+    <text x="0" y="5" font-family="monospace" font-size="14" fill="#ffffff" text-anchor="middle">BURN CYCLES</text>
+    <text x="0" y="25" font-family="monospace" font-size="12" fill="#ff6b00" text-anchor="middle">EVERY 20 MIN</text>
+  </g>
+  
+  <g transform="translate(1050, 400)">
+    <rect x="-80" y="-40" width="160" height="80" fill="#000000" stroke="#ff6b00" stroke-width="2" rx="8" opacity="0.8"/>
+    <text x="0" y="-15" font-family="monospace" font-size="18" font-weight="bold" fill="#ff6b00" text-anchor="middle">OPEN SOURCE</text>
+    <text x="0" y="5" font-family="monospace" font-size="14" fill="#ffffff" text-anchor="middle">TRANSPARENT</text>
+    <text x="0" y="25" font-family="monospace" font-size="12" fill="#ff0000" text-anchor="middle">VERIFIABLE</text>
+  </g>
+  
+  <!-- Bottom call to action -->
+  <g transform="translate(600, 550)">
+    <rect x="-250" y="-30" width="500" height="60" fill="#ff0000" opacity="0.1" stroke="#ff0000" stroke-width="3" rx="10" filter="url(#glow)"/>
+    <text x="0" y="-5" font-family="monospace" font-size="22" font-weight="bold" fill="#ff0000" text-anchor="middle">JOIN THE BURNFLOW</text>
+    <text x="0" y="15" font-family="monospace" font-size="14" fill="#ffffff" text-anchor="middle">Automated buybacks and burns</text>
+  </g>
+  
+  <!-- Floating code snippets -->
+  <g opacity="0.4" font-family="monospace" font-size="10" fill="#ff0000">
+    <text x="50" y="550" transform="rotate(-15 50 550)">if (supply &gt; target) { burn(tokens); }</text>
+    <text x="1000" y="150" transform="rotate(12 1000 150)">estimateImpact(buyback, burn)</text>
+    <text x="200" y="300" transform="rotate(-8 200 300)">treasury.fees -= buybacks</text>
+    <text x="950" y="550" transform="rotate(18 950 550)">earlyBonus *= 2.5</text>
+  </g>
+  
+  <!-- Digital particles -->
+  <g opacity="0.6">
+    <rect x="80" y="200" width="3" height="3" fill="#ff0000" filter="url(#glow)"/>
+    <rect x="1100" y="300" width="2" height="2" fill="#ff6b00" filter="url(#glow)"/>
+    <rect x="150" y="500" width="4" height="4" fill="#ff3333" filter="url(#glow)"/>
+    <rect x="1050" y="200" width="3" height="3" fill="#ff0000" filter="url(#glow)"/>
+    <rect x="100" y="350" width="2" height="2" fill="#ff6b00" filter="url(#glow)"/>
+    <rect x="1150" y="450" width="4" height="4" fill="#ff3333" filter="url(#glow)"/>
+  </g>
+  
+  <!-- Scan lines effect -->
+  <g opacity="0.1">
+    <rect x="0" y="100" width="1200" height="1" fill="#ff0000"/>
+    <rect x="0" y="200" width="1200" height="1" fill="#ff0000"/>
+    <rect x="0" y="300" width="1200" height="1" fill="#ff0000"/>
+    <rect x="0" y="400" width="1200" height="1" fill="#ff0000"/>
+    <rect x="0" y="500" width="1200" height="1" fill="#ff0000"/>
+  </g>
+  
+  <!-- Border -->
+  <rect x="0" y="0" width="1200" height="675" fill="none" stroke="#ff0000" stroke-width="2" opacity="0.7"/>
+</svg>
+
+
+

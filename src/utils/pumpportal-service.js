@@ -278,6 +278,98 @@ class PumpPortalService {
             return false;
         }
     }
+
+    /**
+     * Claim Pump.fun creator fees using PumpPortal REST API
+     * Note: pump.fun claims creator fees all at once, so you do not need to specify "mint"
+     */
+    async claimCreatorFee() {
+        try {
+            console.log(`💰 Claiming Pump.fun creator fees via PumpPortal API...`);
+            
+            if (!this.apiKey) {
+                throw new Error('PumpPortal API key not initialized');
+            }
+            
+            // Prepare request body for PumpPortal API
+            const requestBody = {
+                action: "collectCreatorFee",
+                priorityFee: 0.000001,
+                pool: "pump" // "pump" for Pump.fun fees
+                // Note: pump.fun claims creator fees all at once, so we don't need to specify "mint"
+            };
+            
+            console.log('   📤 Sending creator fee claim request to PumpPortal API...');
+            console.log('   - Request body:', JSON.stringify(requestBody, null, 2));
+            
+            // Make API call to PumpPortal
+            const response = await fetch(`https://pumpportal.fun/api/trade?api-key=${this.apiKey}`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(requestBody)
+            });
+            
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`PumpPortal API error: ${response.status} ${response.statusText} - ${errorText}`);
+            }
+            
+            const data = await response.json();
+            console.log('   📥 PumpPortal API response:', JSON.stringify(data, null, 2));
+            
+            // Check if transaction was successful
+            if (data.signature) {
+                console.log(`   ✅ Creator fee claim transaction created!`);
+                console.log(`   - Transaction signature: ${data.signature}`);
+                
+                // Check if there are any errors in the response
+                if (data.errors && data.errors.length > 0) {
+                    console.log(`   ⚠️ PumpPortal warnings/errors: ${JSON.stringify(data.errors)}`);
+                }
+                
+                // Wait a moment for transaction to be processed
+                console.log(`   ⏳ Waiting for transaction confirmation...`);
+                await new Promise(resolve => setTimeout(resolve, 3000));
+                
+                // Verify transaction was successful by checking it on-chain
+                const txSuccess = await this.verifyTransaction(data.signature);
+                
+                if (txSuccess) {
+                    console.log(`   ✅ Creator fee claim transaction confirmed on-chain!`);
+                    return {
+                        success: true,
+                        signature: data.signature
+                    };
+                } else {
+                    throw new Error(`Transaction failed on-chain. Check Solscan: https://solscan.io/tx/${data.signature}`);
+                }
+            } else {
+                // Check if there are errors indicating no fees to claim
+                if (data.errors && data.errors.length > 0) {
+                    const errorMessage = JSON.stringify(data.errors);
+                    if (errorMessage.toLowerCase().includes('no fees') || errorMessage.toLowerCase().includes('no creator fee')) {
+                        console.log(`   ℹ️ No creator fees available to claim`);
+                        return {
+                            success: true,
+                            signature: null,
+                            message: 'No creator fees available to claim'
+                        };
+                    }
+                }
+                throw new Error(`PumpPortal fee claim failed: ${JSON.stringify(data)}`);
+            }
+            
+        } catch (error) {
+            console.error('❌ PumpPortal creator fee claim failed:', error.message);
+            return {
+                success: false,
+                signature: null,
+                error: error.message
+            };
+        }
+    }
 }
 
 module.exports = PumpPortalService;

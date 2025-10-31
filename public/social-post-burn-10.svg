@@ -1,0 +1,169 @@
+<svg width="1200" height="675" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a0a;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#1a1a1a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0a0a0a;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Red glow gradient -->
+    <radialGradient id="redGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#ff0000;stop-opacity:0.25" />
+      <stop offset="100%" style="stop-color:#ff0000;stop-opacity:0" />
+    </radialGradient>
+    
+    <!-- Glow effects -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="strongGlow">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="pulseGlow">
+      <feGaussianBlur stdDeviation="12" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="675" fill="url(#bgGradient)"/>
+  
+  <!-- Radial glow background -->
+  <circle cx="600" cy="337" r="400" fill="url(#redGlow)"/>
+  
+  <!-- Circuit pattern background (BurnFlow red) -->
+  <g opacity="0.1" stroke="#ff0000" stroke-width="1" fill="none">
+    <!-- Horizontal lines -->
+    <line x1="0" y1="150" x2="1200" y2="150"/>
+    <line x1="0" y1="300" x2="1200" y2="300"/>
+    <line x1="0" y1="450" x2="1200" y2="450"/>
+    <line x1="0" y1="600" x2="1200" y2="600"/>
+    
+    <!-- Vertical lines -->
+    <line x1="200" y1="0" x2="200" y2="675"/>
+    <line x1="400" y1="0" x2="400" y2="675"/>
+    <line x1="600" y1="0" x2="600" y2="675"/>
+    <line x1="800" y1="0" x2="800" y2="675"/>
+    <line x1="1000" y1="0" x2="1000" y2="675"/>
+    
+    <!-- Circuit nodes -->
+    <circle cx="200" cy="150" r="4"/>
+    <circle cx="400" cy="300" r="4"/>
+    <circle cx="600" cy="150" r="4"/>
+    <circle cx="800" cy="450" r="4"/>
+    <circle cx="1000" cy="300" r="4"/>
+  </g>
+  
+  <!-- Logo -->
+  <g transform="translate(100, 80)">
+    <rect x="-30" y="-30" width="60" height="60" fill="#000000" stroke="#ff0000" stroke-width="3" rx="8" filter="url(#glow)"/>
+    <text x="0" y="0" font-family="monospace" font-size="36" font-weight="bold" fill="#ff0000" text-anchor="middle" dominant-baseline="central">B</text>
+  </g>
+  
+  <!-- Central focus area -->
+  <g transform="translate(600, 200)">
+    <!-- Main title (minimally altered for BurnFlow) -->
+    <text x="0" y="0" font-family="monospace, 'Courier New', Courier" font-size="56" font-weight="bold" fill="#ff0000" text-anchor="middle" filter="url(#strongGlow)">AUTOMATIC BURNS</text>
+    <text x="0" y="50" font-family="monospace, 'Courier New', Courier" font-size="32" font-weight="bold" fill="#ff6b00" text-anchor="middle">WHILE YOU SLEEP</text>
+  </g>
+  
+  <!-- Stats boxes -->
+  <g transform="translate(300, 320)">
+    <!-- Box 1 -->
+    <rect x="-80" y="-30" width="160" height="60" fill="#000000" stroke="#ff0000" stroke-width="2" rx="8" opacity="0.8"/>
+    <text x="0" y="-5" font-family="monospace, 'Courier New', Courier" font-size="24" font-weight="bold" fill="#ff0000" text-anchor="middle">24/7</text>
+    <text x="0" y="15" font-family="monospace, 'Courier New', Courier" font-size="14" fill="#ffffff" text-anchor="middle">AUTO BURNS</text>
+  </g>
+  
+  <g transform="translate(600, 320)">
+    <!-- Box 2 -->
+    <rect x="-80" y="-30" width="160" height="60" fill="#000000" stroke="#ff6b00" stroke-width="2" rx="8" opacity="0.8"/>
+    <text x="0" y="-5" font-family="monospace, 'Courier New', Courier" font-size="24" font-weight="bold" fill="#ff6b00" text-anchor="middle">20MIN</text>
+    <text x="0" y="15" font-family="monospace, 'Courier New', Courier" font-size="14" fill="#ffffff" text-anchor="middle">CYCLES</text>
+  </g>
+  
+  <g transform="translate(900, 320)">
+    <!-- Box 3 -->
+    <rect x="-80" y="-30" width="160" height="60" fill="#000000" stroke="#ff3333" stroke-width="2" rx="8" opacity="0.8"/>
+    <text x="0" y="-5" font-family="monospace, 'Courier New', Courier" font-size="24" font-weight="bold" fill="#ff3333" text-anchor="middle">100%</text>
+    <text x="0" y="15" font-family="monospace, 'Courier New', Courier" font-size="14" fill="#ffffff" text-anchor="middle">TRANSPARENT</text>
+  </g>
+  
+  <!-- Key benefits (minimally adapted) -->
+  <g transform="translate(600, 450)">
+    <text x="0" y="0" font-family="monospace, 'Courier New', Courier" font-size="20" font-weight="bold" fill="#ffffff" text-anchor="middle">🔥 GAIN VALUE FROM SUPPLY REDUCTION</text>
+    <text x="0" y="30" font-family="monospace, 'Courier New', Courier" font-size="20" font-weight="bold" fill="#ffffff" text-anchor="middle">⚡ EARLY HOLDERS GET MAXIMUM BENEFIT</text>
+    <text x="0" y="60" font-family="monospace, 'Courier New', Courier" font-size="20" font-weight="bold" fill="#ffffff" text-anchor="middle">🔒 BURN IMPACT COMPOUNDS OVER TIME</text>
+  </g>
+  
+  <!-- Call to action -->
+  <g transform="translate(600, 580)">
+    <rect x="-200" y="-25" width="400" height="50" fill="#ff0000" opacity="0.1" stroke="#ff0000" stroke-width="3" rx="10" filter="url(#glow)"/>
+    <text x="0" y="5" font-family="monospace, 'Courier New', Courier" font-size="20" font-weight="bold" fill="#ff0000" text-anchor="middle">WATCH THE BURN</text>
+  </g>
+  
+  <!-- Floating money symbols (recolored) -->
+  <g opacity="0.7">
+    <!-- Left side -->
+    <g transform="translate(150, 250)">
+      <circle cx="0" cy="0" r="20" fill="#ff6b00" stroke="#ff0000" stroke-width="2" filter="url(#glow)"/>
+      <text x="0" y="7" font-family="monospace" font-size="24" font-weight="bold" fill="#000000" text-anchor="middle">$</text>
+    </g>
+    <g transform="translate(100, 400)">
+      <circle cx="0" cy="0" r="15" fill="#ff6b00" stroke="#ff0000" stroke-width="2" filter="url(#glow)"/>
+      <text x="0" y="5" font-family="monospace" font-size="18" font-weight="bold" fill="#000000" text-anchor="middle">$</text>
+    </g>
+    
+    <!-- Right side -->
+    <g transform="translate(1050, 280)">
+      <circle cx="0" cy="0" r="18" fill="#ff6b00" stroke="#ff0000" stroke-width="2" filter="url(#glow)"/>
+      <text x="0" y="6" font-family="monospace" font-size="22" font-weight="bold" fill="#000000" text-anchor="middle">$</text>
+    </g>
+    <g transform="translate(1100, 420)">
+      <circle cx="0" cy="0" r="16" fill="#ff6b00" stroke="#ff0000" stroke-width="2" filter="url(#glow)"/>
+      <text x="0" y="5" font-family="monospace" font-size="20" font-weight="bold" fill="#000000" text-anchor="middle">$</text>
+    </g>
+  </g>
+  
+  <!-- Energy particles -->
+  <g opacity="0.6">
+    <circle cx="200" cy="500" r="3" fill="#ff0000" filter="url(#glow)"/>
+    <circle cx="1000" cy="180" r="4" fill="#ff6b00" filter="url(#glow)"/>
+    <circle cx="150" cy="150" r="2" fill="#ff3333" filter="url(#glow)"/>
+    <circle cx="1050" cy="550" r="3" fill="#ff0000" filter="url(#glow)"/>
+    <circle cx="50" cy="300" r="2" fill="#ff6b00" filter="url(#glow)"/>
+    <circle cx="1150" cy="350" r="4" fill="#ff3333" filter="url(#glow)"/>
+  </g>
+  
+  <!-- Pulse rings around central area (red) -->
+  <g opacity="0.3">
+    <circle cx="600" cy="337" r="250" fill="none" stroke="#ff0000" stroke-width="1"/>
+    <circle cx="600" cy="337" r="300" fill="none" stroke="#ff0000" stroke-width="0.5"/>
+    <circle cx="600" cy="337" r="350" fill="none" stroke="#ff0000" stroke-width="0.3"/>
+  </g>
+  
+  <!-- Corner accents -->
+  <g opacity="0.4">
+    <polygon points="0,0 50,0 0,50" fill="#ff0000"/>
+    <polygon points="1200,0 1150,0 1200,50" fill="#ff0000"/>
+    <polygon points="0,675 50,675 0,625" fill="#ff0000"/>
+    <polygon points="1200,675 1150,675 1200,625" fill="#ff0000"/>
+  </g>
+  
+  <!-- Border -->
+  <rect x="0" y="0" width="1200" height="675" fill="none" stroke="#ff0000" stroke-width="2" opacity="0.5"/>
+</svg>
+
+
